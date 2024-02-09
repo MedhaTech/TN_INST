@@ -17,4 +17,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/TN_INST  # Change this to your cPanel directory
-          local-dir: .
+          local-dir: /
