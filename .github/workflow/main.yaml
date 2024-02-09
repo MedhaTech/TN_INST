@@ -1,0 +1,24 @@
+name: FTP Auto-deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.SERVER }}
+        username: ${{ secrets.NAME }}
+        password: ${{ secrets.PWD }}
+        server-dir: '/public_html/TN_INST/'
+        local-dir: './'
+        exclude: '.git,.github'
