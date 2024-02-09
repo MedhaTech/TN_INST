@@ -1,0 +1,14 @@
+name: CI/CD for Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+
+   name: Deploy to cPanel
+        host: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+          
+        
