@@ -12,13 +12,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+    - name: Exclude unwanted files
+      run: |
+        find . -type d -name ".git" -prune -exec rm -rf {} \;
+        find . -type d -name ".github" -prune -exec rm -rf {} \
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: ${{ secrets.SERVER }}
         username: ${{ secrets.NAME }}
         password: ${{ secrets.PWD }}
-        server-dir: '/public_html/TN_INST/'
+        server-dir: '/'
         local-dir: './'
-        exclude: '.git,.github'
+        
