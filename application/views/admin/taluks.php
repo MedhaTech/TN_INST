@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                         <th>Sl. No </th>
-                                            <th>District Name</th>
+                                            <th>Block Name</th>
                                             <th>Taluk Name</th>
                                             <th>Vernacular Taluk Name</th>
                                             <th>Status</th>
@@ -42,7 +42,7 @@
                                         <?php $i=1; foreach ($taluks as $taluk) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                                <td><?php echo $this->admin_model->get_field_value('district_name', 'districts', 'district_id',$taluk['district_id']); ?></td>
+                                                <td><?php echo $this->admin_model->get_field_value('block_name', 'blocks', 'block_id',$taluk['block_id']); ?></td>
                                                 <td><?php echo $taluk['taluk_name']; ?></td>
                                                 <td><?php echo $taluk['taluk_name_vernacular']; ?></td>
                                                 <td><?php echo $taluk['status']; ?></td>
@@ -56,7 +56,7 @@
                                     <tfoot>
                                         <tr>
                                         <th>Sl. No </th>
-                                            <th>District Name</th>
+                                            <th>Block Name</th>
                                             <th>Taluk Name</th>
                                             <th>Vernacular Taluk Name</th>
                                             <th>Status</th>

@@ -29,17 +29,18 @@
 
 
 
-                            <?php echo validation_errors(); ?>
-                            <?php echo form_open('admin/addstates'); ?>
+
+                        <?php echo form_open('admin/addstates'); ?>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="state_name">State Name:</label>
                                     <input type="text" class="form-control" name="state_name" id="state_name" value="<?php echo set_value('state_name'); ?>">
-
+                                    <?=form_error('state_name','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="state_name_vernacular">Vernacular State Name:</label>
                                     <input type="text" class="form-control" name="state_name_vernacular" id="state_name_vernacular" value="<?php echo set_value('state_name_vernacular'); ?>">
+                                    <?=form_error('state_name_vernacular','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status:</label>
@@ -47,6 +48,7 @@
                                         <option value="ACTIVE">Active</option>
                                         <option value="INACTIVE">Inactive</option>
                                         <option value="DELETED">Deleted</option>
+                                        <?=form_error('status','<div class="text-danger">','</div>');?>
                                     </select>
                                 </div>
                                
@@ -54,6 +56,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Add</button>
+                                <a href="<?=base_url();?>admin/states" class="btn btn-primary float-right" role="button">Cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

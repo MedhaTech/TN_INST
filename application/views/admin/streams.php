@@ -34,7 +34,7 @@
                                             <th>Institution Type ID</th>
                                             
                                             <th>Stream Name</th>
-                                            <th>Vernacular Stream Name</th>
+                                            <th>Stream Short Name</th>
                                             
                                             <th>Status</th>
                                             <th>Action</th>
@@ -44,9 +44,9 @@
                                         <?php $i=1; foreach ($streams as $stream) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                                <td><?php echo $this->admin_model->get_field_value('institution_type', 'institutiontypes', 'institution_type_id',$stream['institution_type_id']); ?></td>
+                                                <td><?php echo $this->admin_model->get_field_value('institution_type', 'institution_types', 'institution_type_id',$stream['institution_type_id']); ?></td>
                                                 <td><?php echo $stream['stream_name']; ?></td>
-                                                <td><?php echo $stream['stream_name_vernacular']; ?></td>
+                                                <td><?php echo $stream['stream_short_form']; ?></td>
                                                 <td><?php echo $stream['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editstreams/' . $stream['stream_id']); ?>">Edit</a>
@@ -61,7 +61,7 @@
                                             <th>Institution Type ID</th>
                                             
                                             <th>Stream Name</th>
-                                            <th>Vernacular Stream Name</th>
+                                            <th>Stream Short Name</th>
                                             
                                             <th>Status</th>
                                             <th>Action</th>

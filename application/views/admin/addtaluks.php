@@ -29,30 +29,32 @@
 
 
 
-                            <?php echo validation_errors(); ?>
+                            
                             <?php echo form_open('admin/addtaluks'); ?>
                             <div class="card-body">
                                                         
                                 <div class="form-group">
-                                <label for="status">District Name:</label>
-                                <select name="district_id" id="district_id" class="form-control input-lg">
-                                <option value="">Select District</option>
+                                <label for="status">Block Name:</label>
+                                <select name="block_id" id="block_id" class="form-control input-lg select2">
+                                <option value="">Select Block</option>
                                 <?php
-                                foreach($districts as $row)
+                                foreach($blocks as $row)
                                 {
-                                    echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
+                                    echo '<option value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('block_name','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="taluk_name">Taluk Name</label>
                                     <input type="text" class="form-control" name="taluk_name" id="taluk_name" value="<?php echo set_value('taluk_name'); ?>">
-
+                                    <?=form_error('taluk_name','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="taluk_name_vernacular">Vernacular Taluk Name:</label>
                                     <input type="text" class="form-control" name="taluk_name_vernacular" id="taluk_name_vernacular" value="<?php echo set_value('taluk_name_vernacular'); ?>">
+                                    <?=form_error('taluk_name_vernacular','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status:</label>
@@ -67,6 +69,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Add</button>
+                                <a href="<?=base_url();?>admin/taluks" class="btn btn-primary float-right" role="button">Cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

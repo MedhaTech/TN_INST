@@ -60,6 +60,8 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Dashboard";
 			$data['activeMenu'] = "dashboard";
+			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			$data['places'] = $this->admin_model->get_table_details('places');
 			$this->admin_template->show('admin/Dashboard', $data);
 		} else {
 			redirect('admin', 'refresh');
@@ -96,7 +98,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addstates');
+				$this->admin_template->show('admin/addstates',$data);
 			} else {
 				$data = array(
 					'state_name' => $this->input->post('state_name'),
@@ -186,19 +188,23 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
+			$this->form_validation->set_rules('lgd_code', 'lgd Code', 'required|trim');
 			$this->form_validation->set_rules('district_name', 'District Name', 'required|trim|is_unique[districts.district_name]');
 			$this->form_validation->set_rules('district_name_vernacular', 'Vernacular District Name', 'required|trim');
+			$this->form_validation->set_rules('district_short_form', 'District Short Form', 'required|trim');
 			$this->form_validation->set_rules('district_headquarters', 'District Headquarters', 'required|trim');
 			$this->form_validation->set_rules('district_headquarters_vernacular', 'Vernacular District Headquarters', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/adddistricts');
+				$this->admin_template->show('admin/adddistricts', $data);
 			} else {
 				$data = array(
 					'state_id' => '1',
+					'lgd_code' => $this->input->post('lgd_code'),
 					'district_name' => $this->input->post('district_name'),
 					'district_name_vernacular' => $this->input->post('district_name_vernacular'),
+					'district_short_form' => $this->input->post('district_short_form'),
 					'district_headquarters' => $this->input->post('district_headquarters'),
 					'district_headquarters_vernacular' => $this->input->post('district_headquarters_vernacular'),
 					'status' => $this->input->post('status')
@@ -222,9 +228,10 @@ class Admin extends CI_Controller
 
 			
 
-		
+		    $this->form_validation->set_rules('lgd_code', 'lgd Code', 'required|trim');
 			$this->form_validation->set_rules('district_name', 'District Name', 'required|trim');
 			$this->form_validation->set_rules('district_name_vernacular', 'Vernacular District Name', 'required|trim');
+			$this->form_validation->set_rules('district_short_form', 'District Short Form', 'required|trim');
 			$this->form_validation->set_rules('district_headquarters', 'District Headquarters', 'required|trim');
 			$this->form_validation->set_rules('district_headquarters_vernacular', 'Vernacular District Headquarters', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
@@ -234,8 +241,10 @@ class Admin extends CI_Controller
 			} else {
 				$data = array(
 				
+					'lgd_code' => $this->input->post('lgd_code'),
 					'district_name' => $this->input->post('district_name'),
 					'district_name_vernacular' => $this->input->post('district_name_vernacular'),
+					'district_short_form' => $this->input->post('district_short_form'),
 					'district_headquarters' => $this->input->post('district_headquarters'),
 					'district_headquarters_vernacular' => $this->input->post('district_headquarters_vernacular'),
 					'status' => $this->input->post('status')
@@ -286,18 +295,18 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
-			$this->form_validation->set_rules('district_id', 'District ID', 'required|trim');
+			$this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');
 			$this->form_validation->set_rules('taluk_name', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('taluk_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addtaluks',$data);
 			} else {
 				$data = array(
 					
-					'district_id' => $this->input->post('district_id'),
+					'block_id' => $this->input->post('block_id'),
 					'taluk_name' => $this->input->post('taluk_name'),
 					'taluk_name_vernacular' => $this->input->post('taluk_name_vernacular'),
 					'status' => $this->input->post('status')
@@ -324,14 +333,14 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('taluk_name', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('taluk_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/edittaluks', $data);
 			} else {
 				$data = array(
 				
-					'district_id' => $this->input->post('district_id'),
+					'block_id' => $this->input->post('block_id'),
 					'taluk_name' => $this->input->post('taluk_name'),
 					'taluk_name_vernacular' => $this->input->post('taluk_name_vernacular'),
 					'status' => $this->input->post('status')
@@ -380,17 +389,18 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
-			$this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
+			$this->form_validation->set_rules('district_id', 'District ID', 'required|trim');
+			
 			$this->form_validation->set_rules('block_name', 'Block Name', 'required|trim');
 			$this->form_validation->set_rules('block_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['taluks'] = $this->admin_model->get_table_details('taluks');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addblocks',$data);
 			} else {
 				$data = array(
-					'taluk_id' => $this->input->post('taluk_id'),
+					'district_id' => $this->input->post('district_id'),
 					'block_name' => $this->input->post('block_name'),
 					'block_name_vernacular' => $this->input->post('block_name_vernacular'),
 					'status' => $this->input->post('status')
@@ -417,14 +427,14 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('block_name', 'Block Name', 'required|trim');
 			$this->form_validation->set_rules('block_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['taluks'] = $this->admin_model->get_table_details('taluks');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editblocks', $data);
 			} else {
 				$data = array(
 				
-					'taluk_id' => $this->input->post('taluk_id'),
+					'district_id' => $this->input->post('district_id'),
 					'block_name' => $this->input->post('block_name'),
 					'block_name_vernacular' => $this->input->post('block_name_vernacular'),
 					'status' => $this->input->post('status')
@@ -479,13 +489,13 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('place_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('pincode', 'Pincode', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addplaces',$data);
 			} else {
 				$data = array(
-					'block_id' => $this->input->post('block_id'),
+					'taluk_id' => $this->input->post('taluk_id'),
 					'place_type' => $this->input->post('place_type'),
 					'place_name' => $this->input->post('place_name'),
 					'place_name_vernacular' => $this->input->post('place_name_vernacular'),
@@ -516,14 +526,14 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('place_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('pincode', 'Pincode', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editplaces', $data);
 			} else {
 				$data = array(
 				
-					'block_id' => $this->input->post('block_id'),
+					'taluk_id' => $this->input->post('taluk_id'),
 					'place_type' => $this->input->post('place_type'),
 					'place_name' => $this->input->post('place_name'),
 					'place_name_vernacular' => $this->input->post('place_name_vernacular'),
@@ -560,7 +570,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institutiontypes');
+			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 			$this->admin_template->show('admin/institution_types', $data);
 		} else {
 			redirect('admin', 'refresh');
@@ -578,13 +588,13 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addinstitutiontypes');
+				$this->admin_template->show('admin/addinstitutiontypes', $data);
 			} else {
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
 					'status' => $this->input->post('status')
 				);
-				$this->db->insert('institutiontypes', $data);
+				$this->db->insert('institution_types', $data);
 				redirect('admin/institution_types');
 			}
 		} else {
@@ -598,7 +608,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
-			$data['institutiontype'] = $this->admin_model->get_details_by_id($institution_type_id,'institution_type_id','institutiontypes');
+			$data['institutiontype'] = $this->admin_model->get_details_by_id($institution_type_id,'institution_type_id','institution_types');
 
 			// var_dump($data['institutiontype']);
 
@@ -614,7 +624,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->where('institution_type_id', $institution_type_id);
-				$this->db->update('institutiontypes', $data);
+				$this->db->update('institution_types', $data);
 				redirect('admin/institution_types');
 			}
 		} else {
@@ -629,7 +639,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$this->db->where('institution_type_id', $institution_type_id);
-			$this->db->delete('institutiontypes');
+			$this->db->delete('institution_types');
 			redirect('admin/institution_types');
 		} else {
 			redirect('admin', 'refresh');
@@ -662,7 +672,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institution_types'] = $this->admin_model->get_table_details('institutiontypes');
+			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['places'] = $this->admin_model->get_table_details('places');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -700,7 +710,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institution_types'] = $this->admin_model->get_table_details('institutiontypes');
+			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['places'] = $this->admin_model->get_table_details('places');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -862,9 +872,9 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "streams";
 			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
-			$this->form_validation->set_rules('stream_name_vernacular', 'Vernacular Stream Name', 'required|trim');
+			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institutiontypes');
+			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addstreams',$data);
@@ -872,7 +882,7 @@ class Admin extends CI_Controller
 				$data = array(
 					'institution_type_id' => $this->input->post('institution_type_id'),
 					'stream_name' => $this->input->post('stream_name'),
-					'stream_name_vernacular' => $this->input->post('stream_name_vernacular'),
+					'stream_short_form' => $this->input->post('stream_short_form'),
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('streams', $data);
@@ -895,9 +905,9 @@ class Admin extends CI_Controller
 
 		    $this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
-			$this->form_validation->set_rules('stream_name_vernacular', 'Vernacular Stream Name', 'required|trim');
+			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institutiontypes');
+			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editstreams', $data);
@@ -906,7 +916,7 @@ class Admin extends CI_Controller
 				
 					'institution_type_id' => $this->input->post('institution_type_id'),
 					'stream_name' => $this->input->post('stream_name'),
-					'stream_name_vernacular' => $this->input->post('stream_name_vernacular'),
+					'stream_short_form' => $this->input->post('stream_short_form'),
 					'status' => $this->input->post('status')
 				);
 				$this->db->where('stream_id', $stream_id);

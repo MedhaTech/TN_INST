@@ -29,17 +29,17 @@
 
 
 
-                            <?php echo validation_errors(); ?>
+                           
                             <?php echo form_open('admin/addplaces'); ?>
                             <div class="card-body">
                               <div class="form-group">
-                                <label for="status">Block Name:</label>
-                                <select name="block_id" id="block_id" class="form-control input-lg">
-                                <option value="">Select Block</option>
+                                <label for="status">Taluk Name:</label>
+                                <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
+                                <option value="">Select Taluk</option>
                                 <?php
-                                foreach($blocks as $row)
+                                foreach($taluks as $row)
                                 {
-                                    echo '<option value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
+                                    echo '<option value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
                                 }
                                 ?>
                                 </select>
@@ -56,14 +56,17 @@
                                 <div class="form-group">
                                     <label for="place_name">Place Name:</label>
                                     <input type="text" class="form-control" name="place_name" id="place_name" value="<?php echo set_value('place_name'); ?>">
+                                    <?=form_error('place_name','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="place_name_vernacular">Vernacular Place Name:</label>
                                     <input type="text" class="form-control" name="place_name_vernacular" id="place_name_vernacular" value="<?php echo set_value('place_name_vernacular'); ?>">
+                                    <?=form_error('place_name_vernacular','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="pincode">Pincode</label>
                                     <input type="text" class="form-control" name="pincode" id="pincode" value="<?php echo set_value('pincode'); ?>">
+                                    <?=form_error('pincode','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status:</label>
@@ -78,6 +81,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Add</button>
+                                <a href="<?=base_url();?>admin/places" class="btn btn-primary float-right" role="button">cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

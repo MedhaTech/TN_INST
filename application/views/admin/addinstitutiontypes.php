@@ -29,13 +29,13 @@
 
 
 
-                            <?php echo validation_errors(); ?>
+                           
                             <?php echo form_open('admin/addinstitutiontypes'); ?>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="institution_type">Institution Type:</label>
                                     <input type="text" class="form-control" name="institution_type" id="institution_type" value="<?php echo set_value('institution_type'); ?>">
-
+                                    <?=form_error('institution_type','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status:</label>
@@ -50,6 +50,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Add</button>
+                                <a href="<?=base_url();?>admin/institution_types" class="btn btn-primary float-right" role="button">Cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

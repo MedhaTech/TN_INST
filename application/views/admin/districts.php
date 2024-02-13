@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>District</h1>
+                        <h1>Districts</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,8 +32,10 @@
                                         <tr>
                                             <th>Sl. No </th>
                                           
+                                            <th>lgd Code</th>
                                             <th>District Name</th>
                                             <th>Vernacular District Name</th>
+                                            <th>District Short Form</th>
                                             <th>District Headquarters</th>
                                             <th>Vernacular District Headquarters</th>
                                             <th>Status</th>
@@ -45,8 +47,10 @@
                                             <tr>
                                                 <td><?php echo $i; ?></td>
                                                 
+                                                <td><?php echo $district['lgd_code']; ?></td>
                                                 <td><?php echo $district['district_name']; ?></td>
                                                 <td><?php echo $district['district_name_vernacular']; ?></td>
+                                                <td><?php echo $district['district_short_form']; ?></td>
                                                 <td><?php echo $district['district_headquarters']; ?></td>
                                                 <td><?php echo $district['district_headquarters_vernacular']; ?></td>
                                                 <td><?php echo $district['status']; ?></td>
@@ -61,12 +65,14 @@
                                         <tr>
                                         <th>Sl. No </th>
                                           
-                                          <th>District Name</th>
-                                          <th>Vernacular District Name</th>
-                                          <th>District Headquarters</th>
-                                          <th>Vernacular District Headquarters</th>
-                                          <th>Status</th>
-                                          <th>Action</th>
+                                            <th>lgd Code</th>
+                                            <th>District Name</th>
+                                            <th>Vernacular District Name</th>
+                                            <th>District Short Form</th>
+                                            <th>District Headquarters</th>
+                                            <th>Vernacular District Headquarters</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                 </table>

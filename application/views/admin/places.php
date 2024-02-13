@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                         <th>Sl. No </th>
-                                            <th>Block ID</th>
+                                            <th>Taluk Name</th>
                                             <th>Place Type</th>
                                             <th>Place Name</th>
                                             <th>Vernacular Place Name</th>
@@ -44,7 +44,7 @@
                                         <?php $i=1; foreach ($places as $place) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                                <td><?php echo $this->admin_model->get_field_value('block_name', 'blocks', 'block_id',$place['block_id']); ?></td>
+                                                <td><?php echo $this->admin_model->get_field_value('taluk_name', 'taluks', 'taluk_id',$place['taluk_id']); ?></td>
                                                 <td><?php echo $place['place_type']; ?></td>
                                                 <td><?php echo $place['place_name']; ?></td>
                                                 <td><?php echo $place['place_name_vernacular']; ?></td>
@@ -60,7 +60,7 @@
                                     <tfoot>
                                         <tr>
                                         <th>Sl. No </th>
-                                            <th>Block ID</th>
+                                            <th>Taluk Name</th>
                                             <th>Place Type</th>
                                             <th>Place Name</th>
                                             <th>Vernacular Place Name</th>
