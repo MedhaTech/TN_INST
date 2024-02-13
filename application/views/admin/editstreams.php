@@ -29,12 +29,12 @@
 
 
 
-                            <?php echo validation_errors(); ?>
+                            
                             <?php echo form_open('admin/editstreams/' . $stream['stream_id']); ?>
                             <div class="card-body">
                             <div class="form-group">
                                 <label for="status">Institution Type:</label>
-                                <select name="institution_type_id" id="institution_type_id" class="form-control input-lg">
+                                <select name="institution_type_id" id="institution_type_id" class="form-control input-lg select2">
                                 <option value="">Select Institution Type</option>
                                 <?php
                                 foreach($institutiontypes as $row)
@@ -47,10 +47,12 @@
                                 <div class="form-group">
                                     <label for="stream_name">Stream Name:</label>
                                     <input type="text" class="form-control" name="stream_name" id="stream_name" value="<?php echo set_value('stream_name', $stream['stream_name']); ?>">
+                                    <?=form_error('stream_name','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="stream_name_vernacular">Vernacular Stream Name:</label>
-                                    <input type="text" class="form-control" name="stream_name_vernacular" id="stream_name_vernacular" value="<?php echo set_value('stream_name_vernacular', $stream['stream_name_vernacular']); ?>">
+                                    <label for="stream_short_form"> Stream Short Form:</label>
+                                    <input type="text" class="form-control" name="stream_short_form" id="stream_short_form" value="<?php echo set_value('stream_short_form', $stream['stream_short_form']); ?>">
+                                    <?=form_error('stream_short_form','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
                                     <label for="status">Status:</label>
@@ -65,6 +67,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="<?=base_url();?>admin/streams" class="btn btn-primary float-right" role="button">Cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

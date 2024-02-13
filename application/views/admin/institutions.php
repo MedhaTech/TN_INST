@@ -34,8 +34,8 @@
                                             <th>Institution Code</th>
                                             <th>Institution Name</th>
                                             <th>Vernacular Institution Name</th>
-                                            <th>Institution Type ID</th>
-                                            <th>Place ID</th>
+                                            <th>Institution Type</th>
+                                            <th>Place</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -47,7 +47,7 @@
                                                 <td><?php echo $institution['institution_code']; ?></td>
                                                 <td><?php echo $institution['institution_name']; ?></td>
                                                 <td><?php echo $institution['institution_name_vernacular']; ?></td>
-                                                <td><?php echo $this->admin_model->get_field_value('institution_type', 'institutiontypes', 'institution_type_id',$institution['institution_type_id']); ?></td>
+                                                <td><?php echo $this->admin_model->get_field_value('institution_type', 'institution_types', 'institution_type_id',$institution['institution_type_id']); ?></td>
                                                 <td><?php echo $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); ?></td>
                                                 <td><?php echo $institution['status']; ?></td>
                                                 <td>
@@ -63,8 +63,8 @@
                                             <th>Institution Code</th>
                                             <th>Institution Name</th>
                                             <th>Vernacular Institution Name</th>
-                                            <th>Institution Type ID</th>
-                                            <th>Place ID</th>
+                                            <th>Institution Type</th>
+                                            <th>Place</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
