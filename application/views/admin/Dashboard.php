@@ -22,75 +22,88 @@
             <div class="row">
     <div class="col-md-6">
     <div class="row">
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">Districts</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of Districts</h5><br>
-    <p class="card-text">46</p>
-  </div>
-</div>
+    <div class="col-md-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                 <h3>38</h3>
+                 <p style="font-size: 20px">Districts</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
 
-        </div>
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">Blocks</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of Blocks</h5>
-    <p class="card-text">149</p>
-    
-  </div>
-</div>
+        <div class="col-md-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                 <h3>458</h3>
+                 <p style="font-size: 20px">Blocks</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
 
-        </div>
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">Taluks</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of Taluks</h5>
-    <p class="card-text">67</p>
-   
-  </div>
-</div>
+         <div class="col-md-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                 <h3>590</h3>
+                 <p style="font-size: 20px">Taluks</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
 
+           <div class="col-md-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                 <h3>1340</h3>
+                 <p style="font-size: 20px">Places</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
         </div>
-        </div>
+
         <div class="row">
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">Places</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of <br>Places</h5>
-    <p class="card-text">256</p>
-   
-  </div>
-</div>
+          <div class="col-md-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                 <h3>9</h3>
+                 <p style="font-size: 20px">Institution Types</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
 
-        </div>
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">InstitutionTypes</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of InstitutionTypes</h5>
-    <p class="card-text">375</p>
-    
-  </div>
-</div>
-
-        </div>
-        <div class="col-md-4">
-        <div class="card">
-  <h5 class="card-header bg-primary text-white">Institution</h5>
-  <div class="card-body">
-    <h5 class="card-title">Number of Institution</h5>
-    <p class="card-text">175</p>
-    
-  </div>
-</div>
-
-        </div>
-        </div>
+         <div class="col-md-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                 <h3>1097</h3>
+                 <p style="font-size: 20px">Institutions</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">  </a>
+            </div>
+         </div>
     </div>
+ </div>
+
     <div class="col-md-6">
         <div class="card card-primary">
 
