@@ -167,6 +167,12 @@
               </a>
             </li>
             <li class="nav-item">
+            <a href="<?php echo base_url('admin/themesproblems/');?>" class="nav-link  <?php echo ($pageTitle=="Themeproblems") ? "active":"";?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Themes and Problems</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo base_url('admin/logout');?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Logout</p>

@@ -187,5 +187,9 @@ Class Admin_model extends CI_Model
         }
     }
 
+    function statistic_count($table){
+      return $this->db->get($table)->num_rows();
+    }
+
 }
 ?>

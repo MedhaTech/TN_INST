@@ -5,11 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Blocks</h1>
+                        <h1>Themes and Problems</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addblocks/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Blocks</button></a>
+                        <a href="<?php echo base_url('admin/addthemesproblems/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Themes and Problems</button></a>
                         </ol>
                     </div>
                 </div>
@@ -30,37 +30,36 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                        <th>Sl. No </th>
-                                            <th>District Name</th>
-                                            <th>Block Name</th>
-                                            <th>Vernacular Block Name</th>
-                                            <th>Status</th>
+                                            <th>Sl. No </th>
+                                            <th>Theme Name</th>
+                                            <th>Problem Statement</th>
+                                            <th>Problem Statement Description</th>
+                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach ($blocks as $block) : ?>
+                                        <?php $i=1; foreach ($themes_problems as $themesproblem) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                               
-                                                <td><?php echo $this->admin_model->get_field_value('district_name', 'districts', 'district_id',$block['district_id']); ?></td>
-                                                <td><?php echo $block['block_name']; ?></td>
-                                                <td><?php echo $block['block_name_vernacular']; ?></td>
-                                                <td><?php echo $block['status']; ?></td>
+                                                <td><?php echo $themesproblem['theme_name']; ?></td>
+                                                <td><?php echo $themesproblem['problem_statement']; ?></td>
+                                                <td><?php echo $themesproblem['problem_statement_description']; ?></td>
+                                                <td><?php echo $themesproblem['status']; ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editblocks/' . $block['block_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteblocks/' . $block['block_id']); ?>" onclick="return confirm('Are you sure you want to delete this block?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editthemesproblems/' . $themesproblem['theme_problem_id']); ?>">Edit</a>
+                                                    <a href="<?php echo base_url('admin/deletethemesproblems/' . $themesproblem['theme_problem_id']); ?>" onclick="return confirm('Are you sure you want to delete this themesproblems?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                        <th>Sl. No </th>
-                                            <th>District Name</th>
-                                            <th>Block Name</th>
-                                            <th>Vernacular Block Name</th>
-                                            <th>Status</th>
+                                            <th>Sl. No </th>
+                                            <th>Theme Name</th>
+                                            <th>Problem Statement</th>
+                                            <th>Problem Statement Description</th>
+                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

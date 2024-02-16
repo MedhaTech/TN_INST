@@ -44,7 +44,7 @@
                                         <?php $i=1; foreach ($institutions as $institution) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                                <td><?php echo $institution['institution_code']; ?></td>
+                                                <td><a href="<?php echo base_url('admin/viewinstitution/' . $institution['institution_id']); ?>"><?php echo $institution['institution_code']; ?></a></td>
                                                 <td><?php echo $institution['institution_name']; ?></td>
                                                 <td><?php echo $institution['institution_name_vernacular']; ?></td>
                                                 <td><?php echo $this->admin_model->get_field_value('institution_type', 'institution_types', 'institution_type_id',$institution['institution_type_id']); ?></td>
@@ -52,7 +52,7 @@
                                                 <td><?php echo $institution['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editinstitution/' . $institution['institution_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteinstitution/' . $institution['institution_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deleteinstitution/' . $institution['institution_id']); ?>" onclick="return confirm('Are you sure you want to delete this institution?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>

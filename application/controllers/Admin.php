@@ -68,6 +68,24 @@ class Admin extends CI_Controller
 		}
 	}
 
+	function viewinstitution($institution_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Viewinstitution";
+			$data['activeMenu'] = "viewinstitution";
+			$data['institution'] = $this->admin_model->get_table_details('institutions');
+			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
+			$data['taluk'] = $this->admin_model->get_table_details('taluks');
+			$data['block'] = $this->admin_model->get_table_details('blocks');
+			// $this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
+			// $this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');
+			$this->admin_template->show('admin/viewinstitution', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
 
 	function states()
 	{
@@ -106,7 +124,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('states', $data);
-				redirect('states');
+				redirect('admin/states');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -483,7 +501,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
-			$this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');
+			$this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
 			$this->form_validation->set_rules('place_type', 'Place Type', 'required|in_list[METRO,URBAN,SEMI-URBAN,RURAL]');
 			$this->form_validation->set_rules('place_name', 'Place Name', 'required|trim');
 			$this->form_validation->set_rules('place_name_vernacular', 'Vernacular Place Name', 'required|trim');
@@ -1045,6 +1063,100 @@ class Admin extends CI_Controller
 			redirect('admin', 'refresh');
 		}
 	}
+
+	function themesproblems()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Themeproblems";
+			$data['activeMenu'] = "themesproblems";
+			$data['themes_problems'] = $this->admin_model->get_table_details('themes_problems');
+			$this->admin_template->show('admin/themesproblems', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function addthemesproblems()
+	{
+
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Themeproblems";
+			$data['activeMenu'] = "themeproblems";
+			$this->form_validation->set_rules('theme_name', 'Theme Name', 'required|trim');
+			$this->form_validation->set_rules('problem_statement', 'Problem Statement', 'required|trim');
+			$this->form_validation->set_rules('problem_statement_description', 'Problem Statement Description', 'required|trim');
+			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->admin_template->show('admin/addthemesproblems',$data);
+			} else {
+				$data = array(
+					'theme_name' => $this->input->post('theme_name'),
+					'problem_statement' => $this->input->post('problem_statement'),
+					'problem_statement_description' => $this->input->post('problem_statement_description'),
+					'status' => $this->input->post('status')
+				);
+				$this->db->insert('themes_problems', $data);
+				redirect('admin/themesproblems');
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function editthemesproblems($theme_problem_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Themeproblems";
+			$data['activeMenu'] = "themeproblemsates";
+			$data['themesproblem'] = $this->admin_model->get_details_by_id($theme_problem_id,'theme_problem_id','themes_problems');
+
+		
+			$this->form_validation->set_rules('theme_name', 'Theme Name', 'required|trim');
+			$this->form_validation->set_rules('problem_statement', 'Problem Statement', 'required|trim');
+			$this->form_validation->set_rules('problem_statement_description', 'Problem Statement Description', 'required|trim');
+			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->admin_template->show('admin/editthemesproblems', $data);
+			} else {
+				$data = array(
+
+					'theme_name' => $this->input->post('theme_name'),
+					'problem_statement' => $this->input->post('problem_statement'),
+					'problem_statement_description' => $this->input->post('problem_statement_description'),
+					'status' => $this->input->post('status')
+				);
+				$this->db->where('theme_problem_id', $theme_problem_id);
+				$this->db->update('themes_problems', $data);
+				redirect('admin/themesproblems');
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function deletethemesproblems($theme_problem_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "themeproblems";
+			$data['activeMenu'] = "themeproblems";
+			$this->db->where('theme_problem_id', $theme_problem_id);
+			$this->db->delete('themes_problems');
+			redirect('admin/themesproblems');
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
 	function logout()
 	{
 		$this->session->unset_userdata('logged_in');

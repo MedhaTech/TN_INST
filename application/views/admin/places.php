@@ -52,7 +52,7 @@
                                                 <td><?php echo $place['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editplaces/' . $place['place_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteplaces/' . $place['place_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deleteplaces/' . $place['place_id']); ?>" onclick="return confirm('Are you sure you want to delete this place?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
