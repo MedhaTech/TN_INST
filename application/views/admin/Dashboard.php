@@ -25,7 +25,7 @@
     <div class="col-md-6">
             <div class="small-box bg-info">
               <div class="inner">
-                 <h3>38</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('districts')?></h3>
                  <p style="font-size: 20px">Districts</p>
               </div>
               <div class="icon">
@@ -38,7 +38,7 @@
         <div class="col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
-                 <h3>458</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('blocks')?></h3>
                  <p style="font-size: 20px">Blocks</p>
               </div>
               <div class="icon">
@@ -51,7 +51,7 @@
          <div class="col-md-6">
             <div class="small-box bg-warning">
               <div class="inner">
-                 <h3>590</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('taluks')?></h3>
                  <p style="font-size: 20px">Taluks</p>
               </div>
               <div class="icon">
@@ -64,7 +64,7 @@
            <div class="col-md-6">
             <div class="small-box bg-danger">
               <div class="inner">
-                 <h3>1340</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('places')?></h3>
                  <p style="font-size: 20px">Places</p>
               </div>
               <div class="icon">
@@ -79,7 +79,7 @@
           <div class="col-md-6">
             <div class="small-box bg-info">
               <div class="inner">
-                 <h3>9</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('institution_types')?></h3>
                  <p style="font-size: 20px">Institution Types</p>
               </div>
               <div class="icon">
@@ -92,7 +92,7 @@
          <div class="col-md-6">
             <div class="small-box bg-success">
               <div class="inner">
-                 <h3>1097</h3>
+                 <h3><?php echo $this->admin_model->statistic_count('institutions')?></h3>
                  <p style="font-size: 20px">Institutions</p>
               </div>
               <div class="icon">

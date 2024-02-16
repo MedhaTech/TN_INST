@@ -48,7 +48,7 @@
                                                 <td><?php echo $taluk['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>" onclick="return confirm('Are you sure you want to delete this taluk?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>

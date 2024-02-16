@@ -50,7 +50,7 @@
                                                 <td><?php echo $stream['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editstreams/' . $stream['stream_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletestreams/' . $stream['stream_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deletestreams/' . $stream['stream_id']); ?>" onclick="return confirm('Are you sure you want to delete this stream?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>

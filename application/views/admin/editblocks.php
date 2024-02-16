@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                 <label for="status">District Name:</label>
                                 <select name="district_id" id="district_id" class="form-control input-lg select2">
-                                <option value="">Select Block</option>
+                                <option value="">Select District</option>
                                 <?php
                                 foreach($districts as $row)
                                 {

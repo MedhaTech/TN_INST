@@ -52,7 +52,7 @@
                                                 <td><?php echo $institutionprincipal['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editinstitutionprincipals/' . $institutionprincipal['institution_principal_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteinstitutionprincipals/' . $institutionprincipal['institution_principal_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deleteinstitutionprincipals/' . $institutionprincipal['institution_principal_id']); ?>" onclick="return confirm('Are you sure you want to delete this institutionprincipal?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>

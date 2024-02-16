@@ -56,7 +56,7 @@
                                                 <td><?php echo $district['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editdistrict/' . $district['district_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletedistrict/' . $district['district_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/deletedistrict/' . $district['district_id']); ?>" onclick="return confirm('Are you sure you want to delete this districts?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
