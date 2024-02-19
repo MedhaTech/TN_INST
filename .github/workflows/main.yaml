@@ -3,7 +3,7 @@ name: FTP Auto-deployment
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
