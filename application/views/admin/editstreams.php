@@ -39,7 +39,8 @@
                                 <?php
                                 foreach($institutiontypes as $row)
                                 {
-                                    echo '<option value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
+                                    $active=($stream['institution_type_id'] == $row['institution_type_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
                                 }
                                 ?>
                                 </select>

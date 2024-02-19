@@ -149,15 +149,15 @@
               </a>
             </li> -->
             <li class="nav-item">
-              <a href="<?php echo base_url('admin/institution_types/');?>" class="nav-link <?php echo ($pageTitle=="Institutiontypes") ? "active":"";?>">
-                <i class="far fa-circle nav-icon"></i>
-                <p>InstitutionTypes</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="<?php echo base_url('admin/streams/');?>" class="nav-link <?php echo ($pageTitle=="Streams") ? "active":"";?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Streams</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('admin/institution_types/');?>" class="nav-link <?php echo ($pageTitle=="Institutiontypes") ? "active":"";?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>InstitutionTypes</p>
               </a>
             </li>
             <li class="nav-item">

@@ -40,7 +40,8 @@
                                 <?php
                                 foreach($taluks as $row)
                                 {
-                                    echo '<option value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
+                                    $active=($place['taluk_id'] == $row['taluk_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
                                 }
                                 ?>
                                 </select>
