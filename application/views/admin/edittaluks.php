@@ -39,7 +39,8 @@
                                 <?php
                                 foreach($blocks as $row)
                                 {
-                                    echo '<option value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
+                                    $active=($taluk['block_id'] == $row['block_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
                                 }
                                 ?>
                                 </select>

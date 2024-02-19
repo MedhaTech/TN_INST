@@ -54,7 +54,8 @@
                                 <?php
                                 foreach($institution_types as $row)
                                 {
-                                    echo '<option value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
+                                    $active=($institution['institution_type_id'] == $row['institution_type_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
                                 }
                                 ?>
                                 </select>
@@ -66,7 +67,8 @@
                                 <?php
                                 foreach($places as $row)
                                 {
-                                    echo '<option value="'.$row["place_id"].'">'.$row["place_name"].'</option>';
+                                    $active=($institution['place_id'] == $row['place_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["place_id"].'">'.$row["place_name"].'</option>';
                                 }
                                 ?>
                                 </select>

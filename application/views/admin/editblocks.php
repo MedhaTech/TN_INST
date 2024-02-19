@@ -40,7 +40,8 @@
                                 <?php
                                 foreach($districts as $row)
                                 {
-                                    echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
+                                    $active=($block['district_id'] == $row['district_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
                                 }
                                 ?>
                                 </select>
