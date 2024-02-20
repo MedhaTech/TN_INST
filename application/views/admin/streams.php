@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                            <th>Sl. No </th>
-                                            <th>Institution Type ID</th>
+                                            
                                             
                                             <th>Stream Name</th>
                                             <th>Stream Short Name</th>
@@ -44,7 +44,7 @@
                                         <?php $i=1; foreach ($streams as $stream) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                                                <td><?php echo $this->admin_model->get_field_value('institution_type', 'institution_types', 'institution_type_id',$stream['institution_type_id']); ?></td>
+                                                
                                                 <td><?php echo $stream['stream_name']; ?></td>
                                                 <td><?php echo $stream['stream_short_form']; ?></td>
                                                 <td><?php echo $stream['status']; ?></td>
@@ -58,7 +58,7 @@
                                     <tfoot>
                                         <tr>
                                         <th>Sl. No </th>
-                                            <th>Institution Type ID</th>
+                                            
                                             
                                             <th>Stream Name</th>
                                             <th>Stream Short Name</th>

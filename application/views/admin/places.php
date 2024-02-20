@@ -31,6 +31,7 @@
                                     <thead>
                                         <tr>
                                         <th>Sl. No </th>
+                                            
                                             <th>Taluk Name</th>
                                             <th>Place Type</th>
                                             <th>Place Name</th>
@@ -60,6 +61,7 @@
                                     <tfoot>
                                         <tr>
                                         <th>Sl. No </th>
+                                        
                                             <th>Taluk Name</th>
                                             <th>Place Type</th>
                                             <th>Place Name</th>

@@ -34,18 +34,6 @@
                             <div class="card-body">
                                                         
                                 <div class="form-group">
-                                <label for="status">Institution Type:</label>
-                                <select name="institution_type_id" id="institution_type_id" class="form-control input-lg select2">
-                                <option value="">Select Institution Type</option>
-                                <?php
-                                foreach($institutiontypes as $row)
-                                {
-                                    echo '<option value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
-                                }
-                                ?>
-                                </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="stream_name">Stream Name</label>
                                     <input type="text" class="form-control" name="stream_name" id="stream_name" value="<?php echo set_value('stream_name'); ?>">
                                     <?=form_error('stream_name','<div class="text-danger">','</div>');?>

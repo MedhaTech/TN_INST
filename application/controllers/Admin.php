@@ -318,12 +318,13 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('taluk_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addtaluks',$data);
 			} else {
 				$data = array(
-					
+				
 					'block_id' => $this->input->post('block_id'),
 					'taluk_name' => $this->input->post('taluk_name'),
 					'taluk_name_vernacular' => $this->input->post('taluk_name_vernacular'),
@@ -351,6 +352,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('taluk_name', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('taluk_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -480,7 +482,7 @@ class Admin extends CI_Controller
 		}
 	}
 
-	function places()
+	public function places()
 	{
 		if ($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
@@ -508,7 +510,9 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('pincode', 'Pincode', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
-
+			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addplaces',$data);
 			} else {
@@ -603,6 +607,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$this->form_validation->set_rules('institution_type', 'Institution Type', 'required|trim');
+			$this->form_validation->set_rules('institution_short_name', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -610,6 +615,7 @@ class Admin extends CI_Controller
 			} else {
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
+					'institution_short_name' => $this->input->post('institution_short_name'),
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('institution_types', $data);
@@ -691,6 +697,9 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 			$data['places'] = $this->admin_model->get_table_details('places');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -888,7 +897,6 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
-			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
@@ -898,7 +906,7 @@ class Admin extends CI_Controller
 				$this->admin_template->show('admin/addstreams',$data);
 			} else {
 				$data = array(
-					'institution_type_id' => $this->input->post('institution_type_id'),
+				
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),
 					'status' => $this->input->post('status')
@@ -1157,10 +1165,169 @@ class Admin extends CI_Controller
 		}
 	}
 
+	function programs()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Programs";
+			$data['activeMenu'] = "programs";
+			$data['programs'] = $this->admin_model->get_table_details('programs');
+			$this->admin_template->show('admin/programs', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+	public function addprograms()
+	{
+
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Programs";
+			$data['activeMenu'] = "programs";
+			$this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
+			$this->form_validation->set_rules('program_short_name', 'Program Short Name', 'required|trim');
+			$this->form_validation->set_rules('no_of_years', 'Number of Years', 'required|in_list[1,2,3,4,5,6]');
+			$this->form_validation->set_rules('program_type', 'Program Type', 'required|in_list[UG,PG,DIPLOMA]');
+			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->admin_template->show('admin/addprograms',$data);
+			} else {
+				$data = array(
+				
+					'program_name' => $this->input->post('program_name'),
+					'program_short_name' => $this->input->post('program_short_name'),
+					'no_of_years' => $this->input->post('no_of_years'),
+					'program_type' => $this->input->post('program_type'),
+					'status' => $this->input->post('status')
+				);
+				$this->db->insert('programs', $data);
+				redirect('admin/programs');
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+	public function editprograms($program_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Programs";
+			$data['activeMenu'] = "programs";
+			$data['program'] = $this->admin_model->get_details_by_id($program_id,'program_id','programs');
+
+			
+
+		    $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
+			$this->form_validation->set_rules('program_short_name', 'Program Short Name', 'required|trim');
+			$this->form_validation->set_rules('no_of_years', 'Number of years', 'required|in_list[1,2,3,4,5,6]');
+			$this->form_validation->set_rules('program_type', 'Program Type', 'required|in_list[UG,PG,DIPLOMA]');
+			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->admin_template->show('admin/editprograms', $data);
+			} else {
+				$data = array(
+				
+					'program_name' => $this->input->post('program_name'),
+					'program_short_name' => $this->input->post('program_short_name'),
+					'no_of_years' => $this->input->post('no_of_years'),
+					'program_type' => $this->input->post('program_type'),
+					'status' => $this->input->post('status')
+				);
+				$this->db->where('program_id', $program_id);
+				$this->db->update('programs', $data);
+				redirect('admin/programs');
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+	public function deleteprograms($program_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "programs";
+			$data['activeMenu'] = "programs";
+			$this->db->where('program_id', $program_id);
+			$this->db->delete('programs');
+			redirect('admin/programs');
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
 	function logout()
 	{
 		$this->session->unset_userdata('logged_in');
 		session_destroy();
 		redirect('admin', 'refresh');
+	}
+
+
+
+	function BlockList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Blocks";
+			$data['activeMenu'] = "blocks";
+			$district_id=$this->input->post('district_id');
+			$list = $this->admin_model->getDetailsbyfield($district_id,'district_id','blocks')->result();
+			if (count($list)) {
+				$blocks = array();
+				foreach ($list as $res1) {
+					$blocks[] = '<option value="' . $res1->block_id . '">' . $res1->block_name .  '</option>';
+				}
+				print_r($blocks);
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+	function TalukList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Taluks";
+			$data['activeMenu'] = "taluks";
+			$block_id=$this->input->post('block_id');
+			$list = $this->admin_model->getDetailsbyfield($block_id,'block_id','taluks')->result();
+			if (count($list)) {
+				$taluks = array();
+				foreach ($list as $res1) {
+					$taluks[] = '<option value="' . $res1->taluk_id . '">' . $res1->taluk_name .  '</option>';
+				}
+				print_r($taluks);
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+	function PlaceList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Places";
+			$data['activeMenu'] = "places";
+			$taluk_id=$this->input->post('taluk_id');
+			$list = $this->admin_model->getDetailsbyfield($taluk_id,'taluk_id','places')->result();
+			if (count($list)) {
+				$places = array();
+				foreach ($list as $res1) {
+					$places[] = '<option value="' . $res1->place_id . '">' . $res1->place_name .  '</option>';
+				}
+				print_r($places);
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
 	}
 }
