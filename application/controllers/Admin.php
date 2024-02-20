@@ -539,7 +539,8 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$data['place'] = $this->admin_model->get_details_by_id($place_id,'place_id','places');
-
+			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 			
 
 		    $this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');

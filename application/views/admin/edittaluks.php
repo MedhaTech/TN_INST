@@ -37,9 +37,12 @@
                                 <select name="district_id" id="district_id" class="form-control input-lg select2">
                                 <option value="">Select District</option>
                                 <?php
+
+                                $dist=$this->admin_model->getDetailsbyfield($taluk['block_id'],'block_id',"blocks")->result();
+                                $district_id=$dist[0]->district_id;
                                 foreach($districts as $row)
                                 {
-                                    $active=($taluk['block_id'] == $row['block_id']) ? "selected" :"";
+                                    $active=( $district_id == $row["district_id"]) ? "selected" :"";
                                     echo '<option '.$active.' value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
                                 }
                                 ?>
@@ -111,24 +114,24 @@ $(document).ready(function(){
 		var base_url = '<?php echo base_url(); ?>';
 		
 
-$("#block_id").change(function(){
+$("#district_id").change(function(){
 			event.preventDefault();
 	            	
 			
-			var district_id = $("#block_id").val();
+			var district_id = $("#district_id").val();
 			
 			if(district_id == ' ' ){
-			   alert("Please Select Block");
+			   alert("Please Select District");
 			}else{
 			  $.ajax({'type':'POST',
-				'url':base_url+'admin/DistrictList',
-				'data':{'block_id':block_id,},
+				'url':base_url+'admin/BlockList',
+				'data':{'district_id':district_id,},
 				'dataType':'text',
 				'cache':false,
 				'success':function(data){
-					$('select[name="district_id"]').empty();
-					$('select[name="district_id"]').append(data);
-					$('select[name="district_id"]').removeAttr("disabled");
+					$('select[name="block_id"]').empty();
+					$('select[name="block_id"]').append(data);
+					$('select[name="block_id"]').removeAttr("disabled");
 				}
 			  });
 			  

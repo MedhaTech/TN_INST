@@ -32,8 +32,43 @@
                             
                             <?php echo form_open('admin/editplaces/' . $place['place_id']); ?>
                             <div class="card-body">
-                                                        
-                            <div class="form-group">
+                                                 
+                                <div class="form-group">
+                                <label for="status">District Name:</label>
+                                <select name="district_id" id="district_id" class="form-control input-lg select2">
+                                <option value="">Select District</option>
+                                <?php
+
+                                $bloc=$this->admin_model->getDetailsbyfield($place['taluk_id'],'taluk_id',"taluks")->result(); 
+                               
+                                $block_id=$bloc[0]->block_id;
+                                $dist=$this->admin_model->getDetailsbyfield( $block_id,'block_id',"blocks")->result();
+                                $district_id=$dist[0]->district_id;
+                                foreach($districts as $row)
+                                {
+                                    $active=( $district_id == $row["district_id"]) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
+                                }
+                                ?>
+                                </select>
+                                </div>
+                                <div class="form-group">
+                                <label for="status">Block Name:</label>
+                                <select name="block_id" id="block_id" class="form-control input-lg select2">
+                                <option value="">Select Block</option>
+                                <?php
+
+                             
+                               
+                                foreach($blocks as $row)
+                                {
+                                    $active=( $block_id == $row["block_id"]) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
+                                }
+                                ?>
+                                </select>
+                                </div>
+                                <div class="form-group">
                                 <label for="status">Taluk Name:</label>
                                 <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
                                 <option value="">Select Taluk</option>
@@ -108,3 +143,57 @@
     </section>
     <!-- /.content -->
     </div>
+
+    <script>
+$(document).ready(function(){
+		var base_url = '<?php echo base_url(); ?>';
+		
+
+$("#district_id").change(function(){
+			event.preventDefault();
+	            	
+			
+			var district_id = $("#district_id").val();
+			
+			if(district_id == ' ' ){
+			   alert("Please Select District");
+			}else{
+			  $.ajax({'type':'POST',
+				'url':base_url+'admin/BlockList',
+				'data':{'district_id':district_id,},
+				'dataType':'text',
+				'cache':false,
+				'success':function(data){
+					$('select[name="block_id"]').empty();
+					$('select[name="block_id"]').append(data);
+					$('select[name="block_id"]').removeAttr("disabled");
+				}
+			  });
+			  
+			}
+		});
+        $("#block_id").change(function(){
+			event.preventDefault();
+	            	
+			
+			var block_id = $("#block_id").val();
+			
+			if(block_id == ' ' ){
+			   alert("Please Select Blocks");
+			}else{
+			  $.ajax({'type':'POST',
+				'url':base_url+'admin/TalukList',
+				'data':{'block_id':block_id},
+				'dataType':'text',
+				'cache':false,
+				'success':function(data){
+					$('select[name="taluk_id"]').empty();
+					$('select[name="taluk_id"]').append(data);
+					$('select[name="taluk_id"]').removeAttr("disabled");
+				}
+			  });
+			  
+			}
+		});
+    });
+</script>
