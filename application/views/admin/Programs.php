@@ -5,11 +5,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Taluks</h1>
+                        <h1>Programs</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addtaluks/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Taluks</button></a>
+                        <a href="<?php echo base_url('admin/addprograms/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Programs</button></a>
                         </ol>
                     </div>
                 </div>
@@ -32,25 +32,27 @@
                                         <tr>
                                         <th>Sl. No </th>
                                             
-                                            <th>Block Name</th>
-                                            <th>Taluk Name</th>
-                                            <th>Vernacular Taluk Name</th>
+                                            <th>Program Name</th>
+                                            <th>Program Short Name</th>
+                                            <th>Number of years</th>
+                                            <th>Program Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i=1; foreach ($taluks as $taluk) : ?>
+                                        <?php $i=1; foreach ($programs as $program) : ?>
                                             <tr>
                                                 <td><?php echo $i; ?></td>
-                            
-                                                <td><?php echo $this->admin_model->get_field_value('block_name', 'blocks', 'block_id',$taluk['block_id']); ?></td>
-                                                <td><?php echo $taluk['taluk_name']; ?></td>
-                                                <td><?php echo $taluk['taluk_name_vernacular']; ?></td>
-                                                <td><?php echo $taluk['status']; ?></td>
+                                                
+                                                <td><?php echo $program['program_name']; ?></td>
+                                                <td><?php echo $program['program_short_name']; ?></td>
+                                                <td><?php echo $program['no_of_years']; ?></td>
+                                                <td><?php echo $program['program_type']; ?></td>
+                                                <td><?php echo $program['status']; ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>" onclick="return confirm('Are you sure you want to delete this taluk?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editprograms/' . $program['program_id']); ?>">Edit</a>
+                                                    <a href="<?php echo base_url('admin/deleteprograms/' . $program['program_id']); ?>" onclick="return confirm('Are you sure you want to delete this program?')">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
@@ -58,10 +60,11 @@
                                     <tfoot>
                                         <tr>
                                         <th>Sl. No </th>
-                                           
-                                            <th>Block Name</th>
-                                            <th>Taluk Name</th>
-                                            <th>Vernacular Taluk Name</th>
+                                        
+                                            <th>Program Name</th>
+                                            <th>Program Short Name</th>
+                                            <th>Number of years</th>
+                                            <th>Program Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>

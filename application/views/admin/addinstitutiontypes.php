@@ -38,6 +38,11 @@
                                     <?=form_error('institution_type','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
+                                    <label for="institution_short_name">Institution Short Name:</label>
+                                    <input type="text" class="form-control" name="institution_short_name" id="institution_short_name" value="<?php echo set_value('institution_short_name'); ?>">
+                                    <?=form_error('institution_short_name','<div class="text-danger">','</div>');?>
+                                </div>
+                                <div class="form-group">
                                     <label for="status">Status:</label>
                                     <select class="form-control" name="status" id="status">
                                         <option value="ACTIVE">Active</option>

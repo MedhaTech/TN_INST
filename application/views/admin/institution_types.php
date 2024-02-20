@@ -32,6 +32,7 @@
                                         <tr>
                                             <th>Sl. No </th>
                                             <th>Institution Type</th>
+                                            <th>Institution Short Name</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -41,6 +42,7 @@
                                             <tr>
                                                 <td><?php echo $i; ?></td>
                                                 <td><?php echo $institutiontype['institution_type']; ?></td>
+                                                <td><?php echo $institutiontype['institution_short_name']; ?></td>
                                                 <td><?php echo $institutiontype['status']; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editinstitutiontypes/' . $institutiontype['institution_type_id']); ?>">Edit</a>
@@ -53,6 +55,7 @@
                                         <tr>
                                         <th>Sl. No </th>
                                             <th>Institution Type</th>
+                                            <th>Institution Short Name</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>

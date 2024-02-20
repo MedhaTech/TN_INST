@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -158,6 +159,12 @@
               <a href="<?php echo base_url('admin/institution_types/');?>" class="nav-link <?php echo ($pageTitle=="Institutiontypes") ? "active":"";?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>InstitutionTypes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('admin/programs/');?>" class="nav-link <?php echo ($pageTitle=="Programs") ? "active":"";?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Programs</p>
               </a>
             </li>
             <li class="nav-item">
