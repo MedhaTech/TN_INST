@@ -1,99 +1,153 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>View Institution Details</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- <ol class="breadcrumb float-sm-right">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>View Institution Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <!-- <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">DataTables</li>
                         </ol> -->
-                    </div>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-
-
-                    <div class="col-md-6">
-
-                        <div class="card card-primary">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
 
 
+                <div class="col-md-10 offset-md-1">
 
-                           
-                            <?php echo form_open('admin/viewinstitution/' . $institution['institution_id']); ?>
-                            <div class="card-body">
-                                                    
-                                <div class="form-group">
-                                    <label for="institution_code">Institution Code:</label>            
-                                    <?php echo $institution['institution_code']; ?>
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Institution Details</h3>
+                            <!-- <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                        <?php echo form_open('admin/viewinstitution/' . $institution['institution_id']); ?>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="institution_code text-sm">Institution Code :
+                                            <b class="d-block"><?php echo $institution['institution_code']; ?> </b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="staus text-sm">Status :
+                                            <b class="d-block"><?php echo $institution['status']; ?></b>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="institution_name">Institution Name:</label>
-                                    <?php echo $institution['institution_name']; ?>
+
+                                <p class="institution_name text-sm">Institution Name :
+                                    <b class="d-block"><?php echo $institution['institution_name']; ?> </b>
+                                </p>
+                                <p class="institution_name_vernacular text-sm">Vernacular Institution Name :
+                                    <b class="d-block"><?php echo ($institution['institution_name_vernacular']) ? $institution['institution_name_vernacular'] : "--"; ?>
+                                    </b>
+                                </p>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="place_id text-sm">Place Name :
+                                            <b class="d-block"><?php echo $geos['place_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="taluk_name text-sm">Taluk Name :
+                                            <b class="d-block"><?php echo $geos['taluk_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="block_name text-sm">Block Name :
+                                            <b class="d-block"><?php echo $geos['block_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="district_name text-sm">District Name :
+                                            <b class="d-block"><?php echo $geos['district_name']; ?></b>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="institution_name_vernacular">Vernacular Institution Name:</label>
-                                    <?php echo $institution['institution_name_vernacular']; ?>
+
+                                <div class="row pt-2">
+                                    <div class="col-md-12">
+                                        <h5 class="text-md text-uppercase text-bold">List of Courses</h5>
+                                        <table class="table table-hover text-sm projects">
+                                            <thead>
+                                                <tr>
+                                                    <th width="5%">No </th>
+                                                    <th width="15%">Institution Type</th>
+                                                    <th width="25%">Stream Name</th>
+                                                    <th width="45%">Program Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i=1; foreach($institution_courses as $institution_courses1) { ?>
+                                                <tr>
+                                                    <td><?php echo $i++; ?></td>
+                                                    <td><?php echo $institution_courses1->institution_type; ?></td>
+                                                    <td><?php echo $institution_courses1->stream_name; ?></td>
+                                                    <td><?php echo $institution_courses1->program_name.' ['.$institution_courses1->program_type.' - '.$institution_courses1->no_of_years.' Years]'; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="institution_type_id">Institution Type:</label>
-                                    <?php echo $this->admin_model->get_field_value('institution_type', 'institution_types', 'institution_type_id',$institution['institution_type_id']); ?>
-                                </div>
-                                <div class="form-group">
-                                    <label for="place_id">Place Name:</label>
-                                    <?php echo $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); ?>
-                                </div>
-                                <div class="form-group">
-                                    <label for="taluk_name">Taluk Name:</label>
-                                    <?php echo $this->admin_model->get_field_value('taluk_name', 'taluks', 'taluk_id',$institution['institution_type_id']); ?>
-                                </div>
-                                <div class="form-group">
-                                    <label for="block_name">Block Name:</label>
-                                    <?php echo $this->admin_model->get_field_value('block_name', 'blocks', 'block_id',$institution['institution_type_id']); ?>
-                                </div>
-                                <div class="form-group">
-                                    <label for="district_name">District Name:</label>
-                                    <?php echo $this->admin_model->get_field_value('district_name', 'districts', 'district_id',$institution['institution_type_id']); ?>
-                                </div>
-                                <div class="form-group">
-                                    <label for="status">Status:</label>
-                                    <?php echo $institution['status']; ?>
-                                </div>
+
+
                             </div>
-
-                            <div class="card-footer">
-                                <a href="<?=base_url();?>admin/institutions" class="btn btn-primary float-right" role="button">Back</a>
-                            </div>
-                            <?php echo form_close(); ?>
                         </div>
 
-
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <a href="<?php echo base_url('admin/managecourses/' . $institution['institution_id']); ?>"
+                                        class="btn btn-success btn-sm"><i class="fas fa-book"></i> Courses</a>
+                                    <a href="<?php echo base_url('admin/editinstitution/' . $institution['institution_id']); ?>"
+                                        class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a href="<?php echo base_url('admin/deleteinstitution/' . $institution['institution_id']); ?>"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this institution?')"><i
+                                            class="fas fa-trash">
+                                        </i> Delete</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="<?=base_url();?>admin/institutions" class="btn btn-dark btn-sm float-right"
+                                        role="button"><i class="fas fa-arrow-left"></i> Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php echo form_close(); ?>
                     </div>
-
-                                
-
-
-
-
-
 
 
                 </div>
-                <!-- /.col -->
+
+
+
             </div>
-            <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>

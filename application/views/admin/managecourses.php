@@ -1,0 +1,221 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Manage Courses</h1>
+                </div>
+                <div class="col-sm-6">
+                    <!-- <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">DataTables</li>
+                        </ol> -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title text-uppercase">Add Course</h3>
+                        </div>
+                        <div class="card-body">
+                            <?php echo form_open('admin/managecourses/'.$institution_id); ?>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="status" class="text-sm">Institution Type :</label>
+                                        <select name="institution_type_id" id="institution_type_id"
+                                            class="form-control form-control-sm">
+                                            <option value="">Select</option>
+                                            <?php foreach($institution_types as $row) {
+                                                echo '<option value="'.$row["institution_type_id"].'">'.$row["institution_type"].'</option>';
+
+                                            } ?>
+                                        </select>
+                                        <?=form_error('institution_type_id','<div class="text-danger">','</div>');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="stream_id" class="text-sm">Stream :</label>
+                                        <select name="stream_id" id="stream_id" class="form-control form-control-sm">
+                                            <option value="">Select</option>
+                                            <?php foreach($streams as $row) {
+                                                echo '<option value="'.$row["stream_id"].'">'.$row["stream_name"].'</option>';
+
+                                            } ?>
+                                        </select>
+                                        <?=form_error('stream_id','<div class="text-danger">','</div>');?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="program_id" class="text-sm">Program :</label>
+                                        <select name="program_id" id="program_id" class="form-control form-control-sm">
+                                            <option value="">Select</option>
+                                            <?php foreach($programs as $row) {
+                                                echo '<option value="'.$row["program_id"].'">'.$row["program_name"].'</option>';
+
+                                            } ?>
+                                        </select>
+                                        <?=form_error('program_id','<div class="text-danger">','</div>');?>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 text-right">
+                                    <button type="submit" class="btn btn-success btn-sm mt-4">ADD COURSE</button>
+                                    <a href="<?=base_url();?>admin/institutions" class="btn btn-dark btn-sm mt-4"
+                                        role="button">CANCEL</a>
+                                </div>
+
+
+                            </div>
+                            <?php echo form_close(); ?>
+                        </div>
+
+                    </div>
+                    <div class="card card-dark">
+                        <div class="card-header text-uppercase">
+                            List of Assigned Courses
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover table-striped table-sm projects">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">No </th>
+                                        <th width="15%">Institution Type</th>
+                                        <th width="25%">Stream Name</th>
+                                        <th width="45%">Program Name</th>
+                                        <th width="10%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i=1; foreach($institution_courses as $institution_courses1) { ?>
+                                    <tr>
+                                        <td><?php echo $i++; ?></td>
+                                        <td><?php echo $institution_courses1->institution_type; ?></td>
+                                        <td><?php echo $institution_courses1->stream_name; ?></td>
+                                        <td><?php echo $institution_courses1->program_name.' ['.$institution_courses1->program_type.' - '.$institution_courses1->no_of_years.' Years]'; ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url('admin/deletecourses/'.$institution_courses1->institution_course_id.'/'.$institution_courses1->institution_id); ?>"
+                                                class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to delete course details?')"><i
+                                                    class="fas fa-trash">
+                                                </i> Delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<script>
+$(document).ready(function() {
+    var base_url = '<?php echo base_url(); ?>';
+
+
+    $("#district_id").change(function() {
+        event.preventDefault();
+
+
+        var district_id = $("#district_id").val();
+
+        if (district_id == ' ') {
+            alert("Please Select District");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/BlockList',
+                'data': {
+                    'district_id': district_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="block_id"]').empty();
+                    $('select[name="block_id"]').append(data);
+                    $('select[name="block_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+    $("#block_id").change(function() {
+        event.preventDefault();
+
+
+        var block_id = $("#block_id").val();
+
+        if (block_id == ' ') {
+            alert("Please Select Blocks");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/TalukList',
+                'data': {
+                    'block_id': block_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="taluk_id"]').empty();
+                    $('select[name="taluk_id"]').append(data);
+                    $('select[name="taluk_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+    $("#taluk_id").change(function() {
+        event.preventDefault();
+
+
+        var taluk_id = $("#taluk_id").val();
+
+        if (taluk_id == ' ') {
+            alert("Please Select Taluks");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/PlaceList',
+                'data': {
+                    'taluk_id': taluk_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+});
+</script>

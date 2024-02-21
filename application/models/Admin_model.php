@@ -191,5 +191,24 @@ Class Admin_model extends CI_Model
       return $this->db->get($table)->num_rows();
     }
 
+
+    function get_institution_courses($institution_id){
+      $this->db->select('institutional_courses.institution_course_id, institutional_courses.institution_id, institutional_courses.institution_type_id, institution_types.institution_type, institutional_courses.stream_id, streams.stream_name, institutional_courses.program_id, programs.program_name,  programs.program_short_name, programs.no_of_years, programs.program_type, institutional_courses.status');
+      $this->db->join('institution_types', 'institution_types.institution_type_id = institutional_courses.institution_type_id');
+      $this->db->join('streams', 'streams.stream_id = institutional_courses.stream_id');
+      $this->db->join('programs', 'programs.program_id = institutional_courses.program_id');
+      $this->db->where('institutional_courses.institution_id', $institution_id);
+      return $this->db->get('institutional_courses');
+    }
+
+    function get_geo_details($place_id){
+      $this->db->select('districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
+      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id');
+      $this->db->join('blocks', 'blocks.block_id = taluks.block_id');
+      $this->db->join('districts', 'districts.district_id = blocks.district_id');
+      $this->db->where('places.place_id', $place_id);
+      return $this->db->get('places');
+    }
+
 }
 ?>
