@@ -61,6 +61,7 @@
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Block Name:</label>
@@ -73,6 +74,7 @@
                                 }
                                 ?> -->
                                 </select>
+                                <?=form_error('block_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Taluk Name:</label>
@@ -85,6 +87,7 @@
                                 }
                                 ?> -->
                                 </select>
+                                <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Place Name:</label>
@@ -97,6 +100,7 @@
                                 }
                                 ?> -->
                                 </select>
+                                <?=form_error('place_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status:</label>

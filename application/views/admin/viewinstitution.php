@@ -86,6 +86,7 @@
 
                                 <div class="row pt-2">
                                     <div class="col-md-12">
+                                        <?php if($institution_courses){ ?>
                                         <h5 class="text-md text-uppercase text-bold">List of Courses</h5>
                                         <table class="table table-hover text-sm projects">
                                             <thead>
@@ -108,9 +109,12 @@
                                                 <?php } ?>
                                             </tbody>
                                         </table>
+                                        <?php } else {
+                                            echo '<h5 class="text-md text-center pt-5 text-danger text-bold"> Courses have not yet been mapped. <br/> Please '.anchor("admin/managecourses/".$institution['institution_id'],"click here").' to initiate the mapping process. </h5>';
+                                        } ?>
+
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
