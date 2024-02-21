@@ -74,7 +74,9 @@ Class Admin_model extends CI_Model
   }
   
   function getDetailsbySort($sortField, $srotType, $tableName){
-    $this->db->order_by($sortField, $srotType);
+    // $this->db->order_by('(sort_order * -1)', 'DESC' );
+    $this->db->order_by('('.$sortField.' * -1)', $srotType );
+    // $this->db->order_by($sortField, $srotType);
     return $this->db->get($tableName);
   }
 

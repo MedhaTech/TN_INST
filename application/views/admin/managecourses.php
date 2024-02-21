@@ -22,6 +22,52 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 offset-md-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group mb-0">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="institution_code text-sm">Institution Code :
+                                            <b class="d-block"><?php echo $institution['institution_code']; ?> </b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <p class="institution_name text-sm">Institution Name :
+                                            <b class="d-block"><?php echo $institution['institution_name']; ?> </b>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <p class="place_id text-sm">Place Name :
+                                            <b class="d-block"><?php echo $geos['place_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="taluk_name text-sm">Taluk Name :
+                                            <b class="d-block"><?php echo $geos['taluk_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="block_name text-sm">Block Name :
+                                            <b class="d-block"><?php echo $geos['block_name']; ?></b>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="district_name text-sm">District Name :
+                                            <b class="d-block"><?php echo $geos['district_name']; ?></b>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title text-uppercase">Add Course</h3>

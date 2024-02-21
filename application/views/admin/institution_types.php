@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addinstitutiontypes/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Institution Types</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Institution Types</button></a>
                         </ol>
                     </div>
                 </div>
@@ -32,8 +32,9 @@
                                     <thead>
                                         <tr>
                                             <th width="15%">Sl. No </th>
-                                            <th width="30%">Institution Type</th>
-                                            <th width="40%">Short Name</th>
+                                            <th width="35%">Institution Type</th>
+                                            <th width="20%">Short Name</th>
+                                            <th width="15%">Sort Order</th>
                                             <!-- <th >Status</th> -->
                                             <th width="25%">Action</th>
                                         </tr>
@@ -44,12 +45,13 @@
                                                 <td><?php echo $i; ?></td>
                                                 <td><?php echo $institutiontype['institution_type']; ?></td>
                                                 <td><?php echo $institutiontype['institution_short_name']; ?></td>
+                                                <td><?php echo $institutiontype['sort_order']; ?></td>
                                                 <!-- <td><?php echo $institutiontype['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editinstitutiontypes/' . $institutiontype['institution_type_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                                    <a href="<?php echo base_url('admin/editinstitutiontypes/' . $institutiontype['institution_type_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                                     <a href="<?php echo base_url('admin/deleteinstitutiontypes/' . $institutiontype['institution_type_id']); ?>" 
                                                     class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this institutiontype?')"><i class="fas fa-trash"></i>Delete</a>
+                                                    onclick="return confirm('Are you sure you want to delete this institutiontype?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
