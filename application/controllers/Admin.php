@@ -97,10 +97,13 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('stream_id', 'Stream', 'required|trim');
 			$this->form_validation->set_rules('program_id', 'Program', 'required|trim');
 			
-			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
-			$data['streams'] = $this->admin_model->get_table_details('streams');
-			$data['programs'] = $this->admin_model->get_table_details('programs');
-			
+			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
+			$data['geos'] = $this->admin_model->get_geo_details($data['institution']['place_id'])->row_array();
+
+			$data['institution_types'] = $this->admin_model->getDetailsbySort('sort_order','DESC','institution_types')->result_array();
+			$data['streams'] = $this->admin_model->getDetailsbySort('sort_order','DESC','streams')->result_array();
+			$data['programs'] = $this->admin_model->getDetailsbySort('sort_order','DESC','programs')->result_array();
+
 			$data['institution_courses'] = $this->admin_model->get_institution_courses($institution_id)->result();
 
 			if ($this->form_validation->run() === FALSE) {
@@ -642,7 +645,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
+			$data['institutiontypes'] = $this->admin_model->getDetailsbySort('sort_order','DESC','institution_types')->result_array();
 			$this->admin_template->show('admin/institution_types', $data);
 		} else {
 			redirect('admin', 'refresh');
@@ -663,11 +666,12 @@ class Admin extends CI_Controller
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addinstitutiontypes', $data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
 					'institution_short_name' => $this->input->post('institution_short_name'),
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$data['username']
 					
@@ -691,16 +695,19 @@ class Admin extends CI_Controller
 			// var_dump($data['institutiontype']);
 
 		    $this->form_validation->set_rules('institution_type', 'Institution Type', 'required|trim');
+			$this->form_validation->set_rules('institution_short_name', 'Short Name', 'required|trim');
+			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editinstitutiontypes',$data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
-				
 					'institution_type' => $this->input->post('institution_type'),
+					'institution_short_name' => $this->input->post('institution_short_name'),
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'updated_by'=>$data['username']
 				);
@@ -795,12 +802,18 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutions";
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
 
-			$this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
+			// $this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
-			$this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
-			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
+			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
+			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
+			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
+			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['districts'] = $this->admin_model->get_table_details('districts');
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
@@ -811,11 +824,13 @@ class Admin extends CI_Controller
 				$this->admin_template->show('admin/editinstitution', $data);
 			} else {
 				$data = array(
-				
-					'institution_code' => $this->input->post('institution_code'),
+					// 'institution_code' => $this->input->post('institution_code'),
 					'institution_name' => $this->input->post('institution_name'),
 					'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
-					'institution_type_id' => $this->input->post('institution_type_id'),
+					'principal_name' => $this->input->post('principal_name'),
+					'principal_mobile' => $this->input->post('principal_mobile'),
+					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
+					'principal_email' => $this->input->post('principal_email'),
 					'place_id' => $this->input->post('place_id'),
 					'status' => $this->input->post('status')
 				);
@@ -955,7 +970,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
-			$data['streams'] = $this->admin_model->get_table_details('streams');
+			$data['streams'] = $this->admin_model->getDetailsbySort('sort_order','DESC','streams')->result_array();
 			$this->admin_template->show('admin/streams', $data);
 		} else {
 			redirect('admin', 'refresh');
@@ -970,21 +985,19 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
-			$this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
+			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addstreams',$data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
-				
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),
-					
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$data['username']
 				);
@@ -1004,26 +1017,20 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "streams";
 			$data['stream'] = $this->admin_model->get_details_by_id($stream_id,'stream_id','streams');
 
-			
-
-		
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
-			$this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
+			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
-
+			
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editstreams', $data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
-				
-					'institution_type_id' => $this->input->post('institution_type_id'),
 					'stream_name' => $this->input->post('stream_name'),
-					'stream_short_form' => $this->input->post('stream_short_form'),
-					
+					'stream_short_form' => $this->input->post('stream_short_form'),					
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'updated_by'=>$data['username']
 				);
@@ -1254,7 +1261,7 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Programs";
 			$data['activeMenu'] = "programs";
-			$data['programs'] = $this->admin_model->get_table_details('programs');
+			$data['programs'] = $this->admin_model->getDetailsbySort('sort_order','DESC','programs')->result_array();
 			$this->admin_template->show('admin/programs', $data);
 		} else {
 			redirect('admin', 'refresh');
@@ -1277,14 +1284,14 @@ class Admin extends CI_Controller
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addprograms',$data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
-				
 					'program_name' => $this->input->post('program_name'),
 					'program_short_name' => $this->input->post('program_short_name'),
 					'no_of_years' => $this->input->post('no_of_years'),
 					'program_type' => $this->input->post('program_type'),
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$data['username']
 				);
@@ -1304,8 +1311,6 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "programs";
 			$data['program'] = $this->admin_model->get_details_by_id($program_id,'program_id','programs');
 
-			
-
 		    $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
 			$this->form_validation->set_rules('program_short_name', 'Program Short Name', 'required|trim');
 			$this->form_validation->set_rules('no_of_years', 'Number of years', 'required|in_list[1,2,3,4,5,6]');
@@ -1315,14 +1320,14 @@ class Admin extends CI_Controller
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editprograms', $data);
 			} else {
+				$sort_order = ($this->input->post('sort_order')) ? $this->input->post('sort_order') : NULL;
 				$data = array(
-				
 					'program_name' => $this->input->post('program_name'),
 					'program_short_name' => $this->input->post('program_short_name'),
 					'no_of_years' => $this->input->post('no_of_years'),
 					'program_type' => $this->input->post('program_type'),
 					'status' => $this->input->post('status'),
-					'sort_order' => $this->input->post('sort_order'),
+					'sort_order' => $sort_order,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'updated_by'=>$data['username']
 				);

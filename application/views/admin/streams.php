@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addstreams/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Streams</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Streams</button></a>
                         </ol>
                     </div>
                 </div>
@@ -32,11 +32,9 @@
                                     <thead>
                                         <tr>
                                            <th width="15%">No </th>
-                                            
-                                            
-                                            <th width="30%">Stream Name</th>
-                                            <th width="40%">Stream Short Name</th>
-                                            
+                                            <th width="35%">Stream Name</th>
+                                            <th width="20%">Stream Short Name</th>
+                                            <th width="15%">Sort Order</th>
                                             <!-- <th>Status</th> -->
                                             <th width="25%">Action</th>
                                         </tr>
@@ -48,6 +46,7 @@
                                                 
                                                 <td><?php echo $stream['stream_name']; ?></td>
                                                 <td><?php echo $stream['stream_short_form']; ?></td>
+                                                <td><?php echo $stream['sort_order']; ?></td>
                                                 <!-- <td><?php echo $stream['status']; ?></td> -->
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editstreams/' . $stream['stream_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>

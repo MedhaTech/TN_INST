@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addprograms/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Programs</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Programs</button></a>
                         </ol>
                     </div>
                 </div>
@@ -34,9 +34,10 @@
                                         <th width="5%">No </th>
                                             
                                             <th width="14%">Program Name</th>
-                                            <th width="14%">Program Short Name</th>
-                                            <th width="14%">Number of years</th>
+                                            <th width="14%">Short Name</th>
+                                            <th width="14%">No. of years</th>
                                             <th width="14%">Program Type</th>
+                                            <th width="14%">Sort Order</th>
                                             <!-- <th>Status</th> -->
                                             <th width="14%">Action</th>
                                         </tr>
@@ -50,6 +51,7 @@
                                                 <td><?php echo $program['program_short_name']; ?></td>
                                                 <td><?php echo $program['no_of_years']; ?></td>
                                                 <td><?php echo $program['program_type']; ?></td>
+                                                <td><?php echo $program['sort_order']; ?></td>
                                                 <!-- <td><?php echo $program['status']; ?></td> -->
                                                 <td>
                                                     <a href="<?php echo base_url('admin/editprograms/' . $program['program_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>

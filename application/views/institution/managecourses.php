@@ -14,28 +14,28 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            
+
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <div class="card">
-                    <div class="card-body">
+                        <div class="card-body">
                             <div class="form-group mb-0">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <p class="institution_code text-sm">Institution Code :
                                             <b class="d-block"><?php echo $institution['institution_code']; ?> </b>
                                         </p>
                                     </div>
-                                    <div class="col-md-8">
-                                    <p class="institution_name text-sm">Institution Name :
-                                    <b class="d-block"><?php echo $institution['institution_name']; ?> </b>
-                                </p>
+                                    <div class="col-md-9">
+                                        <p class="institution_name text-sm">Institution Name :
+                                            <b class="d-block"><?php echo $institution['institution_name']; ?> </b>
+                                        </p>
                                     </div>
                                 </div>
 
-                               
-                                
-                                 
+
+
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p class="place_id text-sm">Place Name :
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
 
-                             
+
                             </div>
                         </div>
                     </div>

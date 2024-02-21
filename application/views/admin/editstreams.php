@@ -43,7 +43,7 @@
                                     <?=form_error('stream_short_form','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="stream_short_form">Sort Order:</label>
+                                    <label for="sort_order">Sort Order:</label>
                                     <input type="number" min="1" class="form-control" name="sort_order" id="sort_order" value="<?php echo set_value('sort_order', $stream['sort_order']); ?>">
                                     <?=form_error('sort_order','<div class="text-danger">','</div>');?>
                                 </div>
@@ -54,6 +54,7 @@
                                         <option value="INACTIVE" <?php echo ($stream['status'] == 'INACTIVE') ? 'selected' : ''; ?>>Inactive</option>
                                         <option value="DELETED" <?php echo ($stream['status'] == 'DELETED') ? 'selected' : ''; ?>>Deleted</option>
                                     </select>
+                                    <?=form_error('status','<div class="text-danger">','</div>');?>
                                 </div>
 
                             </div>

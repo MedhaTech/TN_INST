@@ -55,13 +55,13 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p class="place_id text-sm">Principal Name :
-                                            <b class="d-block"><?php echo ($institution['institution_name_vernacular']) ? $institution['institution_name_vernacular'] : "--"; ?>
+                                            <b class="d-block"><?php echo ($institution['principal_name']) ? $institution['principal_name'] : "--"; ?>
                                             </b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="principal_name text-sm">Principal Mobile :
-                                            <b class="d-block"><?php echo ($institution['principal_name']) ? $institution['principal_name'] : "--"; ?>
+                                            <b class="d-block"><?php echo ($institution['principal_mobile']) ? $institution['principal_mobile'] : "--"; ?>
                                             </b>
                                         </p>
                                     </div>
@@ -110,9 +110,9 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">No </th>
-                                                    <th width="15%">Institution Type</th>
-                                                    <th width="25%">Stream Name</th>
-                                                    <th width="45%">Program Name</th>
+                                                    <th width="25%">Institution Type</th>
+                                                    <th width="30%">Stream Name</th>
+                                                    <th width="40%">Program Name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

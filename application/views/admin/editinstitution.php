@@ -32,11 +32,12 @@
                         <?php echo form_open('admin/editinstitution/' . $institution['institution_id']); ?>
                         <div class="card-body">
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="institution_code">Institution Code:</label>
                                 <input type="text" class="form-control" name="institution_code" id="institution_code"
                                     value="<?php echo set_value('institution_code', $institution['institution_code']); ?>">
-                            </div>
+                                <?=form_error('institution_code','<div class="text-danger">','</div>');?>
+                            </div> -->
                             <div class="form-group">
                                 <label for="institution_name">Institution Name:</label>
                                 <input type="text" class="form-control" name="institution_name" id="institution_name"
@@ -60,11 +61,12 @@
                                 <label for="principal_mobile">Principal Mobile:</label>
                                 <input type="text" class="form-control" name="principal_mobile" id="principal_mobile"
                                     value="<?php echo set_value('principal_mobile', $institution['principal_mobile']); ?>">
-                                <?=form_error('principal_mobile','<div class="text-danger">','</div>');?>
+                            <?=form_error('principal_mobile','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="principal_whatsapp_mobile">Principal Watsapp Mobile:</label>
-                                <input type="text" class="form-control" name="principal_whatsapp_mobile" id="principal_whatsapp_mobile"
+                                <input type="text" class="form-control" name="principal_whatsapp_mobile"
+                                    id="principal_whatsapp_mobile"
                                     value="<?php echo set_value('principal_whatsapp_mobile', $institution['principal_whatsapp_mobile']); ?>">
                                 <?=form_error('principal_whatsapp_mobile','<div class="text-danger">','</div>');?>
                             </div>
@@ -94,12 +96,13 @@
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Block Name:</label>
                                 <select name="block_id" id="block_id" class="form-control input-lg select2">
                                     <option value="">Select Block</option>
-                                <?php
+                                    <?php
                                 foreach($blocks as $row)
                                 {
                                     $active=( $block_id == $row["block_id"]) ? "selected" :"";
@@ -107,12 +110,13 @@
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('block_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Taluk Name:</label>
                                 <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
                                     <option value="">Select Taluk</option>
-                                <?php
+                                    <?php
                                 foreach($taluks as $row)
                                 {
                                     $active=( $taluk_id == $row["taluk_id"]) ? "selected" :"";
@@ -120,6 +124,7 @@
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
                             </div>
 
                             <div class="form-group">
@@ -134,6 +139,7 @@
                                 }
                                 ?>
                                 </select>
+                                <?=form_error('place_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status:</label>
@@ -148,6 +154,7 @@
                                         <?php echo ($institution['status'] == 'DELETED') ? 'selected' : ''; ?>>Deleted
                                     </option>
                                 </select>
+                                <?=form_error('status','<div class="text-danger">','</div>');?>
                             </div>
 
                         </div>
