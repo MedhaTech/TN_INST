@@ -198,6 +198,7 @@ Class Admin_model extends CI_Model
       $this->db->join('streams', 'streams.stream_id = institutional_courses.stream_id');
       $this->db->join('programs', 'programs.program_id = institutional_courses.program_id');
       $this->db->where('institutional_courses.institution_id', $institution_id);
+      $this->db->order_by('institutional_courses.institution_course_id','DESC');
       return $this->db->get('institutional_courses');
     }
 

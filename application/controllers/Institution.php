@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller
+class Institution extends CI_Controller
 {
 
 	function __construct()
@@ -14,19 +14,19 @@ class Admin extends CI_Controller
 		date_default_timezone_set('Asia/Kolkata');
 		ini_set('upload_max_filesize', '20M');
 	}
-	
+
 	function index()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
 		if ($this->form_validation->run() == FALSE) {
-			$data['pageTitle'] = "Admin Login";
-			$data['action'] = 'admin';
+			$data['pageTitle'] = "Institution Login";
+			$data['action'] = 'institution';
 
-			$this->login_template->show('admin/login', $data);
+			$this->login_template->show('institution/login', $data);
 		} else {
 			$username = $this->input->post('username');
-			redirect('admin/dashboard', 'refresh');
+			redirect('institution/institutions', 'refresh');
 		}
 	}
 
@@ -60,9 +60,9 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Dashboard";
 			$data['activeMenu'] = "dashboard";
-			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			$data['	tion_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['places'] = $this->admin_model->get_table_details('places');
-			$this->admin_template->show('admin/dashboard', $data);
+			$this->institution_template->show('institution/dashboard', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -74,11 +74,11 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Viewinstitution";
-			$data['activeMenu'] = "viewinstitution";
+			$data['activeMenu'] = "institutions";
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
 			$data['geos'] = $this->admin_model->get_geo_details($data['institution']['place_id'])->row_array();
 			$data['institution_courses'] = $this->admin_model->get_institution_courses($data['institution']['institution_id'])->result();
-			$this->admin_template->show('admin/viewinstitution', $data);
+			$this->institution_template->show('institution/viewinstitution', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -97,6 +97,9 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('stream_id', 'Stream', 'required|trim');
 			$this->form_validation->set_rules('program_id', 'Program', 'required|trim');
 			
+			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
+			$data['geos'] = $this->admin_model->get_geo_details($data['institution']['place_id'])->row_array();
+			
 			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['streams'] = $this->admin_model->get_table_details('streams');
 			$data['programs'] = $this->admin_model->get_table_details('programs');
@@ -104,7 +107,7 @@ class Admin extends CI_Controller
 			$data['institution_courses'] = $this->admin_model->get_institution_courses($institution_id)->result();
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/managecourses',$data);
+				$this->institution_template->show('institution/managecourses',$data);
 			} else {
 				$data = array(
 					'institution_id' => $institution_id,
@@ -114,7 +117,7 @@ class Admin extends CI_Controller
 					'status' => 'ACTIVE',
 				);
 				$this->db->insert('institutional_courses', $data);
-				redirect('admin/managecourses/'.$institution_id);
+				redirect('institution/managecourses/'.$institution_id);
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -130,7 +133,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutiontypes";
 			$this->db->where('institution_course_id', $institution_course_id);
 			$this->db->delete('institutional_courses');
-			redirect('admin/managecourses/'.$institution_id);
+			redirect('institution/managecourses/'.$institution_id);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -144,7 +147,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$data['states'] = $this->admin_model->get_table_details('states');
-			$this->admin_template->show('admin/states', $data);
+			$this->institution_template->show('institution/states', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -165,7 +168,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addstates',$data);
+				$this->institution_template->show('institution/addstates',$data);
 			} else {
 				$data = array(
 					'state_name' => $this->input->post('state_name'),
@@ -173,7 +176,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('states', $data);
-				redirect('admin/states');
+				redirect('institution/states');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -198,7 +201,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editstates', $data);
+				$this->institution_template->show('institution/editstates', $data);
 			} else {
 				$data = array(
 					'state_name' => $this->input->post('state_name'),
@@ -207,7 +210,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('state_id', $state_id);
 				$this->db->update('states', $data);
-				redirect('admin/states');
+				redirect('institution/states');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -223,7 +226,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "states";
 			$this->db->where('state_id', $state_id);
 			$this->db->delete('states');
-			redirect('admin/states');
+			redirect('institution/states');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -241,7 +244,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
 			$data['districts'] = $this->admin_model->get_table_details('districts');
-			$this->admin_template->show('admin/districts', $data);
+			$this->institution_template->show('institution/districts', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -264,7 +267,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/adddistricts', $data);
+				$this->institution_template->show('institution/adddistricts', $data);
 			} else {
 				$data = array(
 					'state_id' => '1',
@@ -277,7 +280,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('districts', $data);
-				redirect('admin/districts');
+				redirect('institution/districts');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -304,7 +307,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editdistricts', $data);
+				$this->institution_template->show('institution/editdistricts', $data);
 			} else {
 				$data = array(
 				
@@ -318,7 +321,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('district_id', $district_id);
 				$this->db->update('districts', $data);
-				redirect('admin/districts');
+				redirect('institution/districts');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -335,7 +338,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "districts";
 			$this->db->where('district_id', $district_id);
 			$this->db->delete('districts');
-			redirect('admin/districts');
+			redirect('institution/districts');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -349,7 +352,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
-			$this->admin_template->show('admin/taluks', $data);
+			$this->institution_template->show('institution/taluks', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -370,7 +373,7 @@ class Admin extends CI_Controller
 			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addtaluks',$data);
+				$this->institution_template->show('institution/addtaluks',$data);
 			} else {
 				$data = array(
 				
@@ -380,7 +383,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('taluks', $data);
-				redirect('admin/taluks');
+				redirect('institution/taluks');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -405,7 +408,7 @@ class Admin extends CI_Controller
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/edittaluks', $data);
+				$this->institution_template->show('institution/edittaluks', $data);
 			} else {
 				$data = array(
 				
@@ -416,7 +419,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('taluk_id', $taluk_id);
 				$this->db->update('taluks', $data);
-				redirect('admin/taluks');
+				redirect('institution/taluks');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -431,7 +434,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "taluks";
 			$this->db->where('taluk_id', $taluk_id);
 			$this->db->delete('taluks');
-			redirect('admin/taluks');
+			redirect('institution/taluks');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -445,7 +448,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
-			$this->admin_template->show('admin/blocks', $data);
+			$this->institution_template->show('institution/blocks', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -466,7 +469,7 @@ class Admin extends CI_Controller
 			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addblocks',$data);
+				$this->institution_template->show('institution/addblocks',$data);
 			} else {
 				$data = array(
 					'district_id' => $this->input->post('district_id'),
@@ -475,7 +478,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('blocks', $data);
-				redirect('admin/blocks');
+				redirect('institution/blocks');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -499,7 +502,7 @@ class Admin extends CI_Controller
 			$data['districts'] = $this->admin_model->get_table_details('districts');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editblocks', $data);
+				$this->institution_template->show('institution/editblocks', $data);
 			} else {
 				$data = array(
 				
@@ -510,7 +513,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('block_id', $block_id);
 				$this->db->update('blocks', $data);
-				redirect('admin/blocks');
+				redirect('institution/blocks');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -525,7 +528,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "blocks";
 			$this->db->where('block_id', $block_id);
 			$this->db->delete('blocks');
-			redirect('admin/blocks');
+			redirect('institution/blocks');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -539,7 +542,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$data['places'] = $this->admin_model->get_table_details('places');
-			$this->admin_template->show('admin/places', $data);
+			$this->institution_template->show('institution/places', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -563,7 +566,7 @@ class Admin extends CI_Controller
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 			
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addplaces',$data);
+				$this->institution_template->show('institution/addplaces',$data);
 			} else {
 				$data = array(
 					'taluk_id' => $this->input->post('taluk_id'),
@@ -574,7 +577,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('places', $data);
-				redirect('admin/places');
+				redirect('institution/places');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -601,7 +604,7 @@ class Admin extends CI_Controller
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editplaces', $data);
+				$this->institution_template->show('institution/editplaces', $data);
 			} else {
 				$data = array(
 				
@@ -614,7 +617,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('place_id', $place_id);
 				$this->db->update('places', $data);
-				redirect('admin/places');
+				redirect('institution/places');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -629,7 +632,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "places";
 			$this->db->where('place_id', $place_id);
 			$this->db->delete('places');
-			redirect('admin/places');
+			redirect('institution/places');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -643,7 +646,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
-			$this->admin_template->show('admin/institution_types', $data);
+			$this->institution_template->show('institution/institution_types', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -661,7 +664,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addinstitutiontypes', $data);
+				$this->institution_template->show('institution/addinstitutiontypes', $data);
 			} else {
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
@@ -669,7 +672,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('institution_types', $data);
-				redirect('admin/institution_types');
+				redirect('institution/institution_types');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -690,7 +693,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editinstitutiontypes',$data);
+				$this->institution_template->show('institution/editinstitutiontypes',$data);
 			} else {
 				$data = array(
 				
@@ -699,7 +702,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('institution_type_id', $institution_type_id);
 				$this->db->update('institution_types', $data);
-				redirect('admin/institution_types');
+				redirect('institution/institution_types');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -714,7 +717,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutiontypes";
 			$this->db->where('institution_type_id', $institution_type_id);
 			$this->db->delete('institution_types');
-			redirect('admin/institution_types');
+			redirect('institution/institution_types');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -728,49 +731,12 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
-			$this->admin_template->show('admin/institutions', $data);
+			$this->institution_template->show('institution/institutions', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
 	}
-	public function addinstitutions()
-	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
-			$data['pageTitle'] = "Institutions";
-			$data['activeMenu'] = "institutions";
-			$this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
-			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
-			// $this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
-			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
-			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
-			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
-			// $data['blocks'] = $this->admin_model->get_table_details('blocks');
-			// $data['taluks'] = $this->admin_model->get_table_details('taluks');
-			// $data['places'] = $this->admin_model->get_table_details('places');
-
-			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addinstitutions',$data);
-			} else {
-				$data = array(
-					'institution_code' => $this->input->post('institution_code'),
-					'institution_name' => $this->input->post('institution_name'),
-					'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
-					'place_id' => $this->input->post('place_id'),
-					'status' => $this->input->post('status')
-				);
-				$this->db->insert('institutions', $data);
-				redirect('admin/institutions');
-			}
-		} else {
-			redirect('admin', 'refresh');
-		}
-	}
+	 
 	public function editinstitution($institution_id)
 	{
 		if ($this->session->userdata('logged_in')) {
@@ -791,7 +757,7 @@ class Admin extends CI_Controller
 			$data['places'] = $this->admin_model->get_table_details('places');
 			
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editinstitution', $data);
+				$this->institution_template->show('institution/editinstitution', $data);
 			} else {
 				$data = array(
 				
@@ -804,7 +770,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);
-				redirect('admin/institutions');
+				redirect('institution/institutions');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -824,7 +790,7 @@ class Admin extends CI_Controller
 
 			$this->db->where('institution_id', $institution_id);
 			$this->db->delete('institutions');
-			redirect('admin/institutions');
+			redirect('institution/institutions');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -838,7 +804,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Institutionprincipals";
 			$data['activeMenu'] = "institutionPrincipals";
 			$data['institutionprincipals'] = $this->admin_model->get_table_details('institutionprincipals');
-			$this->admin_template->show('admin/institutionprincipals', $data);
+			$this->institution_template->show('institution/institutionprincipals', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -860,7 +826,7 @@ class Admin extends CI_Controller
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addinstitutionprincipals',$data);
+				$this->institution_template->show('institution/addinstitutionprincipals',$data);
 			} else {
 				$data = array(
 					'institution_id' => $this->input->post('institution_id'),
@@ -871,7 +837,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('institutionprincipals', $data);
-				redirect('admin/institutionprincipals');
+				redirect('institution/institutionprincipals');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -897,7 +863,7 @@ class Admin extends CI_Controller
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editinstitutionprincipals', $data);
+				$this->institution_template->show('institution/editinstitutionprincipals', $data);
 			} else {
 				$data = array(
 				
@@ -910,7 +876,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('institution_principal_id', $institution_principal_id);
 				$this->db->update('institutionprincipals', $data);
-				redirect('admin/institutionprincipals');
+				redirect('institution/institutionprincipals');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -925,7 +891,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutionprincipals";
 			$this->db->where('institution_principal_id', $institution_principal_id);
 			$this->db->delete('institutionprincipals');
-			redirect('admin/institutionprincipals');
+			redirect('institution/institutionprincipals');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -939,7 +905,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$data['streams'] = $this->admin_model->get_table_details('streams');
-			$this->admin_template->show('admin/streams', $data);
+			$this->institution_template->show('institution/streams', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -958,7 +924,7 @@ class Admin extends CI_Controller
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addstreams',$data);
+				$this->institution_template->show('institution/addstreams',$data);
 			} else {
 				$data = array(
 				
@@ -967,7 +933,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('streams', $data);
-				redirect('admin/streams');
+				redirect('institution/streams');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -991,7 +957,7 @@ class Admin extends CI_Controller
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editstreams', $data);
+				$this->institution_template->show('institution/editstreams', $data);
 			} else {
 				$data = array(
 				
@@ -1002,7 +968,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('stream_id', $stream_id);
 				$this->db->update('streams', $data);
-				redirect('admin/streams');
+				redirect('institution/streams');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1017,7 +983,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "streams";
 			$this->db->where('stream_id', $stream_id);
 			$this->db->delete('streams');
-			redirect('admin/streams');
+			redirect('institution/streams');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1031,7 +997,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Institutioncourses";
 			$data['activeMenu'] = "institutioncourses";
 			$data['institutioncourses'] = $this->admin_model->get_table_details('institutionalcourses');
-			$this->admin_template->show('admin/institutioncourses', $data);
+			$this->institution_template->show('institution/institutioncourses', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1054,7 +1020,7 @@ class Admin extends CI_Controller
 			$data['streams'] = $this->admin_model->get_table_details('streams');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addinstitutioncourses',$data);
+				$this->institution_template->show('institution/addinstitutioncourses',$data);
 			} else {
 				$data = array(
 
@@ -1066,7 +1032,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('institutionalcourses', $data);
-				redirect('admin/institutioncourses');
+				redirect('institution/institutioncourses');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1093,7 +1059,7 @@ class Admin extends CI_Controller
 			$data['streams'] = $this->admin_model->get_table_details('streams');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editinstitutioncourses', $data);
+				$this->institution_template->show('institution/editinstitutioncourses', $data);
 			} else {
 				$data = array(
 				
@@ -1106,7 +1072,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('institution_course_id', $institution_course_id);
 				$this->db->update('institutionalcourses', $data);
-				redirect('admin/institutioncourses');
+				redirect('institution/institutioncourses');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1121,7 +1087,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutioncourses";
 			$this->db->where('institution_course_id', $institution_course_id);
 			$this->db->delete('institutionalcourses');
-			redirect('admin/institutioncourses');
+			redirect('institution/institutioncourses');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1135,7 +1101,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Themeproblems";
 			$data['activeMenu'] = "themesproblems";
 			$data['themes_problems'] = $this->admin_model->get_table_details('themes_problems');
-			$this->admin_template->show('admin/themesproblems', $data);
+			$this->institution_template->show('institution/themesproblems', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1155,7 +1121,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addthemesproblems',$data);
+				$this->institution_template->show('institution/addthemesproblems',$data);
 			} else {
 				$data = array(
 					'theme_name' => $this->input->post('theme_name'),
@@ -1164,7 +1130,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('themes_problems', $data);
-				redirect('admin/themesproblems');
+				redirect('institution/themesproblems');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1187,7 +1153,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editthemesproblems', $data);
+				$this->institution_template->show('institution/editthemesproblems', $data);
 			} else {
 				$data = array(
 
@@ -1198,7 +1164,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('theme_problem_id', $theme_problem_id);
 				$this->db->update('themes_problems', $data);
-				redirect('admin/themesproblems');
+				redirect('institution/themesproblems');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1214,7 +1180,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "themeproblems";
 			$this->db->where('theme_problem_id', $theme_problem_id);
 			$this->db->delete('themes_problems');
-			redirect('admin/themesproblems');
+			redirect('institution/themesproblems');
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1228,7 +1194,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Programs";
 			$data['activeMenu'] = "programs";
 			$data['programs'] = $this->admin_model->get_table_details('programs');
-			$this->admin_template->show('admin/programs', $data);
+			$this->institution_template->show('institution/programs', $data);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -1248,7 +1214,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/addprograms',$data);
+				$this->institution_template->show('institution/addprograms',$data);
 			} else {
 				$data = array(
 				
@@ -1259,7 +1225,7 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('programs', $data);
-				redirect('admin/programs');
+				redirect('institution/programs');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1283,7 +1249,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
-				$this->admin_template->show('admin/editprograms', $data);
+				$this->institution_template->show('institution/editprograms', $data);
 			} else {
 				$data = array(
 				
@@ -1295,7 +1261,7 @@ class Admin extends CI_Controller
 				);
 				$this->db->where('program_id', $program_id);
 				$this->db->update('programs', $data);
-				redirect('admin/programs');
+				redirect('institution/programs');
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -1310,7 +1276,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "programs";
 			$this->db->where('program_id', $program_id);
 			$this->db->delete('programs');
-			redirect('admin/programs');
+			redirect('institution/programs');
 		} else {
 			redirect('admin', 'refresh');
 		}

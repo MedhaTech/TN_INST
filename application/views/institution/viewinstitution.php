@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>View Institution Details</h1>
+                    <!-- <h1>View Institution Details</h1> -->
                 </div>
                 <div class="col-sm-6">
                     <!-- <ol class="breadcrumb float-sm-right">
@@ -28,16 +28,8 @@
                     <div class="card card-danger">
                         <div class="card-header">
                             <h3 class="card-title">Institution Details</h3>
-                            <!-- <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div> -->
                         </div>
-                        <?php echo form_open('admin/viewinstitution/' . $institution['institution_id']); ?>
+                        <?php echo form_open('institution/viewinstitution/' . $institution['institution_id']); ?>
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="row">
@@ -136,7 +128,7 @@
                                             </tbody>
                                         </table>
                                         <?php } else {
-                                            echo '<h5 class="text-md text-center pt-5 text-danger text-bold"> Courses have not yet been mapped. <br/> Please '.anchor("admin/managecourses/".$institution['institution_id'],"click here").' to initiate the mapping process. </h5>';
+                                            echo '<h5 class="text-md text-center pt-5 text-danger text-bold"> Courses have not yet been mapped. <br/> Please '.anchor("institution/managecourses/".$institution['institution_id'],"click here").' to initiate the mapping process. </h5>';
                                         } ?>
 
                                     </div>
@@ -148,19 +140,15 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <a href="<?php echo base_url('admin/managecourses/' . $institution['institution_id']); ?>"
+                                    <a href="<?php echo base_url('institution/managecourses/' . $institution['institution_id']); ?>"
                                         class="btn btn-success btn-sm"><i class="fas fa-book"></i> Courses</a>
-                                    <a href="<?php echo base_url('admin/editinstitution/' . $institution['institution_id']); ?>"
+                                    <a href="<?php echo base_url('institution/editinstitution/' . $institution['institution_id']); ?>"
                                         class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                    <a href="<?php echo base_url('admin/deleteinstitution/' . $institution['institution_id']); ?>"
-                                        class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this institution?')"><i
-                                            class="fas fa-trash">
-                                        </i> Delete</a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="<?=base_url();?>admin/institutions" class="btn btn-dark btn-sm float-right"
-                                        role="button"><i class="fas fa-arrow-left"></i> Back to List</a>
+                                    <a href="<?=base_url();?>institution/institutions"
+                                        class="btn btn-dark btn-sm float-right" role="button"><i
+                                            class="fas fa-arrow-left"></i> Back to List</a>
                                 </div>
                             </div>
                         </div>
