@@ -666,7 +666,11 @@ class Admin extends CI_Controller
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
 					'institution_short_name' => $this->input->post('institution_short_name'),
-					'status' => $this->input->post('status')
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'created_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$data['username']
+					
 				);
 				$this->db->insert('institution_types', $data);
 				redirect('admin/institution_types');
@@ -695,7 +699,10 @@ class Admin extends CI_Controller
 				$data = array(
 				
 					'institution_type' => $this->input->post('institution_type'),
-					'status' => $this->input->post('status')
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>$data['username']
 				);
 				$this->db->where('institution_type_id', $institution_type_id);
 				$this->db->update('institution_types', $data);
@@ -955,6 +962,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
+			$this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
@@ -966,7 +974,11 @@ class Admin extends CI_Controller
 				
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),
-					'status' => $this->input->post('status')
+					
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'created_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$data['username']
 				);
 				$this->db->insert('streams', $data);
 				redirect('admin/streams');
@@ -986,8 +998,9 @@ class Admin extends CI_Controller
 
 			
 
-		    $this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
+		
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
+			$this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
@@ -1000,7 +1013,11 @@ class Admin extends CI_Controller
 					'institution_type_id' => $this->input->post('institution_type_id'),
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),
-					'status' => $this->input->post('status')
+					
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>$data['username']
 				);
 				$this->db->where('stream_id', $stream_id);
 				$this->db->update('streams', $data);
@@ -1258,7 +1275,10 @@ class Admin extends CI_Controller
 					'program_short_name' => $this->input->post('program_short_name'),
 					'no_of_years' => $this->input->post('no_of_years'),
 					'program_type' => $this->input->post('program_type'),
-					'status' => $this->input->post('status')
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'created_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$data['username']
 				);
 				$this->db->insert('programs', $data);
 				redirect('admin/programs');
@@ -1293,7 +1313,10 @@ class Admin extends CI_Controller
 					'program_short_name' => $this->input->post('program_short_name'),
 					'no_of_years' => $this->input->post('no_of_years'),
 					'program_type' => $this->input->post('program_type'),
-					'status' => $this->input->post('status')
+					'status' => $this->input->post('status'),
+					'sort_order' => $this->input->post('sort_order'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>$data['username']
 				);
 				$this->db->where('program_id', $program_id);
 				$this->db->update('programs', $data);
