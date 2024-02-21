@@ -23,13 +23,12 @@
                 <div class="row">
 
 
-                    <div class="col-md-6">
+                <div class="col-md-6 offset-3">
 
-                        <div class="card card-primary">
-
-
-
-                            
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                <h3 class="card-title text-uppercase">EDIT BLOCKS</h3>
+                            </div>
                             <?php echo form_open('admin/editblocks/' . $block['block_id']); ?>
                             <div class="card-body">
                                                         
@@ -68,8 +67,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="<?=base_url();?>admin/blocks" class="btn btn-primary float-right" role="button">Cancel</a>
+                                <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                <a href="<?=base_url();?>admin/blocks" class="btn btn-dark btn-sm float-right" role="button">Cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>

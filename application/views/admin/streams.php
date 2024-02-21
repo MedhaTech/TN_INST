@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addstreams/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Streams</button></a>
+                        <a href="<?php echo base_url('admin/addstreams/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Streams</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,17 +28,17 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                           <th>Sl. No </th>
+                                           <th width="15%">No </th>
                                             
                                             
-                                            <th>Stream Name</th>
-                                            <th>Stream Short Name</th>
+                                            <th width="30%">Stream Name</th>
+                                            <th width="40%">Stream Short Name</th>
                                             
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="25%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,26 +48,16 @@
                                                 
                                                 <td><?php echo $stream['stream_name']; ?></td>
                                                 <td><?php echo $stream['stream_short_form']; ?></td>
-                                                <td><?php echo $stream['status']; ?></td>
+                                                <!-- <td><?php echo $stream['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editstreams/' . $stream['stream_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletestreams/' . $stream['stream_id']); ?>" onclick="return confirm('Are you sure you want to delete this stream?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editstreams/' . $stream['stream_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deletestreams/' . $stream['stream_id']); ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this stream?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Sl. No </th>
-                                            
-                                            
-                                            <th>Stream Name</th>
-                                            <th>Stream Short Name</th>
-                                            
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->

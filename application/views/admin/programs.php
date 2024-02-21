@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addprograms/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Programs</button></a>
+                        <a href="<?php echo base_url('admin/addprograms/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Programs</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,17 +28,17 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                        <th>Sl. No </th>
+                                        <th width="5%">No </th>
                                             
-                                            <th>Program Name</th>
-                                            <th>Program Short Name</th>
-                                            <th>Number of years</th>
-                                            <th>Program Type</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th width="14%">Program Name</th>
+                                            <th width="14%">Program Short Name</th>
+                                            <th width="14%">Number of years</th>
+                                            <th width="14%">Program Type</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="14%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,26 +50,16 @@
                                                 <td><?php echo $program['program_short_name']; ?></td>
                                                 <td><?php echo $program['no_of_years']; ?></td>
                                                 <td><?php echo $program['program_type']; ?></td>
-                                                <td><?php echo $program['status']; ?></td>
+                                                <!-- <td><?php echo $program['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editprograms/' . $program['program_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteprograms/' . $program['program_id']); ?>" onclick="return confirm('Are you sure you want to delete this program?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editprograms/' . $program['program_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deleteprograms/' . $program['program_id']); ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this program?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Sl. No </th>
-                                        
-                                            <th>Program Name</th>
-                                            <th>Program Short Name</th>
-                                            <th>Number of years</th>
-                                            <th>Program Type</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->

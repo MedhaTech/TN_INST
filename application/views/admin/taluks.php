@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addtaluks/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Taluks</button></a>
+                        <a href="<?php echo base_url('admin/addtaluks/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Taluks</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,16 +28,16 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                        <th>Sl. No </th>
+                                        <th width="10%">Sl. No </th>
                                             
-                                            <th>Block Name</th>
-                                            <th>Taluk Name</th>
-                                            <th>Vernacular Taluk Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th width="20%">Block Name</th>
+                                            <th width="20%">Taluk Name</th>
+                                            <th width="20%">Vernacular Taluk Name</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="15%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,25 +48,16 @@
                                                 <td><?php echo $this->admin_model->get_field_value('block_name', 'blocks', 'block_id',$taluk['block_id']); ?></td>
                                                 <td><?php echo $taluk['taluk_name']; ?></td>
                                                 <td><?php echo $taluk['taluk_name_vernacular']; ?></td>
-                                                <td><?php echo $taluk['status']; ?></td>
+                                                <!-- <td><?php echo $taluk['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>" onclick="return confirm('Are you sure you want to delete this taluk?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                                    <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this taluk?')"><i class="fas fa-trash"></i>Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Sl. No </th>
-                                           
-                                            <th>Block Name</th>
-                                            <th>Taluk Name</th>
-                                            <th>Vernacular Taluk Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->

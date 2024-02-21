@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addthemesproblems/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Themes and Problems</button></a>
+                        <a href="<?php echo base_url('admin/addthemesproblems/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Themes and Problems</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,15 +28,15 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                            <th>Sl. No </th>
-                                            <th>Theme Name</th>
-                                            <th>Problem Statement</th>
-                                            <th>Problem Statement Description</th>
-                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th width="5%">No </th>
+                                            <th width="15%">Theme Name</th>
+                                            <th width="25%">Problem Statement</th>
+                                            <th width="25%">Problem Statement Description</th>
+                                             <!-- <th>Status</th> -->
+                                            <th width="20%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,24 +46,16 @@
                                                 <td><?php echo $themesproblem['theme_name']; ?></td>
                                                 <td><?php echo $themesproblem['problem_statement']; ?></td>
                                                 <td><?php echo $themesproblem['problem_statement_description']; ?></td>
-                                                <td><?php echo $themesproblem['status']; ?></td>
+                                                <!-- <td><?php echo $themesproblem['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editthemesproblems/' . $themesproblem['theme_problem_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletethemesproblems/' . $themesproblem['theme_problem_id']); ?>" onclick="return confirm('Are you sure you want to delete this themesproblems?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editthemesproblems/' . $themesproblem['theme_problem_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deletethemesproblems/' . $themesproblem['theme_problem_id']); ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this themesproblems?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Sl. No </th>
-                                            <th>Theme Name</th>
-                                            <th>Problem Statement</th>
-                                            <th>Problem Statement Description</th>
-                                             <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->

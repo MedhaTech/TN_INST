@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addblocks/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Blocks</button></a>
+                        <a href="<?php echo base_url('admin/addblocks/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Blocks</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,15 +28,15 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                        <th>Sl. No </th>
-                                            <th>District Name</th>
-                                            <th>Block Name</th>
-                                            <th>Vernacular Block Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                        <th width="10%">No </th>
+                                            <th width="20%">District Name</th>
+                                            <th width="20%">Block Name</th>
+                                            <th width="20%">Vernacular Block Name</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="15%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,24 +47,17 @@
                                                 <td><?php echo $this->admin_model->get_field_value('district_name', 'districts', 'district_id',$block['district_id']); ?></td>
                                                 <td><?php echo $block['block_name']; ?></td>
                                                 <td><?php echo $block['block_name_vernacular']; ?></td>
-                                                <td><?php echo $block['status']; ?></td>
+                                                <!-- <td><?php echo $block['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editblocks/' . $block['block_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteblocks/' . $block['block_id']); ?>" onclick="return confirm('Are you sure you want to delete this block?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editblocks/' . $block['block_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deleteblocks/' . $block['block_id']); ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this block?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Sl. No </th>
-                                            <th>District Name</th>
-                                            <th>Block Name</th>
-                                            <th>Vernacular Block Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
+
                                 </table>
                             </div>
                             <!-- /.card-body -->

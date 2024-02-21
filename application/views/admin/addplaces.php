@@ -23,13 +23,12 @@
                 <div class="row">
 
 
-                    <div class="col-md-6">
+                <div class="col-md-6 offset-3">
 
-                        <div class="card card-primary">
-
-
-
-                           
+                    <div class="card card-dark">
+                        <div class="card-header">
+                            <h3 class="card-title text-uppercase">ADD PLACE</h3>
+                        </div>
                             <?php echo form_open('admin/addplaces'); ?>
                             <div class="card-body">
                                <div class="form-group">
@@ -100,8 +99,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                                <a href="<?=base_url();?>admin/places" class="btn btn-primary float-right" role="button">cancel</a>
+                                <button type="submit" class="btn btn-success btn-sm">Add</button>
+                                <a href="<?=base_url();?>admin/places" class="btn btn-dark btn-sm float-right" role="button">cancel</a>
                             </div>
                             <?php echo form_close(); ?>
                         </div>
