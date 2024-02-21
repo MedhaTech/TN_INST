@@ -75,13 +75,62 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Viewinstitution";
 			$data['activeMenu'] = "viewinstitution";
-			$data['institution'] = $this->admin_model->get_table_details('institutions');
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
-			$data['taluk'] = $this->admin_model->get_table_details('taluks');
-			$data['block'] = $this->admin_model->get_table_details('blocks');
-			// $this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
-			// $this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');
+			$data['geos'] = $this->admin_model->get_geo_details($data['institution']['place_id'])->row_array();
+			$data['institution_courses'] = $this->admin_model->get_institution_courses($data['institution']['institution_id'])->result();
 			$this->admin_template->show('admin/viewinstitution', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function managecourses($institution_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Institutions";
+			$data['activeMenu'] = "institutions";
+			$data['institution_id'] = $institution_id;
+
+			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
+			$this->form_validation->set_rules('stream_id', 'Stream', 'required|trim');
+			$this->form_validation->set_rules('program_id', 'Program', 'required|trim');
+			
+			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			$data['streams'] = $this->admin_model->get_table_details('streams');
+			$data['programs'] = $this->admin_model->get_table_details('programs');
+			
+			$data['institution_courses'] = $this->admin_model->get_institution_courses($institution_id)->result();
+
+			if ($this->form_validation->run() === FALSE) {
+				$this->admin_template->show('admin/managecourses',$data);
+			} else {
+				$data = array(
+					'institution_id' => $institution_id,
+					'institution_type_id' => $this->input->post('institution_type_id'),
+					'stream_id' =>trim($this->input->post('stream_id')),
+					'program_id' => $this->input->post('program_id'),
+					'status' => 'ACTIVE',
+				);
+				$this->db->insert('institutional_courses', $data);
+				redirect('admin/managecourses/'.$institution_id);
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	public function deletecourses($institution_course_id, $institution_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "institutiontypes";
+			$data['activeMenu'] = "institutiontypes";
+			$this->db->where('institution_course_id', $institution_course_id);
+			$this->db->delete('institutional_courses');
+			redirect('admin/managecourses/'.$institution_id);
 		} else {
 			redirect('admin', 'refresh');
 		}
@@ -697,11 +746,11 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['districts'] = $this->admin_model->get_table_details('districts');
-			$data['blocks'] = $this->admin_model->get_table_details('blocks');
-			$data['taluks'] = $this->admin_model->get_table_details('taluks');
-			$data['places'] = $this->admin_model->get_table_details('places');
+			// $data['blocks'] = $this->admin_model->get_table_details('blocks');
+			// $data['taluks'] = $this->admin_model->get_table_details('taluks');
+			// $data['places'] = $this->admin_model->get_table_details('places');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addinstitutions',$data);
@@ -730,17 +779,16 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutions";
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
 
-			
-
 			$this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
 			$this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('institution_type_id', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
-			$data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
+			$data['districts'] = $this->admin_model->get_table_details('districts');
 			$data['places'] = $this->admin_model->get_table_details('places');
-
+			
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editinstitution', $data);
 			} else {
@@ -1282,6 +1330,7 @@ class Admin extends CI_Controller
 			$list = $this->admin_model->getDetailsbyfield($district_id,'district_id','blocks')->result();
 			if (count($list)) {
 				$blocks = array();
+				$blocks[] = '<option value=" ">Select Block</option>';
 				foreach ($list as $res1) {
 					$blocks[] = '<option value="' . $res1->block_id . '">' . $res1->block_name .  '</option>';
 				}
@@ -1302,6 +1351,7 @@ class Admin extends CI_Controller
 			$list = $this->admin_model->getDetailsbyfield($block_id,'block_id','taluks')->result();
 			if (count($list)) {
 				$taluks = array();
+				$taluks[] = '<option value=" ">Select Taluk</option>';
 				foreach ($list as $res1) {
 					$taluks[] = '<option value="' . $res1->taluk_id . '">' . $res1->taluk_name .  '</option>';
 				}
@@ -1322,6 +1372,7 @@ class Admin extends CI_Controller
 			$list = $this->admin_model->getDetailsbyfield($taluk_id,'taluk_id','places')->result();
 			if (count($list)) {
 				$places = array();
+				$places[] = '<option value=" ">Select Place</option>';
 				foreach ($list as $res1) {
 					$places[] = '<option value="' . $res1->place_id . '">' . $res1->place_name .  '</option>';
 				}
