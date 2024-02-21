@@ -787,6 +787,8 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
 			$data['districts'] = $this->admin_model->get_table_details('districts');
+			$data['blocks'] = $this->admin_model->get_table_details('blocks');
+			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 			$data['places'] = $this->admin_model->get_table_details('places');
 			
 			if ($this->form_validation->run() === FALSE) {

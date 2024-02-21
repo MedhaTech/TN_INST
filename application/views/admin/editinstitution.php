@@ -55,9 +55,18 @@
                                 <select name="district_id" id="district_id" class="form-control input-lg select2">
                                     <option value="">Select Districts</option>
                                     <?php
+                                $talu=$this->admin_model->getDetailsbyfield($institution['place_id'],'place_id',"places")->result(); 
+                                $taluk_id=$talu[0]->taluk_id;
+
+                                $bloc=$this->admin_model->getDetailsbyfield($taluk_id,'taluk_id',"taluks")->result(); 
+                                $block_id=$bloc[0]->block_id;
+
+                                $dist=$this->admin_model->getDetailsbyfield( $block_id,'block_id',"blocks")->result();
+                                $district_id=$dist[0]->district_id;
                                 foreach($districts as $row)
                                 {
-                                    echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
+                                    $active=($district_id == $row['district_id']) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
                                 }
                                 ?>
                                 </select>
@@ -65,37 +74,27 @@
                             <div class="form-group">
                                 <label for="status">Block Name:</label>
                                 <select name="block_id" id="block_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Block</option>
+                                    <option value="">Select Block</option>
                                 <?php
                                 foreach($blocks as $row)
                                 {
-                                    echo '<option value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
+                                    $active=( $block_id == $row["block_id"]) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
                                 }
-                                ?> -->
+                                ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="status">Taluk Name:</label>
                                 <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Taluk</option>
+                                    <option value="">Select Taluk</option>
                                 <?php
                                 foreach($taluks as $row)
                                 {
-                                    echo '<option value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
+                                    $active=( $taluk_id == $row["taluk_id"]) ? "selected" :"";
+                                    echo '<option '.$active.' value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
                                 }
-                                ?> -->
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Place Name:</label>
-                                <select name="place_id" id="place_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Place</option>
-                                <?php
-                                foreach($places as $row)
-                                {
-                                    echo '<option value="'.$row["place_id"].'">'.$row["place_name"].'</option>';
-                                }
-                                ?> -->
+                                ?>
                                 </select>
                             </div>
 
@@ -157,3 +156,88 @@
 </section>
 <!-- /.content -->
 </div>
+<script>
+$(document).ready(function() {
+    var base_url = '<?php echo base_url(); ?>';
+
+
+    $("#district_id").change(function() {
+        event.preventDefault();
+
+
+        var district_id = $("#district_id").val();
+
+        if (district_id == ' ') {
+            alert("Please Select District");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/BlockList',
+                'data': {
+                    'district_id': district_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="block_id"]').empty();
+                    $('select[name="block_id"]').append(data);
+                    $('select[name="block_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+    $("#block_id").change(function() {
+        event.preventDefault();
+
+
+        var block_id = $("#block_id").val();
+
+        if (block_id == ' ') {
+            alert("Please Select Blocks");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/TalukList',
+                'data': {
+                    'block_id': block_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="taluk_id"]').empty();
+                    $('select[name="taluk_id"]').append(data);
+                    $('select[name="taluk_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+    $("#taluk_id").change(function() {
+        event.preventDefault();
+
+
+        var taluk_id = $("#taluk_id").val();
+
+        if (taluk_id == ' ') {
+            alert("Please Select Taluks");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/PlaceList',
+                'data': {
+                    'taluk_id': taluk_id,
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+});
+</script>
