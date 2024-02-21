@@ -43,6 +43,11 @@
                                     <?=form_error('stream_short_form','<div class="text-danger">','</div>');?>
                                 </div>
                                 <div class="form-group">
+                                    <label for="stream_short_form">Sort Order:</label>
+                                    <input type="number" min="1" class="form-control" name="sort_order" id="sort_order" value="<?php echo set_value('sort_order', $stream['sort_order']); ?>">
+                                    <?=form_error('sort_order','<div class="text-danger">','</div>');?>
+                                </div>
+                                <div class="form-group">
                                     <label for="status">Status:</label>
                                     <select class="form-control" name="status" id="status">
                                         <option value="ACTIVE" <?php echo ($stream['status'] == 'ACTIVE') ? 'selected' : ''; ?>>Active</option>
