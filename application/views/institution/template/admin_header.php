@@ -60,7 +60,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="<?php echo base_url();?>admin/dashboard" class="brand-link">
+            <a href="<?php echo base_url();?>institution/dashboard" class="brand-link">
 
                 <span class="brand-text font-weight-light">EDII-TN</span>
             </a>
