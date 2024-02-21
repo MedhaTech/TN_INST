@@ -32,7 +32,7 @@
                                         <tr>
                                             <th>Sl. No </th>
                                             <th>Institution Type</th>
-                                            <th>Institution Short Name</th>
+                                            <th>Short Name</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
