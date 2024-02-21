@@ -749,6 +749,10 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutions";
 			$this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
+			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
+			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
 			// $this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
 			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
@@ -768,6 +772,10 @@ class Admin extends CI_Controller
 					'institution_code' => $this->input->post('institution_code'),
 					'institution_name' => $this->input->post('institution_name'),
 					'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
+					'principal_name' => $this->input->post('principal_name'),
+					'principal_mobile' => $this->input->post('principal_mobile'),
+					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
+					'principal_email' => $this->input->post('principal_email'),
 					'place_id' => $this->input->post('place_id'),
 					'status' => $this->input->post('status')
 				);

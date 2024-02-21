@@ -33,9 +33,9 @@
                                     <tr>
                                         <th width="5%">No </th>
                                         <!-- <th>Institution Code</th> -->
-                                        <th width="30%">Institution Name</th>
+                                        <th width="20%">Institution Name</th>
                                         <th width="30%">Vernacular Institution Name</th>
-                                        <th width="10%">Place</th>
+                                        <th width="20%">Place</th>
                                         <!-- <th>Status</th> -->
                                         <th width="25%">Action</th>
                                     </tr>

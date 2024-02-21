@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addstates/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add States</button></a>
+                        <a href="<?php echo base_url('admin/addstates/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add States</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,14 +28,14 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                            <th>Sl. No </th>
-                                            <th>State Name</th>
-                                            <th>Vernacular State Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th width="10%">No </th>
+                                            <th width="25%">State Name</th>
+                                            <th width="40%">Vernacular State Name</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="25%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,23 +44,18 @@
                                                 <td><?php echo $i; ?></td>
                                                 <td><?php echo $state['state_name']; ?></td>
                                                 <td><?php echo $state['state_name_vernacular']; ?></td>
-                                                <td><?php echo $state['status']; ?></td>
+                                                <!-- <td><?php echo $state['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editstates/' . $state['state_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deletestates/' . $state['state_id']); ?>" onclick="return confirm('Are you sure you want to delete this state?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editstates/' . $state['state_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deletestates/' . $state['state_id']); ?>"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this state?')"><i class="fas fa-trash">
+                                                    </i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Sl. No </th>
-                                            <th>State Name</th>
-                                            <th>Vernacular State Name</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
+                            
                                 </table>
                             </div>
                             <!-- /.card-body -->

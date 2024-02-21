@@ -51,6 +51,30 @@
                                 <?=form_error('institution_name_vernacular','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
+                                <label for="principal_name">Principal Name:</label>
+                                <input type="text" class="form-control" name="principal_name" id="principal_name"
+                                    value="<?php echo set_value('principal_name', $institution['principal_name']); ?>">
+                                <?=form_error('principal_name','<div class="text-danger">','</div>');?>
+                            </div>
+                            <div class="form-group">
+                                <label for="principal_mobile">Principal Mobile:</label>
+                                <input type="text" class="form-control" name="principal_mobile" id="principal_mobile"
+                                    value="<?php echo set_value('principal_mobile', $institution['principal_mobile']); ?>">
+                                <?=form_error('principal_mobile','<div class="text-danger">','</div>');?>
+                            </div>
+                            <div class="form-group">
+                                <label for="principal_whatsapp_mobile">Principal Watsapp Mobile:</label>
+                                <input type="text" class="form-control" name="principal_whatsapp_mobile" id="principal_whatsapp_mobile"
+                                    value="<?php echo set_value('principal_whatsapp_mobile', $institution['principal_whatsapp_mobile']); ?>">
+                                <?=form_error('principal_whatsapp_mobile','<div class="text-danger">','</div>');?>
+                            </div>
+                            <div class="form-group">
+                                <label for="principal_email">Principal Email:</label>
+                                <input type="text" class="form-control" name="principal_email" id="principal_email"
+                                    value="<?php echo set_value('principal_email', $institution['principal_email']); ?>">
+                                <?=form_error('principal_email','<div class="text-danger">','</div>');?>
+                            </div>
+                            <div class="form-group">
                                 <label for="status">District Name:</label>
                                 <select name="district_id" id="district_id" class="form-control input-lg select2">
                                     <option value="">Select Districts</option>
@@ -129,8 +153,8 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="<?=base_url();?>admin/institutions" class="btn btn-primary float-right"
+                            <button type="submit" class="btn btn-success btn-sm">Update</button>
+                            <a href="<?=base_url();?>admin/institutions" class="btn btn-dark btn-sm float-right"
                                 role="button">Cancel</a>
                         </div>
                         <?php echo form_close(); ?>

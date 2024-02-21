@@ -9,7 +9,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <a href="<?php echo base_url('admin/addplaces/');?>"><button type="button" class="btn btn-block btn-outline-primary">Add Places</button></a>
+                        <a href="<?php echo base_url('admin/addplaces/');?>"><button type="button"
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Places</button></a>
                         </ol>
                     </div>
                 </div>
@@ -27,18 +28,17 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example2" class="table table-hover table-striped projects">
                                     <thead>
                                         <tr>
-                                        <th>Sl. No </th>
-                                            
-                                            <th>Taluk Name</th>
-                                            <th>Place Type</th>
-                                            <th>Place Name</th>
-                                            <th>Vernacular Place Name</th>
-                                            <th>Pincode</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th width="10%">No </th>
+                                            <th width="14%">Taluk Name</th>
+                                            <th width="15%">Place Type</th>
+                                            <th width="15%">Place Name</th>
+                                            <th width="14%">Vernacular Place Name</th>
+                                            <th width="14%">Pincode</th>
+                                            <!-- <th>Status</th> -->
+                                            <th width="28%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,27 +50,16 @@
                                                 <td><?php echo $place['place_name']; ?></td>
                                                 <td><?php echo $place['place_name_vernacular']; ?></td>
                                                 <td><?php echo $place['pincode']; ?></td>
-                                                <td><?php echo $place['status']; ?></td>
+                                                <!-- <td><?php echo $place['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editplaces/' . $place['place_id']); ?>">Edit</a>
-                                                    <a href="<?php echo base_url('admin/deleteplaces/' . $place['place_id']); ?>" onclick="return confirm('Are you sure you want to delete this place?')">Delete</a>
+                                                    <a href="<?php echo base_url('admin/editplaces/' . $place['place_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                    <a href="<?php echo base_url('admin/deleteplaces/' . $place['place_id']); ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Are you sure you want to delete this place?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                        <th>Sl. No </th>
-                                        
-                                            <th>Taluk Name</th>
-                                            <th>Place Type</th>
-                                            <th>Place Name</th>
-                                            <th>Vernacular Place Name</th>
-                                            <th>Pincode</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->
