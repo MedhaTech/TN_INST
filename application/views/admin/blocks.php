@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addblocks/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Blocks</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Blocks</button></a>
                         </ol>
                     </div>
                 </div>

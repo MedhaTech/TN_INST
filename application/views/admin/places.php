@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addplaces/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Places</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Places</button></a>
                         </ol>
                     </div>
                 </div>

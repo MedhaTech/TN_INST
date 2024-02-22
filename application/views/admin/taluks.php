@@ -10,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addtaluks/');?>"><button type="button"
-                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i>Add Taluks</button></a>
+                         class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Taluks</button></a>
                         </ol>
                     </div>
                 </div>
@@ -50,10 +50,10 @@
                                                 <td><?php echo $taluk['taluk_name_vernacular']; ?></td>
                                                 <!-- <td><?php echo $taluk['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                                    <a href="<?php echo base_url('admin/edittaluks/' . $taluk['taluk_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                                     <a href="<?php echo base_url('admin/deletetaluks/' . $taluk['taluk_id']); ?>"
                                                     class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this taluk?')"><i class="fas fa-trash"></i>Delete</a>
+                                                    onclick="return confirm('Are you sure you want to delete this taluk?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
