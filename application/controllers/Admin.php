@@ -558,8 +558,8 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
 			$this->form_validation->set_rules('place_type', 'Place Type', 'required|in_list[METRO,URBAN,SEMI-URBAN,RURAL]');
 			$this->form_validation->set_rules('place_name', 'Place Name', 'required|trim');
-			$this->form_validation->set_rules('place_name_vernacular', 'Vernacular Place Name', 'required|trim');
-			$this->form_validation->set_rules('pincode', 'Pincode', 'required|trim');
+			$this->form_validation->set_rules('place_name_vernacular', 'Vernacular Place Name', 'trim');
+			$this->form_validation->set_rules('pincode', 'Pincode', 'trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 			$data['districts'] = $this->admin_model->get_table_details('districts');
@@ -754,12 +754,12 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
-			$this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
+
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
-			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
-			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
-			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
-			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
+			$this->form_validation->set_rules('principal_name', 'Principal Name', 'trim');
+			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			// $this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
 			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
@@ -775,8 +775,18 @@ class Admin extends CI_Controller
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addinstitutions',$data);
 			} else {
+				
+				$count = $this->admin_model->getMaxId()->row()->institution_id;
+				$cnt_number = $count +1;
+				$strlen = strlen(($cnt_number));
+				if($strlen == 1){  $cnt_number = "000".$cnt_number; }
+				if($strlen == 2){  $cnt_number = "00".$cnt_number; }
+				if($strlen == 3){  $cnt_number = "0".$cnt_number; }
+				
+				$institution_code = "EDII".$cnt_number;
+				
 				$data = array(
-					'institution_code' => $this->input->post('institution_code'),
+					'institution_code' => $institution_code,
 					'institution_name' => $this->input->post('institution_name'),
 					'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
 					'principal_name' => $this->input->post('principal_name'),
@@ -787,7 +797,8 @@ class Admin extends CI_Controller
 					'status' => $this->input->post('status')
 				);
 				$this->db->insert('institutions', $data);
-				redirect('admin/institutions');
+				$iid = $this->db->insert_id();
+				redirect('admin/viewinstitution/'.$iid);
 			}
 		} else {
 			redirect('admin', 'refresh');
@@ -804,10 +815,10 @@ class Admin extends CI_Controller
 
 			// $this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
-			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
-			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
-			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
-			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
+			$this->form_validation->set_rules('principal_name', 'Principal Name', 'trim');
+			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'numeric|exact_length[10]');
+			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
 			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
 			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
