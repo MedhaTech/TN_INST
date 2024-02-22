@@ -747,15 +747,15 @@ class Institution extends CI_Controller
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
 
 			// $this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
-			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
+			// $this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
 			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
 			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
-			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
-			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
-			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
+			// $this->form_validation->set_rules('district_id', 'District', 'required|trim');
+			// $this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			// $this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
+			// $this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
@@ -769,17 +769,19 @@ class Institution extends CI_Controller
 			} else {
 				$data = array(
 					// 'institution_code' => $this->input->post('institution_code'),
-					'institution_name' => $this->input->post('institution_name'),
-					'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
+					// 'institution_name' => $this->input->post('institution_name'),
+					// 'institution_name_vernacular' => $this->input->post('institution_name_vernacular'),
 					'principal_name' => $this->input->post('principal_name'),
 					'principal_mobile' => $this->input->post('principal_mobile'),
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
-					'principal_email' => $this->input->post('principal_email'),
-					'place_id' => $this->input->post('place_id')
+					'principal_email' => $this->input->post('principal_email')
+					// 'place_id' => $this->input->post('place_id')
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);
-				redirect('institution/institutions');
+
+			 
+				redirect('institution/viewinstitution/'.$institution_id);
 			}
 		} else {
 			redirect('admin', 'refresh');
