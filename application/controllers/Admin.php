@@ -495,7 +495,7 @@ class Admin extends CI_Controller
 
 			
 
-		    $this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
+		    $this->form_validation->set_rules('district_id', 'District', 'required|trim');
 			$this->form_validation->set_rules('block_name', 'Block Name', 'required|trim');
 			$this->form_validation->set_rules('block_name_vernacular', 'Vernacular Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');

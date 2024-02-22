@@ -57,10 +57,10 @@
                                                 <td><?php echo $district['district_headquarters_vernacular']; ?></td>
                                                 <!-- <td><?php echo $district['status']; ?></td> -->
                                                 <td>
-                                                    <a href="<?php echo base_url('admin/editdistrict/' . $district['district_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>Edit</a>
+                                                    <a href="<?php echo base_url('admin/editdistrict/' . $district['district_id']); ?>"class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                                     <a href="<?php echo base_url('admin/deletedistrict/' . $district['district_id']); ?>" 
                                                     class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure you want to delete this districts?')"><i class="fas fa-trash"></i>Delete</a>
+                                                    onclick="return confirm('Are you sure you want to delete this district?')"><i class="fas fa-trash"></i> Delete</a>
                                                 </td>
                                             </tr>
                                         <?php $i++; endforeach; ?>
