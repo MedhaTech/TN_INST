@@ -32,12 +32,6 @@
                         <?php echo form_open('admin/addinstitutions'); ?>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="institution_code">Institution Code:</label>
-                                <input type="text" class="form-control" name="institution_code" id="institution_code"
-                                    value="<?php echo set_value('institution_code'); ?>">
-                                <?=form_error('institution_code','<div class="text-danger">','</div>');?>
-                            </div>
-                            <div class="form-group">
                                 <label for="institution_name">Institution Name:</label>
                                 <input type="text" class="form-control" name="institution_name" id="institution_name"
                                     value="<?php echo set_value('institution_name'); ?>">

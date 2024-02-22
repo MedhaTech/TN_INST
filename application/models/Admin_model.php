@@ -72,7 +72,12 @@ Class Admin_model extends CI_Model
     $this->db->order_by($sortField, $srotType);
     return $this->db->get($tableName);
   }
-  
+
+  function getMaxId(){
+    $this->db->select_max('institution_id');
+    return $this->db->get('institutions');
+  }
+
   function getDetailsbySort($sortField, $srotType, $tableName){
     // $this->db->order_by('(sort_order * -1)', 'DESC' );
     $this->db->order_by('('.$sortField.' * -1)', $srotType );
