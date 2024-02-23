@@ -164,7 +164,7 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$this->form_validation->set_rules('state_name', 'State Name', 'required|trim|is_unique[states.state_name]');
-			$this->form_validation->set_rules('state_name_vernacular', 'Vernacular State Name', 'required|trim');
+			$this->form_validation->set_rules('state_name_vernacular', 'Vernacular State Name', 'trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -197,7 +197,7 @@ class Admin extends CI_Controller
 			}
 
 			$this->form_validation->set_rules('state_name', 'State Name', 'required|trim');
-			$this->form_validation->set_rules('state_name_vernacular', 'Vernacular State Name', 'required|trim');
+			$this->form_validation->set_rules('state_name_vernacular', 'Vernacular State Name', '|trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
@@ -258,12 +258,12 @@ class Admin extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
-			$this->form_validation->set_rules('lgd_code', 'lgd Code', 'required|trim');
+			$this->form_validation->set_rules('lgd_code', 'LGD Code', 'required|trim');
 			$this->form_validation->set_rules('district_name', 'District Name', 'required|trim|is_unique[districts.district_name]');
-			$this->form_validation->set_rules('district_name_vernacular', 'Vernacular District Name', 'required|trim');
+			$this->form_validation->set_rules('district_name_vernacular', 'Vernacular District Name', 'trim');
 			$this->form_validation->set_rules('district_short_form', 'District Short Form', 'required|trim');
 			$this->form_validation->set_rules('district_headquarters', 'District Headquarters', 'required|trim');
-			$this->form_validation->set_rules('district_headquarters_vernacular', 'Vernacular District Headquarters', 'required|trim');
+			$this->form_validation->set_rules('district_headquarters_vernacular', 'Vernacular District Headquarters', 'trim');
 			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
