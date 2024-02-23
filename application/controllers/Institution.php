@@ -36,7 +36,7 @@ class Institution extends CI_Controller
 		$username = $this->input->post('username');
 
 		//query the database
-		$result = $this->admin_model->login($username, md5($password));
+		$result = $this->admin_model->login($username, md5($password),'2');
 		if ($result) {
 			$sess_array = array();
 			foreach ($result as $row) {
@@ -752,10 +752,10 @@ class Institution extends CI_Controller
 			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
-			// $this->form_validation->set_rules('district_id', 'District', 'required|trim');
-			// $this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			// $this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
-			// $this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
+			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
+			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
+			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
@@ -774,8 +774,8 @@ class Institution extends CI_Controller
 					'principal_name' => $this->input->post('principal_name'),
 					'principal_mobile' => $this->input->post('principal_mobile'),
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
-					'principal_email' => $this->input->post('principal_email')
-					// 'place_id' => $this->input->post('place_id')
+					'principal_email' => $this->input->post('principal_email'),
+					'place_id' => $this->input->post('place_id')
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);

