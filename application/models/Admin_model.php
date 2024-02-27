@@ -194,6 +194,11 @@ Class Admin_model extends CI_Model
         }
     }
 
+    function row_count($table, $field, $value1){
+      $this->db->where($field, $value1); 
+      return $this->db->get($table)->num_rows();
+    }
+
     function statistic_count($table){
       return $this->db->get($table)->num_rows();
     }

@@ -9,7 +9,9 @@
                         currently</h4>
                     <h6 class="text-primary">If you do not find your institution listed here, please send a whatsapp
                         message to
-                        Thiru.Shunmugaraj, +91-9445327750</h6>
+                        Thiru.Shunmugaraj, <b> <i class="fab fa-whatsapp text-success"></i> <a
+                                href="https://wa.me/9445327750" target="_blank" class="text-success"> +91-9445327750</a>
+                        </b> </h6>
                 </div>
 
             </div>
@@ -27,35 +29,47 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
                             <table id="example2" class="table table-hover table-striped projects">
                                 <thead>
                                     <tr>
                                         <th width="5%">No </th>
                                         <!-- <th>Institution Code</th> -->
-                                        <th width="30%">Institution Name</th>
-                                        <th width="30%">Vernacular Institution Name</th>
-                                        <th width="10%">Place</th>
+                                        <th width="40%">Institution Name</th>
+                                        <th width="15%">Place</th>
+                                        <th width="10%">Courses</th>
                                         <!-- <th>Status</th> -->
                                         <th width="25%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1; foreach ($institutions as $institution) : ?>
+                                    <?php $i=1; foreach ($institutions as $institution) :
+                                        $courses_count = $this->admin_model->row_count('institutional_courses', 'institution_id', $institution['institution_id']);
+                                    ?>
                                     <tr>
                                         <td><?php echo $i++; ?></td>
                                         <td><?php echo $institution['institution_name']; ?> <br />
                                             <a
                                                 href="<?php echo base_url('institution/viewinstitution/' . $institution['institution_id']); ?>"><?php echo "#".$institution['institution_code']; ?></a>
                                         </td>
-                                        <td><?php echo $institution['institution_name_vernacular']; ?></td>
+                                        <!-- <td><?php echo $institution['institution_name_vernacular']; ?></td> -->
+
                                         <td><?php echo $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if($courses_count){
+                                                echo '<span class="badge badge-success h2">'.$courses_count.'</span>';
+                                            }else{
+                                            echo '<span class="badge badge-danger h2">'.$courses_count.'</span>';
+                                            }
+                                            ?>
                                         </td>
                                         <!-- <td><?php echo $institution['status']; ?></td> -->
                                         <td class="text-right">
-                                            <a href="<?php echo base_url('institution/viewinstitution/' . $institution['institution_id']); ?>"
-                                                class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> View</a>
                                             <a href="<?php echo base_url('institution/managecourses/' . $institution['institution_id']); ?>"
                                                 class="btn btn-success btn-sm"><i class="fas fa-book"></i> Courses</a>
+                                            <a href="<?php echo base_url('institution/viewinstitution/' . $institution['institution_id']); ?>"
+                                                class="btn btn-warning btn-sm"><i class="fas fa-eye"></i> View</a>
                                             <a href="<?php echo base_url('institution/editinstitution/' . $institution['institution_id']); ?>"
                                                 class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
                                         </td>

@@ -4,14 +4,14 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <!-- <h1>View Institution Details</h1> -->
-                </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
+                <div class="col-sm-12 text-center">
+                    <h5 class="text-danger">Please make note of the Institution Code for future Mentor Registration and
+                        access to the Institution Panel.</h5>
+                    <h6 class="text-primary">If you do not find your institution listed here, please send a whatsapp
+                        message to
+                        Thiru.Shunmugaraj, <b> <i class="fab fa-whatsapp text-success"></i> <a
+                                href="https://wa.me/9445327750" target="_blank" class="text-success"> +91-9445327750</a>
+                        </b> </h6>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -31,11 +31,19 @@
                         </div>
                         <?php echo form_open('institution/viewinstitution/' . $institution['institution_id']); ?>
                         <div class="card-body">
+                            <div class="ribbon-wrapper ribbon-xl">
+                                <div class="ribbon bg-warning text-lg">
+                                    <?php echo $institution['institution_code']; ?>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p class="institution_code text-sm">Institution Code :
-                                            <b class="d-block"><?php echo $institution['institution_code']; ?> </b>
+                                        <p class="institution_code text-md">Institution Code :
+                                            <b class="d-block"><span class="bg-warning"
+                                                    id="text-to-copy"><?php echo $institution['institution_code']; ?>
+                                                </span> <a href="#"><i class="far fa-copy pl-3"
+                                                        id="copy-button"></i></a></b>
                                         </p>
                                     </div>
                                     <div class="col-md-4">
@@ -82,22 +90,26 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p class="place_id text-sm">Place Name :
-                                            <b class="d-block"><?php echo ($geos['place_name']) ? $geos['place_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
+                                            <b
+                                                class="d-block"><?php echo ($geos['place_name']) ? $geos['place_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="taluk_name text-sm">Taluk Name :
-                                            <b class="d-block"><?php echo ($geos['taluk_name']) ? $geos['taluk_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
+                                            <b
+                                                class="d-block"><?php echo ($geos['taluk_name']) ? $geos['taluk_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="block_name text-sm">Block Name :
-                                            <b class="d-block"><?php echo ($geos['block_name']) ? $geos['block_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
+                                            <b
+                                                class="d-block"><?php echo ($geos['block_name']) ? $geos['block_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="district_name text-sm">District Name :
-                                            <b class="d-block"><?php echo ($geos['district_name']) ? $geos['district_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
+                                            <b
+                                                class="d-block"><?php echo ($geos['district_name']) ? $geos['district_name'] : "<span style='color:red;'>Missing</span>"; ?></b>
                                         </p>
                                     </div>
                                 </div>
@@ -169,3 +181,17 @@
 </section>
 <!-- /.content -->
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#copy-button').click(function() {
+        var textToCopy = $('#text-to-copy').text();
+        var tempTextarea = $('<textarea>');
+        $('body').append(tempTextarea);
+        tempTextarea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextarea.remove();
+        alert("Copied");
+    });
+});
+</script>
