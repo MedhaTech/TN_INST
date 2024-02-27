@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('districts')?></h3>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('blocks')?></h3>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('taluks')?></h3>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('places')?></h3>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('institution_types')?></h3>
@@ -87,7 +87,33 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><?php echo $this->admin_model->statistic_count('programs')?></h3>
+                                    <p>Programs</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"> </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><?php echo $this->admin_model->statistic_count('streams')?></h3>
+                                    <p>Streams</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"> </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3><?php echo $this->admin_model->statistic_count('institutions')?></h3>

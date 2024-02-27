@@ -85,10 +85,18 @@
                             </a>
 
                         </li>
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
+                            <a href="https://wa.me/9445327750" target="_blank" class="nav-link">
+                                <i class="nav-icon fab fa-whatsapp"></i>
+                                <p>
+                                    Support
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?php echo base_url();?>institution/logout"
                                 class="nav-link <?php echo ($activeMenu=="logout") ? "active":"";?>">
-                                <i class="nav-icon fas fa-lock"></i>
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     Logout
                                 </p>

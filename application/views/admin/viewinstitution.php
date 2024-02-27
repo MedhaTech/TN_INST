@@ -39,11 +39,19 @@
                         </div>
                         <?php echo form_open('admin/viewinstitution/' . $institution['institution_id']); ?>
                         <div class="card-body">
+                            <div class="ribbon-wrapper ribbon-xl">
+                                <div class="ribbon bg-warning text-lg">
+                                    <?php echo $institution['institution_code']; ?>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <p class="institution_code text-sm">Institution Code :
-                                            <b class="d-block"><?php echo $institution['institution_code']; ?> </b>
+                                        <p class="institution_code text-md">Institution Code :
+                                            <b class="d-block"><span class="bg-warning"
+                                                    id="text-to-copy"><?php echo $institution['institution_code']; ?>
+                                                </span> <a href="#"><i class="far fa-copy pl-3"
+                                                        id="copy-button"></i></a></b>
                                         </p>
                                     </div>
                                     <div class="col-md-4">
@@ -181,3 +189,16 @@
 </section>
 <!-- /.content -->
 </div>
+<script>
+$(document).ready(function() {
+    $('#copy-button').click(function() {
+        var textToCopy = $('#text-to-copy').text();
+        var tempTextarea = $('<textarea>');
+        $('body').append(tempTextarea);
+        tempTextarea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextarea.remove();
+        alert("Copied");
+    });
+});
+</script>

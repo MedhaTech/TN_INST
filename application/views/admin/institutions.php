@@ -10,7 +10,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <a href="<?php echo base_url('admin/addinstitutions/');?>"><button type="button"
-                                class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add Institutions</button></a>
+                                class="btn btn-block btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Add
+                                Institutions</button></a>
                     </ol>
                 </div>
             </div>
@@ -33,23 +34,33 @@
                                     <tr>
                                         <th width="5%">No </th>
                                         <!-- <th>Institution Code</th> -->
-                                        <th width="20%">Institution Name</th>
-                                        <th width="30%">Vernacular Institution Name</th>
-                                        <th width="20%">Place</th>
+                                        <th width="40%">Institution Name</th>
+                                        <th width="15%">Place</th>
+                                        <th width="10%">Courses</th>
                                         <!-- <th>Status</th> -->
                                         <th width="25%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=1; foreach ($institutions as $institution) : ?>
+                                    <?php $i=1; foreach ($institutions as $institution) :
+                                        $courses_count = $this->admin_model->row_count('institutional_courses', 'institution_id', $institution['institution_id']);
+                                    ?>
                                     <tr>
                                         <td><?php echo $i++; ?></td>
                                         <td><?php echo $institution['institution_name']; ?> <br />
                                             <a
                                                 href="<?php echo base_url('admin/viewinstitution/' . $institution['institution_id']); ?>"><?php echo "#".$institution['institution_code']; ?></a>
                                         </td>
-                                        <td><?php echo $institution['institution_name_vernacular']; ?></td>
+                                        <!-- <td><?php echo $institution['institution_name_vernacular']; ?></td> -->
                                         <td><?php echo $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if($courses_count){
+                                                echo '<span class="badge badge-success h2">'.$courses_count.'</span>';
+                                            }else{
+                                            echo '<span class="badge badge-danger h2">'.$courses_count.'</span>';
+                                            }
+                                            ?>
                                         </td>
                                         <!-- <td><?php echo $institution['status']; ?></td> -->
                                         <td class="text-right">
