@@ -52,7 +52,11 @@
                                                 href="<?php echo base_url('admin/viewinstitution/' . $institution['institution_id']); ?>"><?php echo "#".$institution['institution_code']; ?></a>
                                         </td>
                                         <!-- <td><?php echo $institution['institution_name_vernacular']; ?></td> -->
-                                        <td><?php echo $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); ?>
+                                        <td>
+                                            <?php 
+                                                $place_name = $this->admin_model->get_field_value('place_name', 'places', 'place_id',$institution['place_id']); 
+                                                echo ($place_name) ? $place_name : "<span class='text-danger'>-- MISSING --</span>";
+                                            ?>
                                         </td>
                                         <td class="text-center">
                                             <?php if($courses_count){

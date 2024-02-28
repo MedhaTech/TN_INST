@@ -202,6 +202,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?php echo base_url('admin/reports/');?>"
+                                        class="nav-link  <?php echo ($pageTitle=="Reports") ? "active":"";?>">
+                                        <i class="fa fa-list nav-icon"></i>
+                                        <p>Reports</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="https://wa.me/9445327750" target="_blank" class="nav-link">
                                         <i class="nav-icon fab fa-whatsapp text-success"></i>
                                         <p>

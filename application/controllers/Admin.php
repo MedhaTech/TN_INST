@@ -1437,4 +1437,17 @@ class Admin extends CI_Controller
 			redirect('admin', 'refresh');
 		}
 	}
+
+	function reports()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Reports";
+			$data['activeMenu'] = "Reports";
+			$this->admin_template->show('admin/reports', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
 }
