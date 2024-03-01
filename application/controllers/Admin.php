@@ -1382,10 +1382,15 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$district_id=$this->input->post('district_id');
+			$flag=$this->input->post('flag');
 			$list = $this->admin_model->getDetailsbyfield($district_id,'district_id','blocks')->result();
 			if (count($list)) {
 				$blocks = array();
-				$blocks[] = '<option value=" ">Select Block</option>';
+				if($flag=="A"){
+					$blocks[] = '<option value="all">All Blocks</option>';
+				}else{
+					$blocks[] = '<option value=" ">Select Block</option>';
+				}
 				foreach ($list as $res1) {
 					$blocks[] = '<option value="' . $res1->block_id . '">' . $res1->block_name .  '</option>';
 				}
@@ -1403,10 +1408,15 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$block_id=$this->input->post('block_id');
+			$flag=$this->input->post('flag');
 			$list = $this->admin_model->getDetailsbyfield($block_id,'block_id','taluks')->result();
 			if (count($list)) {
 				$taluks = array();
-				$taluks[] = '<option value=" ">Select Taluk</option>';
+				if($flag=="A"){
+					$taluks[] = '<option value="all">All Taluks</option>';
+				}else{
+					$taluks[] = '<option value=" ">Select Taluk</option>';
+				}
 				foreach ($list as $res1) {
 					$taluks[] = '<option value="' . $res1->taluk_id . '">' . $res1->taluk_name .  '</option>';
 				}
@@ -1424,10 +1434,15 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$taluk_id=$this->input->post('taluk_id');
+			$flag=$this->input->post('flag');
 			$list = $this->admin_model->getDetailsbyfield($taluk_id,'taluk_id','places')->result();
 			if (count($list)) {
 				$places = array();
-				$places[] = '<option value=" ">Select Place</option>';
+				if($flag=="A"){
+					$places[] = '<option value="all">All Places</option>';
+				}else{
+					$places[] = '<option value=" ">Select Place</option>';
+				}
 				foreach ($list as $res1) {
 					$places[] = '<option value="' . $res1->place_id . '">' . $res1->place_name .  '</option>';
 				}
@@ -1446,6 +1461,384 @@ class Admin extends CI_Controller
 			$data['pageTitle'] = "Reports";
 			$data['activeMenu'] = "Reports";
 			$this->admin_template->show('admin/reports', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function geographical_regions()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Tamil Nadu Geographical Regions";
+			$data['activeMenu'] = "Reports";
+			
+			$data['districts'] = $this->admin_model->get_table_details('districts');
+
+			$this->admin_template->show('admin/geographical_regions', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function getGeographicalData()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Institutions List";
+			$data['activeMenu'] = "Reports";
+			
+			$district_id = $this->input->post('district_id');
+			$block_id = $this->input->post('block_id');
+			$taluk_id = $this->input->post('taluk_id');
+			$place_id = $this->input->post('place_id');
+			$download = $this->input->post('download');
+			
+			$details = $this->admin_model->getGeographicalData($district_id, $block_id, $taluk_id, $place_id)->result();
+			
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+				$this->table->set_template($table_setup);
+    			$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;'),
+    				                );
+    			$i=1;
+    			foreach ($details as $details1){
+    				$this->table->add_row($i++,
+							$details1->district_name,
+							$details1->block_name,
+							$details1->taluk_name,
+							$details1->place_name
+    				);
+					
+    			}
+				$detailsTable = $this->table->generate();
+				$response =  array('op' => 'ok',
+                        'file' => "data:application/vnd.ms-excel;base64,".base64_encode($detailsTable)
+                        );
+                die(json_encode($response));    
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+                $this->table->set_template($table_setup);
+    			$this->table->set_heading(
+									array('data' =>'S.No', 'style'=>'width:5%;'),
+									array('data' =>'District','style'=>'width:15%;'),
+									array('data' =>'Block','style'=>'width:20%;'),
+									array('data' =>'Taluk','style'=>'width:20%;'),
+									array('data' =>'Place','style'=>'width:20%;'),
+									);
+				$i=1;
+				foreach ($details as $details1){
+					$this->table->add_row($i++,
+							$details1->district_name,
+							$details1->block_name,
+							$details1->taluk_name,
+							$details1->place_name
+					);
+					
+				}
+				echo $data['table']=$this->table->generate();
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function institutionsList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Institutions List";
+			$data['activeMenu'] = "Reports";
+			
+			$data['districts'] = $this->admin_model->get_table_details('districts');
+
+			$this->admin_template->show('admin/institutions_list', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function getInstitutionsList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Institutions List";
+			$data['activeMenu'] = "Reports";
+			
+			$district_id = $this->input->post('district_id');
+			$block_id = $this->input->post('block_id');
+			$taluk_id = $this->input->post('taluk_id');
+			$place_id = $this->input->post('place_id');
+			$download = $this->input->post('download');
+			
+			$institutions = $this->admin_model->getInstitutionsList($district_id, $block_id, $taluk_id, $place_id)->result();
+			
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+				$this->table->set_template($table_setup);
+    			$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'Institution Code','style'=>'width:15%;'),
+    								array('data' =>'Institution Name','style'=>'width:60%;'),
+									array('data' =>'Institution Vernacular Name','style'=>'width:60%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;'),
+									array('data' =>'Principal Name','style'=>'width:20%;'),
+									array('data' =>'Principal Mobile','style'=>'width:20%;'),
+									array('data' =>'Principal Whatsapp','style'=>'width:20%;'),
+									array('data' =>'Principal Email','style'=>'width:20%;')
+    				                );
+    			$i=1;
+    			foreach ($institutions as $institutions1){
+    				$this->table->add_row($i++,
+							$institutions1->institution_code,
+    						$institutions1->institution_name,
+							$institutions1->institution_name_vernacular,
+							$institutions1->district_name,
+							$institutions1->block_name,
+							$institutions1->taluk_name,
+							$institutions1->place_name,
+							$institutions1->principal_name,
+							$institutions1->principal_mobile,
+							$institutions1->principal_whatsapp_mobile,
+							$institutions1->principal_email
+    				);
+					
+    			}
+				$detailsTable = $this->table->generate();
+				$response =  array('op' => 'ok',
+                        'file' => "data:application/vnd.ms-excel;base64,".base64_encode($detailsTable)
+                        );
+                die(json_encode($response));    
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+                $this->table->set_template($table_setup);
+    			$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'Institution Code','style'=>'width:15%;'),
+    								array('data' =>'Institution Name','style'=>'width:25%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;')
+    				                );
+    			$i=1;
+    			foreach ($institutions as $institutions1){
+    				$this->table->add_row($i++,
+							$institutions1->institution_code,
+    						$institutions1->institution_name,
+							$institutions1->district_name,
+							$institutions1->block_name,
+							$institutions1->taluk_name,
+							$institutions1->place_name
+    				);
+    			}
+				echo $data['table']=$this->table->generate();
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function report1($download = 0)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Courses Not Mapped - Institutions List";
+			$data['activeMenu'] = "Reports";
+			$data['download_btn'] = "admin/report1/1";
+			
+			$details = $this->admin_model->report1()->result();
+
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+			}
+			
+			if($details){
+				$this->table->set_template($table_setup);
+    		$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'Institution Code','style'=>'width:15%;'),
+    								array('data' =>'Institution Name','style'=>'width:60%;'),
+									array('data' =>'Institution Vernacular Name','style'=>'width:60%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;'),
+									array('data' =>'Principal Name','style'=>'width:20%;'),
+									array('data' =>'Principal Mobile','style'=>'width:20%;'),
+									array('data' =>'Principal Whatsapp','style'=>'width:20%;'),
+									array('data' =>'Principal Email','style'=>'width:20%;')
+    				                );
+    			$i=1;
+    			foreach ($details as $institutions1){
+    				$this->table->add_row($i++,
+							$institutions1->institution_code,
+    						$institutions1->institution_name,
+							$institutions1->institution_name_vernacular,
+							$institutions1->district_name,
+							$institutions1->block_name,
+							$institutions1->taluk_name,
+							$institutions1->place_name,
+							$institutions1->principal_name,
+							$institutions1->principal_mobile,
+							$institutions1->principal_whatsapp_mobile,
+							$institutions1->principal_email
+    				);
+					
+    			}
+				$detailsTable = $this->table->generate();
+			}else{
+				$detailsTable = "NO DETAILS FOUND..!";
+			}
+			
+
+			if($download){
+				$current_date = date("dmYhis");
+				header("Content-type: application/octet-stream");
+                header("Content-Disposition: attachment; filename=".$data['pageTitle'].' '.$current_date.".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0"); 
+                echo $detailsTable;   
+			}else{
+				$data['detailsTable'] = $detailsTable;
+				$this->admin_template->show('admin/report_details', $data);
+			}			
+			
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function report2($download = 0)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Address Missing - Institutions List";
+			$data['activeMenu'] = "Reports";
+			$data['download_btn'] = "admin/report2/1";
+			
+			$details = $this->admin_model->report2()->result();
+
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+			}
+			if($details){
+				$this->table->set_template($table_setup);
+				$this->table->set_heading(
+										array('data' =>'S.No', 'style'=>'width:5%;'),
+										array('data' =>'Institution Code','style'=>'width:15%;'),
+										array('data' =>'Institution Name','style'=>'width:60%;'),
+										array('data' =>'Institution Vernacular Name','style'=>'width:60%;')
+										);
+					$i=1;
+					foreach ($details as $institutions1){
+						$this->table->add_row($i++,
+								$institutions1->institution_code,
+								$institutions1->institution_name,
+								$institutions1->institution_name_vernacular
+						);
+						
+					}
+					$detailsTable = $this->table->generate();
+			}else{
+				$detailsTable = "NO DETAILS FOUND..!";
+			}
+			
+
+			if($download){
+				$current_date = date("dmYhis");
+				
+				header("Content-type: application/octet-stream");
+                header("Content-Disposition: attachment; filename=".$data['pageTitle'].' '.$current_date.".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0"); 
+                echo $detailsTable;   
+			}else{
+				$data['detailsTable'] = $detailsTable;
+				$this->admin_template->show('admin/report_details', $data);
+			}			
+			
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function report3($download = 0)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Principal Details Not Updated - Institutions List";
+			$data['activeMenu'] = "Reports";
+			$data['download_btn'] = "admin/report3/1";
+			
+			$details = $this->admin_model->report3()->result();
+
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+			}
+			if($details){
+				$this->table->set_template($table_setup);
+				$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'Institution Code','style'=>'width:15%;'),
+    								array('data' =>'Institution Name','style'=>'width:25%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;')
+    				                );
+					$i=1;
+					foreach ($details as $institutions1){
+						$this->table->add_row($i++,
+									$institutions1->institution_code,
+									$institutions1->institution_name,
+									$institutions1->district_name,
+									$institutions1->block_name,
+									$institutions1->taluk_name,
+									$institutions1->place_name
+						);
+						
+					}
+					$detailsTable = $this->table->generate();
+			}else{
+				$detailsTable = "NO DETAILS FOUND..!";
+			}
+			
+
+			if($download){
+				$current_date = date("dmYhis");
+				
+				header("Content-type: application/octet-stream");
+                header("Content-Disposition: attachment; filename=".$data['pageTitle'].' '.$current_date.".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0"); 
+                echo $detailsTable;   
+			}else{
+				$data['detailsTable'] = $detailsTable;
+				$this->admin_template->show('admin/report_details', $data);
+			}			
+			
 		} else {
 			redirect('admin', 'refresh');
 		}

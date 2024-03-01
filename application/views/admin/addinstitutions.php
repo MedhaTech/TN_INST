@@ -46,15 +46,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="principal_name">Principal Name:</label>
-                                <input type="text" class="form-control" name="principal_name"
-                                    id="principal_name"
+                                <input type="text" class="form-control" name="principal_name" id="principal_name"
                                     value="<?php echo set_value('principal_name'); ?>">
                                 <?=form_error('principal_name','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="principal_mobile">Principal Mobile Number:</label>
-                                <input type="text" class="form-control" name="principal_mobile"
-                                    id="principal_mobile"
+                                <input type="text" class="form-control" name="principal_mobile" id="principal_mobile"
                                     value="<?php echo set_value('principal_mobile'); ?>">
                                 <?=form_error('principal_mobile','<div class="text-danger">','</div>');?>
                             </div>
@@ -67,8 +65,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="principal_email">Principal Email:</label>
-                                <input type="text" class="form-control" name="principal_email"
-                                    id="principal_email"
+                                <input type="text" class="form-control" name="principal_email" id="principal_email"
                                     value="<?php echo set_value('principal_email'); ?>">
                                 <?=form_error('principal_email','<div class="text-danger">','</div>');?>
                             </div>
@@ -182,6 +179,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/BlockList',
                 'data': {
                     'district_id': district_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,
@@ -208,6 +206,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/TalukList',
                 'data': {
                     'block_id': block_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,
@@ -234,6 +233,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/PlaceList',
                 'data': {
                     'taluk_id': taluk_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,

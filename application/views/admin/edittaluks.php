@@ -124,7 +124,7 @@ $("#district_id").change(function(){
 			}else{
 			  $.ajax({'type':'POST',
 				'url':base_url+'admin/BlockList',
-				'data':{'district_id':district_id,},
+				'data':{'district_id':district_id,'flag':""},
 				'dataType':'text',
 				'cache':false,
 				'success':function(data){
