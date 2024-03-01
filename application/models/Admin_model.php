@@ -223,9 +223,10 @@ Class Admin_model extends CI_Model
     }
 
     function get_institutionTypes($institution_id){
-      $this->db->select(' institution_types.institution_type');
+      $this->db->select('institution_types.institution_type_id, institution_types.institution_type');
       $this->db->join('institution_types', 'institution_types.institution_type_id = institutional_courses.institution_type_id');
       $this->db->where('institutional_courses.institution_id', $institution_id);
+      $this->db->group_by('institutions.institution_type_id');
       return $this->db->get('institutional_courses');
     }
 
