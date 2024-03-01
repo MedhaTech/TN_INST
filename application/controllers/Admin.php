@@ -1466,6 +1466,75 @@ class Admin extends CI_Controller
 		}
 	}
 
+
+	function institutionsDetails()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Institutions List";
+			$data['activeMenu'] = "Reports";
+			
+			$institutions = $this->admin_model->get_table_details('institutions');
+			$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+			$this->table->set_template($table_setup);
+    		$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'Institution Code','style'=>'width:15%;'),
+    								array('data' =>'Institution Name','style'=>'width:60%;'),
+									// array('data' =>'Institution Vernacular Name','style'=>'width:60%;'),
+									array('data' =>'Institution Types','style'=>'width:60%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Taluk','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;'),
+									array('data' =>'Principal Name','style'=>'width:20%;'),
+									array('data' =>'Principal Mobile','style'=>'width:20%;'),
+									array('data' =>'Principal Whatsapp','style'=>'width:20%;'),
+									array('data' =>'Principal Email','style'=>'width:20%;')
+    				                );
+    			$i=1;
+    			foreach ($institutions as $institutions1){
+				
+					$geos = $this->admin_model->get_geo_details($institutions1['place_id'])->row_array();
+					$institutionTypes = $this->admin_model->get_institutionTypes($institutions1['institution_id'])->result();
+					$finalIT = '';
+					foreach($institutionTypes as $institutionTypes1){
+						$finalIT = $finalIT.', '.$institutionTypes1->institution_type;
+						// print_r($institutionTypes1->institution_type);
+					}
+					$finalIT = rtrim($finalIT, ", ");
+					$finalIT = ltrim($finalIT, ", ");
+					
+    				$this->table->add_row($i++,
+							$institutions1['institution_code'],
+    						$institutions1['institution_name'],
+							// $institutions1['institution_name_vernacular'],
+							$finalIT,
+							($geos['district_name']) ? $geos['district_name'] : "<span style='color:#FF0000;'>Missing</span>",
+							($geos['block_name']) ? $geos['block_name'] : "<span style='color:#FF0000;'>Missing</span>",
+							($geos['taluk_name']) ? $geos['taluk_name'] : "<span style='color:#FF0000;'>Missing</span>",
+							($geos['place_name']) ? $geos['place_name'] : "<span style='color:#FF0000;'>Missing</span>",
+							($institutions1['principal_name']) ? $institutions1['principal_name'] : "<span style='color:#FF0000;'>Missing</span>",
+							($institutions1['principal_mobile']) ? $institutions1['principal_mobile'] : "<span style='color:#FF0000;'>Missing</span>",
+							($institutions1['principal_whatsapp_mobile']) ? $institutions1['principal_whatsapp_mobile'] : "<span style='color:#FF0000;'>Missing</span>",
+							($institutions1['principal_email']) ? $institutions1['principal_email'] : "<span style='color:#FF0000;'>Missing</span>"
+    				);
+					
+    			}
+				$detailsTable = $this->table->generate();
+				$current_date = date("dmYhis");
+				header("Content-type: application/octet-stream");
+                header("Content-Disposition: attachment; filename=".$data['pageTitle'].' '.$current_date.".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0"); 
+                echo $detailsTable;   
+			// $this->admin_template->show('admin/institutions_list', $data);
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
 	function geographical_regions()
 	{
 		if ($this->session->userdata('logged_in')) {

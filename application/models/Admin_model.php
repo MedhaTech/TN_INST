@@ -222,6 +222,13 @@ Class Admin_model extends CI_Model
       return $this->db->get('places');
     }
 
+    function get_institutionTypes($institution_id){
+      $this->db->select(' institution_types.institution_type');
+      $this->db->join('institution_types', 'institution_types.institution_type_id = institutional_courses.institution_type_id');
+      $this->db->where('institutional_courses.institution_id', $institution_id);
+      return $this->db->get('institutional_courses');
+    }
+
     function getInstitutionsList($district_id, $block_id, $taluk_id, $place_id){
       $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
       $this->db->join('places', 'places.place_id = institutions.place_id');
