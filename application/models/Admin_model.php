@@ -285,7 +285,7 @@ Class Admin_model extends CI_Model
     }
 
     function report2(){
-      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name');
+      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, institutions.institution_name_vernacular');
       $this->db->where('institutions.place_id',"0");
       return $this->db->get('institutions');
     }
