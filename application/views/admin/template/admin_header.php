@@ -61,22 +61,8 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
+                    <a class="nav-link text-dark" data-widget="navbar-search" role="button">
+                        <i class="fas fa-user"></i> Welcome to Admin
                     </a>
                 </li>
             </ul>
@@ -103,7 +89,7 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="<?php echo base_url();?>admin/dashboard"
                                 class="nav-link <?php echo ($pageTitle=="Dashboard") ? "active":"";?>">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
