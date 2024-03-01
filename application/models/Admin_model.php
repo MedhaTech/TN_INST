@@ -203,7 +203,6 @@ Class Admin_model extends CI_Model
       return $this->db->get($table)->num_rows();
     }
 
-
     function get_institution_courses($institution_id){
       $this->db->select('institutional_courses.institution_course_id, institutional_courses.institution_id, institutional_courses.institution_type_id, institution_types.institution_type, institutional_courses.stream_id, streams.stream_name, institutional_courses.program_id, programs.program_name,  programs.program_short_name, programs.no_of_years, programs.program_type, institutional_courses.status');
       $this->db->join('institution_types', 'institution_types.institution_type_id = institutional_courses.institution_type_id');
@@ -223,5 +222,79 @@ Class Admin_model extends CI_Model
       return $this->db->get('places');
     }
 
+    function getInstitutionsList($district_id, $block_id, $taluk_id, $place_id){
+      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
+      $this->db->join('places', 'places.place_id = institutions.place_id');
+      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id');
+      $this->db->join('blocks', 'blocks.block_id = taluks.block_id');
+      $this->db->join('districts', 'districts.district_id = blocks.district_id');
+      if($district_id != "all"){
+        $this->db->where('districts.district_id', $district_id);
+      }
+      if($block_id != "all"){
+        $this->db->where('blocks.block_id', $block_id);
+      }
+      if($taluk_id != "all"){
+        $this->db->where('taluks.taluk_id', $taluk_id);
+      }
+      if($place_id != "all"){
+        $this->db->where('places.place_id', $place_id);
+      }
+      return $this->db->get('institutions');
+    }
+
+
+    function getGeographicalData($district_id, $block_id, $taluk_id, $place_id){
+      $this->db->select('districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
+      $this->db->join('blocks', 'districts.district_id = blocks.district_id');
+      $this->db->join('taluks', 'blocks.block_id = taluks.block_id');
+      $this->db->join('places', 'taluks.taluk_id = places.taluk_id');
+      if($district_id != "all"){
+        $this->db->where('districts.district_id', $district_id);
+      }
+      if($block_id != "all"){
+        $this->db->where('blocks.block_id', $block_id);
+      }
+      if($taluk_id != "all"){
+        $this->db->where('taluks.taluk_id', $taluk_id);
+      }
+      if($place_id != "all"){
+        $this->db->where('places.place_id', $place_id);
+      }
+      return $this->db->get('districts');
+    }
+
+    function report1(){
+      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name, COUNT(institutional_courses.institution_id) AS cnt');
+      $this->db->join('places', 'places.place_id = institutions.place_id');
+      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id');
+      $this->db->join('blocks', 'blocks.block_id = taluks.block_id');
+      $this->db->join('districts', 'districts.district_id = blocks.district_id');
+      $this->db->join('institutional_courses', 'institutional_courses.institution_id = institutions.institution_id',"LEFT");
+      $this->db->group_by('institutions.institution_id');
+      $this->db->having('COUNT(institutional_courses.institution_id) = 0');
+      return $this->db->get('institutions');
+    }
+
+    function report2(){
+      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name');
+      $this->db->where('institutions.place_id',"0");
+      return $this->db->get('institutions');
+    }
+
+    function report3(){
+      $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
+      $this->db->join('places', 'places.place_id = institutions.place_id',"left");
+      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id',"left");
+      $this->db->join('blocks', 'blocks.block_id = taluks.block_id',"left");
+      $this->db->join('districts', 'districts.district_id = blocks.district_id',"left");
+      $this->db->where('institutions.principal_name',"");
+      $this->db->or_where('institutions.principal_mobile',"");
+      $this->db->or_where('institutions.principal_whatsapp_mobile',"");
+      $this->db->or_where('institutions.principal_email',"");
+      return $this->db->get('institutions');
+    }
+
+     
 }
 ?>

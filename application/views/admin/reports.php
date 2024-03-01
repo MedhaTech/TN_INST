@@ -42,38 +42,44 @@
                                         <td><?=$i++;?></td>
                                         <td>Courses Not Mapped - Institutions List</td>
                                         <td>
-                                            <?php echo anchor('','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
+                                            <?php echo anchor('admin/report1','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><?=$i++;?></td>
                                         <td>Address Missing - Institutions List</td>
                                         <td>
-                                            <?php echo anchor('','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
+                                            <?php echo anchor('admin/report2','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><?=$i++;?></td>
                                         <td>Principal Details Not Updated - Institutions List</td>
                                         <td>
-                                            <?php echo anchor('','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
+                                            <?php echo anchor('admin/report3','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><?=$i++;?></td>
                                         <td>Tamil Nadu Geographical Regions</td>
                                         <td>
-                                            <?php echo anchor('','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
+                                            <?php echo anchor('admin/geographical_regions','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td><?=$i++;?></td>
                                         <td>Institutions and Courses</td>
                                         <td>
                                             <?php echo anchor('','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
                                         </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td><?=$i++;?></td>
+                                        <td>Institutions List</td>
+                                        <td>
+                                            <?php echo anchor('admin/institutionsList','VIEW REPORT <i class="fas fa-angle-double-right"></i> ','class="btn btn-danger btn-sm"'); ?>
+                                        </td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>

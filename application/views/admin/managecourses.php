@@ -199,6 +199,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/BlockList',
                 'data': {
                     'district_id': district_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,
@@ -225,6 +226,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/TalukList',
                 'data': {
                     'block_id': block_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,
@@ -251,6 +253,7 @@ $(document).ready(function() {
                 'url': base_url + 'admin/PlaceList',
                 'data': {
                     'taluk_id': taluk_id,
+                    'flag': ""
                 },
                 'dataType': 'text',
                 'cache': false,

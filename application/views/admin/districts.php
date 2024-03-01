@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        
+
     </section>
 
     <!-- Main content -->
@@ -22,7 +22,7 @@
                                         <a class="btn btn-block btn-sm btn-outline-primary"
                                             href="<?php echo base_url('admin/adddistricts/');?>"><i
                                                 class="fas fa-plus"></i> Add
-                                                District</a>
+                                            District</a>
                                     </li>
                                 </ul>
                             </div>
