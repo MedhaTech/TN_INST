@@ -1531,7 +1531,7 @@ class Admin extends CI_Controller
 									array('data' =>'District','style'=>'width:15%;'),
 									array('data' =>'Block','style'=>'width:20%;'),
 									array('data' =>'Taluk','style'=>'width:20%;'),
-									array('data' =>'Place','style'=>'width:20%;'),
+									array('data' =>'Place','style'=>'width:20%;')
 									);
 				$i=1;
 				foreach ($details as $details1){
