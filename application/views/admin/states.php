@@ -19,10 +19,10 @@
                             <div class="card-tools">
                                 <ul class="nav nav-pills ml-auto">
                                     <li class="nav-item">
-                                        <a class="btn btn-block btn-sm btn-outline-primary"
+                                        <!-- <a class="btn btn-block btn-sm btn-outline-primary"
                                             href="<?php echo base_url('admin/addstates/');?>"><i
                                                 class="fas fa-plus"></i> Add
-                                            State</a>
+                                            State</a> -->
                                     </li>
                                 </ul>
                             </div>
@@ -49,11 +49,11 @@
                                         <td>
                                             <a href="<?php echo base_url('admin/editstates/' . $state['state_id']); ?>"
                                                 class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                            <a href="<?php echo base_url('admin/deletestates/' . $state['state_id']); ?>"
+                                            <!-- <a href="<?php echo base_url('admin/deletestates/' . $state['state_id']); ?>"
                                                 class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Are you sure you want to delete this state?')"><i
                                                     class="fas fa-trash">
-                                                </i> Delete</a>
+                                                </i> Delete</a> -->
                                         </td>
                                     </tr>
                                     <?php $i++; endforeach; ?>

@@ -23,7 +23,7 @@
                         <div class="card-body">
 
                             <div class="form-group">
-                                <label for="lgd_code">IDG Code:</label>
+                                <label for="lgd_code">LDG Code:</label>
                                 <input type="text" class="form-control" name="lgd_code" id="lgd_code"
                                     value="<?php echo set_value('lgd_code'); ?>">
                                 <?=form_error('lgd_code','<div class="text-danger">','</div>');?>
@@ -62,15 +62,14 @@
                                     value="<?php echo set_value('district_headquarters_vernacular'); ?>">
                                 <?=form_error('district_headquarters_vernacular','<div class="text-danger">','</div>');?>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="status">Status:</label>
                                 <select class="form-control" name="status" id="status">
                                     <option value="ACTIVE">Active</option>
                                     <option value="INACTIVE">Inactive</option>
                                     <option value="DELETED">Deleted</option>
                                 </select>
-                            </div>
-
+                            </div> -->
                         </div>
 
                         <div class="card-footer">

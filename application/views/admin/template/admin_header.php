@@ -91,7 +91,7 @@
              with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="<?php echo base_url();?>admin/dashboard"
-                                class="nav-link <?php echo ($pageTitle=="Dashboard") ? "active":"";?>">
+                                class="nav-link <?php echo ($activeMenu=="Dashboard") ? "active":"";?>">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -113,35 +113,35 @@
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/states/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="States") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="States") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>States</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/districts/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Districts") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Districts") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Districts</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/blocks/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Blocks") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Blocks") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Blocks</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/taluks/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Taluks") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Taluks") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Taluks</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/places/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Places") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Places") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Places</p>
                                     </a>
@@ -154,44 +154,51 @@
             </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/streams/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Streams") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Streams") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Streams</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/institution_types/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Institutiontypes") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Institutiontypes") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>InstitutionTypes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/programs/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Programs") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Programs") ? "active":"";?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Programs</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/institutions/');?>"
-                                        class="nav-link <?php echo ($pageTitle=="Institutions") ? "active":"";?>">
+                                        class="nav-link <?php echo ($activeMenu=="Institutions") ? "active":"";?>">
                                         <i class="nav-icon fas fa-university"></i>
                                         <p>Institutions</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/themesproblems/');?>"
-                                        class="nav-link  <?php echo ($pageTitle=="Themeproblems") ? "active":"";?>">
+                                        class="nav-link  <?php echo ($activeMenu=="Themeproblems") ? "active":"";?>">
                                         <i class="far fa-lightbulb nav-icon"></i>
                                         <p>Themes and Problems</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('admin/reports/');?>"
-                                        class="nav-link  <?php echo ($pageTitle=="Reports") ? "active":"";?>">
+                                        class="nav-link  <?php echo ($activeMenu=="Reports") ? "active":"";?>">
                                         <i class="fa fa-list nav-icon"></i>
                                         <p>Reports</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('admin/changePassword/');?>"
+                                        class="nav-link  <?php echo ($activeMenu=="changePassword") ? "active":"";?>">
+                                        <i class="fas fa-key nav-icon"></i>
+                                        <p>Change Password</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

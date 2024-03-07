@@ -62,7 +62,7 @@
                                     <input type="text" class="form-control" name="district_headquarters_vernacular" id="district_headquarters_vernacular" value="<?php echo set_value('district_headquarters_vernacular', $district['district_headquarters_vernacular']); ?>">
                                     <?=form_error('district_headquarters_vernacular','<div class="text-danger">','</div>');?>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="status">Status:</label>
                                     <select class="form-control" name="status" id="status">
                                     <option value="ACTIVE" <?php echo ($district['status'] == 'ACTIVE') ? 'selected' : ''; ?>>Active</option>
@@ -70,7 +70,7 @@
                                         <option value="DELETED" <?php echo ($district['status'] == 'DELETED') ? 'selected' : ''; ?>>Deleted</option>
                                     </select>
                                     <?=form_error('status','<div class="text-danger">','</div>');?>
-                                </div>
+                                </div> -->
 
                             </div>
 

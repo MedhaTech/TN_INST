@@ -68,8 +68,12 @@ Class Admin_model extends CI_Model
   }
 
   function getDetailsbyfieldSort($id, $fieldId, $sortField, $srotType, $tableName){
-    $this->db->where($fieldId, $id);
-    $this->db->order_by($sortField, $srotType);
+    if($fieldId){
+      $this->db->where($fieldId, $id);
+    }
+    if($sortField){
+      $this->db->order_by($sortField, $srotType);
+    }
     return $this->db->get($tableName);
   }
 
@@ -211,6 +215,12 @@ Class Admin_model extends CI_Model
       $this->db->where('institutional_courses.institution_id', $institution_id);
       $this->db->order_by('institutional_courses.institution_course_id','DESC');
       return $this->db->get('institutional_courses');
+    }
+
+    function get_district($block_id){
+      $this->db->select('districts.district_id, districts.district_name, blocks.block_id, blocks.block_name');
+      $this->db->join('blocks', 'blocks.district_id = districts.district_id');
+      return $this->db->get('districts');
     }
 
     function get_geo_details($place_id){

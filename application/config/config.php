@@ -24,18 +24,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
   
-if (!empty($_SERVER['SERVER_ADDR'])) {
-    if($_SERVER['SERVER_ADDR'] == "::1"){
-        $url = "http://[::1]/TN_INST/";
-    }else{
-        $url = "https://www.edii-innovation.tn.gov.in/masters/";
-    }    
-}else{
-    $url = "https://www.edii-innovation.tn.gov.in/masters/";
-}
+// if (!empty($_SERVER['SERVER_ADDR'])) {
+//     if($_SERVER['SERVER_ADDR'] == "::1"){
+//         $url = "http://[::1]/TN_INST/";
+//     }else{
+//         $url = "https://www.edii-innovation.tn.gov.in/masters/";
+//     }    
+// }else{
+//     $url = "https://www.edii-innovation.tn.gov.in/masters/";
+// }
 
-$config['base_url'] = $url;
-// $config['base_url'] = '';
+// $config['base_url'] = $url;
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

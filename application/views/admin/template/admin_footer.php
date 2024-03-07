@@ -68,7 +68,11 @@ $(function() {
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "stateSave": true,
+        "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+        ],
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example1').DataTable({
@@ -76,6 +80,7 @@ $(function() {
         "lengthChange": false,
         "searching": false,
         "ordering": true,
+        "stateSave": true,
         "info": true,
         "autoWidth": false,
         "responsive": true,

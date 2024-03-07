@@ -2,19 +2,6 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Add Place</h1>
-                </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -32,40 +19,36 @@
                         <?php echo form_open('admin/addplaces'); ?>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="status">District Name:</label>
-                                <select name="district_id" id="district_id" class="form-control input-lg select2">
+                                <label for="status">District Name <span class="text-danger">*</span></label>
+                                <select name="district_id" id="district_id" class="form-control input-lg">
                                     <option value="">Select District</option>
                                     <?php
-                                foreach($districts as $row)
-                                {
-                                    echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
-                                }
-                                ?>
+                                        foreach($districts as $row)
+                                        {
+                                            echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
+                                        }
+                                    ?>
                                 </select>
-                                <?=form_error('district_name','<div class="text-danger">','</div>');?>
+                                <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">block Name:</label>
-                                <select name="block_id" id="block_id" class="form-control input-lg select2">
-
+                                <label for="status">Block Name <span class="text-danger">*</span></label>
+                                <select name="block_id" id="block_id" class="form-control input-lg" disabled>
+                                    <option value="">Select Block</option>
                                 </select>
-                                <?=form_error('block_name','<div class="text-danger">','</div>');?>
+                                <?=form_error('block_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">Taluk Name:</label>
-                                <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Taluk</option>
-                                <?php
-                                foreach($taluks as $row)
-                                {
-                                    echo '<option value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
-                                }
-                                ?> -->
+                                <label for="status">Taluk Name </label>
+                                <select name="taluk_id" id="taluk_id" class="form-control input-lg" disabled>
+                                    <option value="">Select Taluk</option>
                                 </select>
+                                <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="place_type">Place Type:</label>
+                                <label for="place_type">Place Type <span class="text-danger">*</span></label>
                                 <select class="form-control" name="place_type" id="place_type">
+                                    <option value="">Select Place Type</option>
                                     <option value="METRO">Metro</option>
                                     <option value="URBAN">Urban</option>
                                     <option value="SEMI-URBAN">Semi-Urban</option>
@@ -73,7 +56,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="place_name">Place Name:</label>
+                                <label for="place_name">Place Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="place_name" id="place_name"
                                     value="<?php echo set_value('place_name'); ?>">
                                 <?=form_error('place_name','<div class="text-danger">','</div>');?>
@@ -91,14 +74,6 @@
                                     value="<?php echo set_value('pincode'); ?>">
                                 <?=form_error('pincode','<div class="text-danger">','</div>');?>
                             </div>
-                            <div class="form-group">
-                                <label for="status">Status:</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="ACTIVE">Active</option>
-                                    <option value="INACTIVE">Inactive</option>
-                                    <option value="DELETED">Deleted</option>
-                                </select>
-                            </div>
 
                         </div>
 
@@ -112,14 +87,6 @@
 
 
                 </div>
-
-
-
-
-
-
-
-
 
             </div>
             <!-- /.col -->
@@ -160,10 +127,25 @@ $(document).ready(function() {
                     $('select[name="block_id"]').removeAttr("disabled");
                 }
             });
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/TalukList',
+                'data': {
+                    'district_id': district_id,
+                    'flag': ""
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="taluk_id"]').empty();
+                    $('select[name="taluk_id"]').append(data);
+                    $('select[name="taluk_id"]').removeAttr("disabled");
+                }
+            });
 
         }
     });
-    $("#block_id").change(function() {
+    $("#block_id_OLD").change(function() {
         event.preventDefault();
 
 

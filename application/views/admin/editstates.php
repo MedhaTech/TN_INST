@@ -41,7 +41,7 @@
                                     <input type="text" class="form-control" name="state_name_vernacular" id="state_name_vernacular" value="<?php echo set_value('state_name_vernacular', $state['state_name_vernacular']); ?>">
                                     <?=form_error('state_name_vernacular','<div class="text-danger">','</div>');?>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="status">Status:<span class="text-danger">*</span></label>
                                     <select class="form-control" name="status" id="status">
                                         <option value="ACTIVE" <?php echo ($state['status'] == 'ACTIVE') ? 'selected' : ''; ?>>Active</option>
@@ -49,7 +49,7 @@
                                         <option value="DELETED" <?php echo ($state['status'] == 'DELETED') ? 'selected' : ''; ?>>Deleted</option>
                                     </select>
                                     <?=form_error('status','<div class="text-danger">','</div>');?>
-                                </div>
+                                </div> -->
 
                             </div>
 

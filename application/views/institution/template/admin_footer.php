@@ -69,16 +69,19 @@ $(function() {
         "responsive": true,
         "lengthChange": true,
         "autoWidth": false,
+        "stateSave": true,
         "lengthMenu": [
             [10, 25, 50, 100, -1],
             [10, 25, 50, 100, "All"]
         ],
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
     $('#example1').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
+        "stateSave": true,
         "ordering": true,
         "info": true,
         "autoWidth": false,

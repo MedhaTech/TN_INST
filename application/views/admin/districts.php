@@ -34,7 +34,7 @@
                                     <tr>
                                         <th width="5%">No </th>
 
-                                        <th width="12%">lgd Code</th>
+                                        <th width="12%">LGD Code</th>
                                         <th width="12%">District Name</th>
                                         <th width="15%">Vernacular District Name</th>
                                         <th width="12%">District Short Form</th>
