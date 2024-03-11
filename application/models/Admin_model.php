@@ -282,6 +282,14 @@ Class Admin_model extends CI_Model
       return $this->db->get('districts');
     }
 
+    function getOverallGeographicalData(){
+      $this->db->select('blocks.district_id, districts.district_name, places.block_id,blocks.block_name, places.place_id, places.place_name');
+      $this->db->join('blocks', 'blocks.block_id = places.block_id');
+      $this->db->join('districts', 'districts.district_id = blocks.district_id');
+      $this->db->order_by('districts.district_name ASC , blocks.block_name ASC , places.place_name ASC');
+      return $this->db->get('places');
+    }
+
     function report1(){
       $this->db->select('institutions.institution_id, institutions.institution_code, institutions.institution_name, districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name, COUNT(institutional_courses.institution_id) AS cnt');
       $this->db->join('places', 'places.place_id = institutions.place_id');

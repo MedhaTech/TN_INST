@@ -98,13 +98,6 @@
                             <?=form_error('block_id','<div class="text-danger">','</div>');?>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="status">Taluk Name:</label>
-                            <?php $taluks_options = array('all' => 'All Taluks');
-                                        echo form_dropdown('taluk_id', $taluks_options, 'all','class="form-control form-control-sm" id="taluk_id" disabled');
-                                    ?>
-                            <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
-                        </div>
-                        <div class="form-group col-md-2">
                             <label for="status" class="h6">Place Name:</label>
                             <?php $places_options = array('all' => 'All Places');
                                         echo form_dropdown('place_id', $places_options, 'all','class="form-control form-control-sm" id="place_id" disabled');
@@ -156,6 +149,77 @@ $(document).ready(function() {
     $("#district_id").change(function() {
         event.preventDefault();
 
+
+        var district_id = $("#district_id").val();
+
+        if (district_id == ' ') {
+            alert("Please Select District");
+        } else if (district_id == "all") {
+            $('select[name="block_id"]').empty();
+            $('#block_id').append(`<option value="all">All Blocks</option>`);
+            $('#block_id').attr('disabled', true);
+
+            $('select[name="place_id"]').empty();
+            $('#place_id').append(`<option value="all">All Places</option>`);
+            $('#place_id').attr('disabled', true);
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/BlockList',
+                'data': {
+                    'district_id': district_id,
+                    'flag': "A"
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="block_id"]').empty();
+                    $('select[name="block_id"]').append(data);
+                    $('select[name="block_id"]').removeAttr("disabled");
+
+                    $('select[name="place_id"]').empty();
+                    $('#place_id').append(`<option value="all">All Places</option>`);
+                    $('#place_id').attr('disabled', true);
+                }
+            });
+        }
+    });
+
+    $("#block_id").change(function() {
+        event.preventDefault();
+
+
+        var block_id = $("#block_id").val();
+
+        if (block_id == ' ') {
+            alert("Please Select Blocks");
+        } else if (block_id == "all") {
+            $('select[name="place_id"]').empty();
+            $('#place_id').append(`<option value="all">All Places</option>`);
+            $('#place_id').attr('disabled', true);
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/PlaceList',
+                'data': {
+                    'block_id': block_id,
+                    'flag': "A"
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+
+    $("#district_id1").change(function() {
+        event.preventDefault();
+
         var district_id = $("#district_id").val();
         if (district_id == ' ') {
             alert("Please Select District");
@@ -201,7 +265,8 @@ $(document).ready(function() {
 
         }
     });
-    $("#block_id").change(function() {
+
+    $("#block_id1").change(function() {
         event.preventDefault();
 
 
@@ -243,7 +308,7 @@ $(document).ready(function() {
 
         }
     });
-    $("#taluk_id").change(function() {
+    $("#taluk_id1").change(function() {
         event.preventDefault();
 
 

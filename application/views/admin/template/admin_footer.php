@@ -66,7 +66,7 @@ $.widget.bridge('uibutton', $.ui.button)
 $(function() {
     $("#example2").DataTable({
         "responsive": true,
-        "lengthChange": false,
+        "lengthChange": true,
         "autoWidth": false,
         "stateSave": true,
         "lengthMenu": [
