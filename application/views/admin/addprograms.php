@@ -2,19 +2,6 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Add Programs</h1>
-                </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
@@ -72,22 +59,12 @@
                                     value="<?php echo set_value('sort_order'); ?>">
                                 <?=form_error('sort_order','<div class="text-danger">','</div>');?>
                             </div>
-                            <div class="form-group">
-                                <label for="status">Status:</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="ACTIVE">Active</option>
-                                    <option value="INACTIVE">Inactive</option>
-                                    <option value="DELETED">Deleted</option>
-                                </select>
-                                <?=form_error('status','<div class="text-danger">','</div>');?>
-                            </div>
-
                         </div>
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm">Add</button>
                             <a href="<?=base_url();?>admin/programs" class="btn btn-dark btn-sm float-right"
-                                role="button">cancel</a>
+                                role="button">Cancel</a>
                         </div>
                         <?php echo form_close(); ?>
                     </div>

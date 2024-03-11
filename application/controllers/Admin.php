@@ -232,6 +232,90 @@ class Admin extends CI_Controller
 		}
 	}
 
+	function districtsDropdown()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Districts";
+			$data['activeMenu'] = "Districts";
+
+			$districts = $this->admin_model->get_table_details('districts');
+
+			$result = array();
+			foreach($districts as $row) {
+				$result[$row["district_id"]] = $row["district_name"];
+			}
+			return $result;
+
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function blocksDropdown($district_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Districts";
+			$data['activeMenu'] = "Districts";
+
+			$blocks = $this->admin_model->getDetailsbyfield($district_id,'district_id',"blocks")->result(); 
+			
+			$result = array();
+			foreach($blocks as $row) {
+				$result[$row->block_id] = $row->block_name;
+			}
+			return $result;
+
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function taluksDropdown($district_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Taluks";
+			$data['activeMenu'] = "Taluks";
+
+			$taluks = $this->admin_model->getDetailsbyfield($district_id,'district_id',"taluks")->result(); 
+			
+			$result = array();
+			foreach($taluks as $row) {
+				$result[$row->taluk_id] = $row->taluk_name;
+			}
+			return $result;
+
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function placesDropdown($block_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Places";
+			$data['activeMenu'] = "Places";
+
+			$places = $this->admin_model->getDetailsbyfield($block_id,'block_id',"places")->result(); 
+			
+			$result = array();
+			foreach($places as $row) {
+				$result[$row->place_id] = $row->place_name;
+			}
+			return $result;
+
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
 	function districts()
 	{
 		if ($this->session->userdata('logged_in')) {
@@ -628,7 +712,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutiontypes";
-			$data['activeMenu'] = "institutiontypes";
+			$data['activeMenu'] = "Institutiontypes";
 			$data['institutiontypes'] = $this->admin_model->getDetailsbySort('sort_order','DESC','institution_types')->result_array();
 			$this->admin_template->show('admin/institution_types', $data);
 		} else {
@@ -645,7 +729,7 @@ class Admin extends CI_Controller
 			$data['activeMenu'] = "institutiontypes";
 			$this->form_validation->set_rules('institution_type', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('institution_short_name', 'Institution Type', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addinstitutiontypes', $data);
@@ -654,7 +738,7 @@ class Admin extends CI_Controller
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
 					'institution_short_name' => $this->input->post('institution_short_name'),
-					'status' => $this->input->post('status'),
+					'status' => 'ACTIVE',
 					'sort_order' => $sort_order,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$data['username']
@@ -681,7 +765,7 @@ class Admin extends CI_Controller
 		    $this->form_validation->set_rules('institution_type', 'Institution Type', 'required|trim');
 			$this->form_validation->set_rules('institution_short_name', 'Short Name', 'required|trim');
 			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editinstitutiontypes',$data);
@@ -690,7 +774,6 @@ class Admin extends CI_Controller
 				$data = array(
 					'institution_type' => $this->input->post('institution_type'),
 					'institution_short_name' => $this->input->post('institution_short_name'),
-					'status' => $this->input->post('status'),
 					'sort_order' => $sort_order,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'updated_by'=>$data['username']
@@ -724,7 +807,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutions";
-			$data['activeMenu'] = "institutions";
+			$data['activeMenu'] = "Institutions";
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
 			$this->admin_template->show('admin/institutions', $data);
 		} else {
@@ -737,7 +820,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutions";
-			$data['activeMenu'] = "institutions";
+			$data['activeMenu'] = "Institutions";
 
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
 			$this->form_validation->set_rules('principal_name', 'Principal Name', 'trim');
@@ -745,16 +828,17 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			// $this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
-			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
+			$this->form_validation->set_rules('district_id', 'District Name', 'required|trim');
 			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
+			// $data['districts'] = $this->admin_model->get_table_details('districts');
 			// $data['blocks'] = $this->admin_model->get_table_details('blocks');
 			// $data['taluks'] = $this->admin_model->get_table_details('taluks');
 			// $data['places'] = $this->admin_model->get_table_details('places');
+
+			$data['districts'] = array(""=>"Select District")+$this->districtsDropdown();
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addinstitutions',$data);
@@ -778,7 +862,7 @@ class Admin extends CI_Controller
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
 					'principal_email' => $this->input->post('principal_email'),
 					'place_id' => $this->input->post('place_id'),
-					'status' => $this->input->post('status')
+					'status' => 'ACTIVE'
 				);
 				$this->db->insert('institutions', $data);
 				$iid = $this->db->insert_id();
@@ -794,9 +878,33 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutions";
-			$data['activeMenu'] = "institutions";
+			$data['activeMenu'] = "Institutions";
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
+			$data['place_id'] = $data['institution']['place_id'];
 
+			if($data['place_id']){
+				$places = $this->admin_model->getDetailsbyfield($data['place_id'],'place_id',"places")->row(); 
+				$data['block_id'] = $places->block_id;
+				$data['taluk_id'] = $places->taluk_id;
+
+				$blocks = $this->admin_model->getDetailsbyfield($data['block_id'],'block_id',"blocks")->row(); 
+				$data['district_id'] = $blocks->district_id;
+
+				$data['blocksArray'] = array(""=>"Select Block")+$this->blocksDropdown($data['district_id']);
+				$data['taluksArray'] = array(""=>"Select Taluk")+$this->taluksDropdown($data['district_id']);
+				$data['placesArray'] = array(""=>"Select Place")+$this->placesDropdown($data['block_id']);
+				
+			}else{
+				$data['district_id'] = '';
+				$data['block_id'] = '';
+				$data['taluk_id'] = '';
+				$data['blocksArray'] = array(""=>"Select Block");
+				$data['taluksArray'] = array(""=>"Select Taluk");
+				$data['placesArray'] = array(""=>"Select Place");
+			}                                        
+
+			$data['districts'] = array(""=>"Select District")+$this->districtsDropdown();
+			
 			// $this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			$this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
 			$this->form_validation->set_rules('principal_name', 'Principal Name', 'trim');
@@ -805,15 +913,15 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
 			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
+			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
-			$data['blocks'] = $this->admin_model->get_table_details('blocks');
-			$data['taluks'] = $this->admin_model->get_table_details('taluks');
-			$data['places'] = $this->admin_model->get_table_details('places');
+			// $data['districts'] = $this->admin_model->get_table_details('districts');
+			// $data['blocks'] = $this->admin_model->get_table_details('blocks');
+			// $data['taluks'] = $this->admin_model->get_table_details('taluks');
+			// $data['places'] = $this->admin_model->get_table_details('places');
 			
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editinstitution', $data);
@@ -826,8 +934,7 @@ class Admin extends CI_Controller
 					'principal_mobile' => $this->input->post('principal_mobile'),
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
 					'principal_email' => $this->input->post('principal_email'),
-					'place_id' => $this->input->post('place_id'),
-					'status' => $this->input->post('status')
+					'place_id' => $this->input->post('place_id')
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);
@@ -842,8 +949,8 @@ class Admin extends CI_Controller
 		if ($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
-			$data['pageTitle'] = "institutions";
-			$data['activeMenu'] = "institutions";
+			$data['pageTitle'] = "Institutions";
+			$data['activeMenu'] = "Institutions";
 
 			$this->db->where('institution_id', $institution_id);
 			$this->db->delete('institutional_courses');
@@ -964,7 +1071,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Streams";
-			$data['activeMenu'] = "streams";
+			$data['activeMenu'] = "Streams";
 			$data['streams'] = $this->admin_model->getDetailsbySort('sort_order','DESC','streams')->result_array();
 			$this->admin_template->show('admin/streams', $data);
 		} else {
@@ -978,11 +1085,11 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Streams";
-			$data['activeMenu'] = "streams";
+			$data['activeMenu'] = "Streams";
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
 			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/addstreams',$data);
@@ -991,7 +1098,7 @@ class Admin extends CI_Controller
 				$data = array(
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),
-					'status' => $this->input->post('status'),
+					'status' => 'ACTIVE',
 					'sort_order' => $sort_order,
 					'created_at'=>date('Y-m-d H:i:s'),
 					'created_by'=>$data['username']
@@ -1009,13 +1116,13 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Streams";
-			$data['activeMenu'] = "streams";
+			$data['activeMenu'] = "Streams";
 			$data['stream'] = $this->admin_model->get_details_by_id($stream_id,'stream_id','streams');
 
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
 			// $this->form_validation->set_rules('sort_order', 'Sort Order', 'required|trim');
 			$this->form_validation->set_rules('stream_short_form', 'Stream Short Form', 'required|trim');
-			$this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
+			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			
 			if ($this->form_validation->run() === FALSE) {
 				$this->admin_template->show('admin/editstreams', $data);
@@ -1024,7 +1131,6 @@ class Admin extends CI_Controller
 				$data = array(
 					'stream_name' => $this->input->post('stream_name'),
 					'stream_short_form' => $this->input->post('stream_short_form'),					
-					'status' => $this->input->post('status'),
 					'sort_order' => $sort_order,
 					'updated_at'=>date('Y-m-d H:i:s'),
 					'updated_by'=>$data['username']
@@ -1162,7 +1268,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Themeproblems";
-			$data['activeMenu'] = "themesproblems";
+			$data['activeMenu'] = "Themeproblems";
 			$data['themes_problems'] = $this->admin_model->get_table_details('themes_problems');
 			$this->admin_template->show('admin/themesproblems', $data);
 		} else {
@@ -1255,7 +1361,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Programs";
-			$data['activeMenu'] = "programs";
+			$data['activeMenu'] = "Programs";
 			$data['programs'] = $this->admin_model->getDetailsbySort('sort_order','DESC','programs')->result_array();
 			$this->admin_template->show('admin/programs', $data);
 		} else {
@@ -1269,7 +1375,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Programs";
-			$data['activeMenu'] = "programs";
+			$data['activeMenu'] = "Programs";
 			$this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
 			$this->form_validation->set_rules('program_short_name', 'Program Short Name', 'required|trim');
 			$this->form_validation->set_rules('no_of_years', 'Number of Years', 'required|in_list[1,2,3,4,5,6]');
@@ -1303,7 +1409,7 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Programs";
-			$data['activeMenu'] = "programs";
+			$data['activeMenu'] = "Programs";
 			$data['program'] = $this->admin_model->get_details_by_id($program_id,'program_id','programs');
 
 		    $this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
@@ -1416,10 +1522,10 @@ class Admin extends CI_Controller
 			$session_data = $this->session->userdata('logged_in');
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Places";
-			$data['activeMenu'] = "places";
-			$taluk_id=$this->input->post('taluk_id');
+			$data['activeMenu'] = "Places";
+			$block_id=$this->input->post('block_id');
 			$flag=$this->input->post('flag');
-			$list = $this->admin_model->getDetailsbyfield($taluk_id,'taluk_id','places')->result();
+			$list = $this->admin_model->getDetailsbyfield($block_id,'block_id','places')->result();
 			if (count($list)) {
 				$places = array();
 				if($flag=="A"){
@@ -1592,6 +1698,69 @@ class Admin extends CI_Controller
 							$details1->district_name,
 							$details1->block_name,
 							$details1->taluk_name,
+							$details1->place_name
+					);
+					
+				}
+				echo $data['table']=$this->table->generate();
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function overallGeoDownload($download = 1)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "TN - Geographical Data";
+			$data['activeMenu'] = "Reports";
+			
+			$details = $this->admin_model->getOverallGeographicalData()->result();
+
+			if($download){
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm"  border="1" id="js-dataTable-full">');    
+				$this->table->set_template($table_setup);
+    			$this->table->set_heading(
+    								array('data' =>'S.No', 'style'=>'width:5%;'),
+    								array('data' =>'District','style'=>'width:15%;'),
+    								array('data' =>'Block','style'=>'width:20%;'),
+    								array('data' =>'Place','style'=>'width:20%;')
+    				                );
+    			$i=1;
+    			foreach ($details as $details1){
+    				$this->table->add_row($i++,
+							$details1->district_name,
+							$details1->block_name,
+							$details1->place_name
+    				);
+					
+    			}
+				$detailsTable = $this->table->generate();
+
+				$current_date = date("dmYhis");
+				header("Content-type: application/octet-stream");
+                header("Content-Disposition: attachment; filename=".$data['pageTitle'].' '.$current_date.".xls");
+                header("Pragma: no-cache");
+                header("Expires: 0"); 
+                echo $detailsTable;   
+
+			}else{
+				$table_setup = array ('table_open'=> '<table class="table table-striped table-vcenter table-hover js-dataTable-full font-size-sm" id="js-dataTable-full">');
+                $this->table->set_template($table_setup);
+    			$this->table->set_heading(
+									array('data' =>'S.No', 'style'=>'width:5%;'),
+									array('data' =>'District','style'=>'width:15%;'),
+									array('data' =>'Block','style'=>'width:20%;'),
+									// array('data' =>'Taluk','style'=>'width:20%;'),
+									array('data' =>'Place','style'=>'width:20%;')
+									);
+				$i=1;
+				foreach ($details as $details1){
+					$this->table->add_row($i++,
+							$details1->district_name,
+							$details1->block_name,
 							$details1->place_name
 					);
 					

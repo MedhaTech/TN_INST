@@ -78,84 +78,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="status">District Name:</label>
-                                <select name="district_id" id="district_id" class="form-control input-lg select2">
-                                    <option value="">Select Districts</option>
-                                    <?php
-                                $talu=$this->admin_model->getDetailsbyfield($institution['place_id'],'place_id',"places")->result(); 
-                                $taluk_id=$talu[0]->taluk_id;
-
-                                $bloc=$this->admin_model->getDetailsbyfield($taluk_id,'taluk_id',"taluks")->result(); 
-                                $block_id=$bloc[0]->block_id;
-
-                                $dist=$this->admin_model->getDetailsbyfield( $block_id,'block_id',"blocks")->result();
-                                $district_id=$dist[0]->district_id;
-                                foreach($districts as $row)
-                                {
-                                    $active=($district_id == $row['district_id']) ? "selected" :"";
-                                    echo '<option '.$active.' value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
-                                }
-                                ?>
-                                </select>
+                                <?php echo form_dropdown('district_id', $districts, (set_value('district_id'))?set_value('district_id'):$district_id, 'class="form-control input-xs" id="district_id"'); ?>
                                 <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Block Name:</label>
-                                <select name="block_id" id="block_id" class="form-control input-lg select2">
-                                    <option value="">Select Block</option>
-                                    <?php
-                                foreach($blocks as $row)
-                                {
-                                    $active=( $block_id == $row["block_id"]) ? "selected" :"";
-                                    echo '<option '.$active.' value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
-                                }
-                                ?>
-                                </select>
+                                <?php echo form_dropdown('block_id', $blocksArray, (set_value('block_id'))?set_value('block_id'):$block_id, 'class="form-control input-xs" id="block_id"'); ?>
                                 <?=form_error('block_id','<div class="text-danger">','</div>');?>
                             </div>
+
                             <div class="form-group">
-                                <label for="status">Taluk Name:</label>
-                                <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
-                                    <option value="">Select Taluk</option>
-                                    <?php
-                                foreach($taluks as $row)
-                                {
-                                    $active=( $taluk_id == $row["taluk_id"]) ? "selected" :"";
-                                    echo '<option '.$active.' value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
-                                }
-                                ?>
-                                </select>
+                                <label for="status">Taluk Name</label>
+                                <?php echo form_dropdown('taluk_id', $taluksArray, (set_value('taluk_id'))?set_value('taluk_id'):$taluk_id, 'class="form-control input-xs" id="taluk_id"'); ?>
                                 <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
                             </div>
 
                             <div class="form-group">
-                                <label for="status">Place Name:</label>
-                                <select name="place_id" id="place_id" class="form-control input-lg select2">
-                                    <option value="">Select Place</option>
-                                    <?php
-                                foreach($places as $row)
-                                {
-                                    $active=($institution['place_id'] == $row['place_id']) ? "selected" :"";
-                                    echo '<option '.$active.' value="'.$row["place_id"].'">'.$row["place_name"].'</option>';
-                                }
-                                ?>
-                                </select>
+                                <label for="status">Place Name</label>
+                                <?php echo form_dropdown('place_id', $placesArray, (set_value('place_id'))?set_value('place_id'):$place_id, 'class="form-control input-xs" id="place_id"'); ?>
                                 <?=form_error('place_id','<div class="text-danger">','</div>');?>
                             </div>
-                            <div class="form-group">
-                                <label for="status">Status:</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="ACTIVE"
-                                        <?php echo ($institution['status'] == 'ACTIVE') ? 'selected' : ''; ?>>Active
-                                    </option>
-                                    <option value="INACTIVE"
-                                        <?php echo ($institution['status'] == 'INACTIVE') ? 'selected' : ''; ?>>Inactive
-                                    </option>
-                                    <option value="DELETED"
-                                        <?php echo ($institution['status'] == 'DELETED') ? 'selected' : ''; ?>>Deleted
-                                    </option>
-                                </select>
-                                <?=form_error('status','<div class="text-danger">','</div>');?>
-                            </div>
+
 
                         </div>
 
@@ -216,6 +159,21 @@ $(document).ready(function() {
                     $('select[name="block_id"]').removeAttr("disabled");
                 }
             });
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/TalukList',
+                'data': {
+                    'district_id': district_id,
+                    'flag': ""
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="taluk_id"]').empty();
+                    $('select[name="taluk_id"]').append(data);
+                    $('select[name="taluk_id"]').removeAttr("disabled");
+                }
+            });
 
         }
     });
@@ -230,36 +188,9 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 'type': 'POST',
-                'url': base_url + 'admin/TalukList',
-                'data': {
-                    'block_id': block_id,
-                    'flag': ""
-                },
-                'dataType': 'text',
-                'cache': false,
-                'success': function(data) {
-                    $('select[name="taluk_id"]').empty();
-                    $('select[name="taluk_id"]').append(data);
-                    $('select[name="taluk_id"]').removeAttr("disabled");
-                }
-            });
-
-        }
-    });
-    $("#taluk_id").change(function() {
-        event.preventDefault();
-
-
-        var taluk_id = $("#taluk_id").val();
-
-        if (taluk_id == ' ') {
-            alert("Please Select Taluks");
-        } else {
-            $.ajax({
-                'type': 'POST',
                 'url': base_url + 'admin/PlaceList',
                 'data': {
-                    'taluk_id': taluk_id,
+                    'block_id': block_id,
                     'flag': ""
                 },
                 'dataType': 'text',
@@ -273,5 +204,7 @@ $(document).ready(function() {
 
         }
     });
+
+
 });
 </script>

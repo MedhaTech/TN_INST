@@ -2,22 +2,26 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <!-- <h1>Blocks</h1> -->
-                </div>
-                <div class="col-sm-6">
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
+
     </section>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title font-weight-bold"><?=$pageTitle;?></h3>
+                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                    <h3 class="card-title">
+                        <i class="fas fa-server mr-1"></i>
+                        <?=$pageTitle;?>
+                    </h3>
+                    <div class="card-tools">
+                        <ul class="nav nav-pills ml-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-block btn-sm btn-danger"
+                                    href="<?php echo base_url('admin/overallGeoDownload/1');?>"><i class="fas fa-download"></i>
+                                    Overall Download</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">

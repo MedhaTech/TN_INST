@@ -2,19 +2,7 @@
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Edit District</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
+             
         </section>
 
         <!-- Main content -->
@@ -33,7 +21,7 @@
                             <div class="card-body">
          
                                 <div class="form-group">
-                                    <label for="lgd_code">Igd Code:</label>
+                                    <label for="lgd_code">LGD Code:</label>
                                     <input type="text" class="form-control" name="lgd_code" id="lgd_code" value="<?php echo set_value('lgd_code', $district['lgd_code']); ?>">
                                     <?=form_error('lgd_code','<div class="text-danger">','</div>');?>
                                 </div>

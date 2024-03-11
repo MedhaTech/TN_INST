@@ -2,19 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Add Institution</h1>
-                </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
+
     </section>
 
     <!-- Main content -->
@@ -32,102 +20,75 @@
                         <?php echo form_open('admin/addinstitutions'); ?>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="institution_name">Institution Name:</label>
+                                <label for="institution_name">Institution Name <span class="text-danger">*</span>
+                                </label>
                                 <input type="text" class="form-control" name="institution_name" id="institution_name"
-                                    value="<?php echo set_value('institution_name'); ?>">
+                                    value="<?php echo (set_value('institution_name'))?set_value('institution_name'):'';?>">
                                 <?=form_error('institution_name','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="institution_name_vernacular">Vernacular Institution Name:</label>
+                                <label for="institution_name_vernacular">Vernacular Institution Name </label>
                                 <input type="text" class="form-control" name="institution_name_vernacular"
                                     id="institution_name_vernacular"
-                                    value="<?php echo set_value('institution_name_vernacular'); ?>">
+                                    value="<?php echo (set_value('institution_name_vernacular'))?set_value('institution_name_vernacular'):'';?>">
                                 <?=form_error('institution_name_vernacular','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="principal_name">Principal Name:</label>
+                                <label for="principal_name">Principal Name </label>
                                 <input type="text" class="form-control" name="principal_name" id="principal_name"
-                                    value="<?php echo set_value('principal_name'); ?>">
+                                    value="<?php echo (set_value('principal_name'))?set_value('principal_name'):'';?>">
                                 <?=form_error('principal_name','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="principal_mobile">Principal Mobile Number:</label>
+                                <label for="principal_mobile">Principal Mobile Number </label>
                                 <input type="text" class="form-control" name="principal_mobile" id="principal_mobile"
-                                    value="<?php echo set_value('principal_mobile'); ?>">
+                                    value="<?php echo (set_value('principal_mobile'))?set_value('principal_mobile'):'';?>">
                                 <?=form_error('principal_mobile','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="principal_whatsapp_mobile">Principal Watsapp Mobile Number:</label>
+                                <label for="principal_whatsapp_mobile">Principal Watsapp Mobile Number </label>
                                 <input type="text" class="form-control" name="principal_whatsapp_mobile"
                                     id="principal_whatsapp_mobile"
-                                    value="<?php echo set_value('principal_whatsapp_mobile'); ?>">
+                                    value="<?php echo (set_value('principal_whatsapp_mobile'))?set_value('principal_whatsapp_mobile'):'';?>">
                                 <?=form_error('principal_whatsapp_mobile','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="principal_email">Principal Email:</label>
+                                <label for="principal_email">Principal Email </label>
                                 <input type="text" class="form-control" name="principal_email" id="principal_email"
-                                    value="<?php echo set_value('principal_email'); ?>">
+                                    value="<?php echo (set_value('principal_email'))?set_value('principal_email'):'';?>">
                                 <?=form_error('principal_email','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">District Name:</label>
-                                <select name="district_id" id="district_id" class="form-control input-lg select2">
-                                    <option value="">Select Districts</option>
-                                    <?php
-                                foreach($districts as $row)
-                                {
-                                    echo '<option value="'.$row["district_id"].'">'.$row["district_name"].'</option>';
-                                }
-                                ?>
-                                </select>
+                                <label for="status">District Name <span class="text-danger">*</span> </label>
+                                <?php 
+                                    // $districtsData = array(" " => "Select Districts");
+                                        //  foreach($districts as $row) {
+                                        //     $districtsData[$row["district_id"]] = $row["district_name"];
+                                        // }
+                                    ?>
+                                <?php echo form_dropdown('district_id', $districts, (set_value('district_id'))?set_value('district_id'):'', 'class="form-control input-xs" id="district_id"'); ?>
                                 <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">Block Name:</label>
-                                <select name="block_id" id="block_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Block</option>
-                                <?php
-                                foreach($blocks as $row)
-                                {
-                                    echo '<option value="'.$row["block_id"].'">'.$row["block_name"].'</option>';
-                                }
-                                ?> -->
+                                <label for="status">Block Name <span class="text-danger">*</span></label>
+                                <select name="block_id" id="block_id" class="form-control input-lg">
+                                    <option value="">Select Block</option>
                                 </select>
                                 <?=form_error('block_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Taluk Name:</label>
-                                <select name="taluk_id" id="taluk_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Taluk</option>
-                                <?php
-                                foreach($taluks as $row)
-                                {
-                                    echo '<option value="'.$row["taluk_id"].'">'.$row["taluk_name"].'</option>';
-                                }
-                                ?> -->
+                                <select name="taluk_id" id="taluk_id" class="form-control input-lg">
+                                    <option value="">Select Taluk</option>
                                 </select>
                                 <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
                                 <label for="status">Place Name:</label>
-                                <select name="place_id" id="place_id" class="form-control input-lg select2">
-                                    <!-- <option value="">Select Place</option>
-                                <?php
-                                foreach($places as $row)
-                                {
-                                    echo '<option value="'.$row["place_id"].'">'.$row["place_name"].'</option>';
-                                }
-                                ?> -->
+                                <select name="place_id" id="place_id" class="form-control input-lg">
+                                    <option value="">Select Place</option>
                                 </select>
                                 <?=form_error('place_id','<div class="text-danger">','</div>');?>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Status:</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option value="ACTIVE">Active</option>
-                                    <option value="INACTIVE">Inactive</option>
-                                    <option value="DELETED">Deleted</option>
-                                </select>
                             </div>
 
                         </div>
@@ -189,6 +150,21 @@ $(document).ready(function() {
                     $('select[name="block_id"]').removeAttr("disabled");
                 }
             });
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/TalukList',
+                'data': {
+                    'district_id': district_id,
+                    'flag': ""
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $('select[name="taluk_id"]').empty();
+                    $('select[name="taluk_id"]').append(data);
+                    $('select[name="taluk_id"]').removeAttr("disabled");
+                }
+            });
 
         }
     });
@@ -203,7 +179,7 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 'type': 'POST',
-                'url': base_url + 'admin/TalukList',
+                'url': base_url + 'admin/PlaceList',
                 'data': {
                     'block_id': block_id,
                     'flag': ""
@@ -211,15 +187,15 @@ $(document).ready(function() {
                 'dataType': 'text',
                 'cache': false,
                 'success': function(data) {
-                    $('select[name="taluk_id"]').empty();
-                    $('select[name="taluk_id"]').append(data);
-                    $('select[name="taluk_id"]').removeAttr("disabled");
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
                 }
             });
 
         }
     });
-    $("#taluk_id").change(function() {
+    $("#taluk_id1").change(function() {
         event.preventDefault();
 
 
