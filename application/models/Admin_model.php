@@ -224,9 +224,10 @@ Class Admin_model extends CI_Model
     }
 
     function get_geo_details($place_id){
+      // $this->db->select('taluks.taluk_id, taluks.taluk_name, blocks.block_id, blocks.block_name, places.place_id, places.place_name');
       $this->db->select('districts.district_id, districts.district_name, blocks.block_id, blocks.block_name, taluks.taluk_id, taluks.taluk_name, places.place_id, places.place_name');
-      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id');
-      $this->db->join('blocks', 'blocks.block_id = taluks.block_id');
+      $this->db->join('taluks', 'taluks.taluk_id = places.taluk_id',"left");
+      $this->db->join('blocks', 'blocks.block_id = places.block_id',"left");
       $this->db->join('districts', 'districts.district_id = blocks.district_id');
       $this->db->where('places.place_id', $place_id);
       return $this->db->get('places');
@@ -287,6 +288,13 @@ Class Admin_model extends CI_Model
       $this->db->join('blocks', 'blocks.block_id = places.block_id');
       $this->db->join('districts', 'districts.district_id = blocks.district_id');
       $this->db->order_by('districts.district_name ASC , blocks.block_name ASC , places.place_name ASC');
+      return $this->db->get('places');
+    }
+
+    function getDistrictPlacesList($district_id){
+      $this->db->select('places.place_id, places.place_name');
+      $this->db->join('blocks', 'blocks.block_id = places.block_id');
+      $this->db->where('blocks.district_id',$district_id);
       return $this->db->get('places');
     }
 

@@ -829,7 +829,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			// $this->form_validation->set_rules('institution_name_vernacular', 'Vernacular Place Name', 'required|trim');
 			$this->form_validation->set_rules('district_id', 'District Name', 'required|trim');
-			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			// $this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
@@ -862,7 +862,9 @@ class Admin extends CI_Controller
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
 					'principal_email' => $this->input->post('principal_email'),
 					'place_id' => $this->input->post('place_id'),
-					'status' => 'ACTIVE'
+					'status' => 'ACTIVE',
+					'created_at'=>date('Y-m-d H:i:s'),
+					'created_by'=>$data['username']
 				);
 				$this->db->insert('institutions', $data);
 				$iid = $this->db->insert_id();
@@ -912,8 +914,8 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
-			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'trim');
+			// $this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			// $this->form_validation->set_rules('taluk_id', 'Taluk Name', 'trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 			
@@ -934,7 +936,9 @@ class Admin extends CI_Controller
 					'principal_mobile' => $this->input->post('principal_mobile'),
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
 					'principal_email' => $this->input->post('principal_email'),
-					'place_id' => $this->input->post('place_id')
+					'place_id' => $this->input->post('place_id'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>$data['username']
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);
@@ -1538,6 +1542,53 @@ class Admin extends CI_Controller
 				}
 				print_r($places);
 			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function DistrictPlacesList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Places";
+			$data['activeMenu'] = "Places";
+			$district_id=$this->input->post('district_id');
+			$flag=$this->input->post('flag');
+			$list = $this->admin_model->getDistrictPlacesList($district_id)->result();
+			if (count($list)) {
+				$places = array();
+				if($flag=="A"){
+					$places[] = '<option value="all">All Places</option>';
+				}else{
+					$places[] = '<option value=" ">Select Place</option>';
+				}
+				foreach ($list as $res1) {
+					$places[] = '<option value="' . $res1->place_id . '">' . $res1->place_name .  '</option>';
+				}
+				print_r($places);
+			}
+		} else {
+			redirect('admin', 'refresh');
+		}
+	}
+
+	function getBlockTaluk()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Places";
+			$data['activeMenu'] = "Places";
+			$place_id = $this->input->post('place_id');
+			$geo = $this->admin_model->get_geo_details($place_id)->row();
+
+			$block_name = ($geo->block_name) ? $geo->block_name : '--';
+			$taluk_name = ($geo->taluk_name) ? $geo->taluk_name : '--';
+
+			echo $res  = '<div class="row"><div class="form-group col-md"><label for="status">Block Name</label><h6>'.$block_name.'</h6></div><div class="form-group col-md"><label for="status">Taluk Name</label><h6>'.$taluk_name.'</h6></div></div>';
+			
 		} else {
 			redirect('admin', 'refresh');
 		}
