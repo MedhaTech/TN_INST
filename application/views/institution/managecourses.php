@@ -39,22 +39,22 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <p class="place_id text-sm">Place Name :
-                                            <b class="d-block"><?php echo $geos['place_name']; ?></b>
+                                            <b class="d-block"><?php echo ($geos['place_name']) ? $geos['place_name'] : "<span style='color:red;'>--</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="taluk_name text-sm">Taluk Name :
-                                            <b class="d-block"><?php echo $geos['taluk_name']; ?></b>
+                                            <b class="d-block"><?php echo ($geos['taluk_name']) ? $geos['taluk_name'] : "<span style='color:red;'>--</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="block_name text-sm">Block Name :
-                                            <b class="d-block"><?php echo $geos['block_name']; ?></b>
+                                            <b class="d-block"><?php echo ($geos['block_name']) ? $geos['block_name'] : "<span style='color:red;'>--</span>"; ?></b>
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p class="district_name text-sm">District Name :
-                                            <b class="d-block"><?php echo $geos['district_name']; ?></b>
+                                            <b class="d-block"><?php echo ($geos['district_name']) ? $geos['district_name'] : "<span style='color:red;'>--</span>"; ?></b>
                                         </p>
                                     </div>
                                 </div>

@@ -70,27 +70,14 @@
                                 <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">Block Name <span class="text-danger">*</span></label>
-                                <select name="block_id" id="block_id" class="form-control input-lg">
-                                    <option value="">Select Block</option>
-                                </select>
-                                <?=form_error('block_id','<div class="text-danger">','</div>');?>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Taluk Name:</label>
-                                <select name="taluk_id" id="taluk_id" class="form-control input-lg">
-                                    <option value="">Select Taluk</option>
-                                </select>
-                                <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Place Name:</label>
+                                <label for="status">Place Name <span class="text-danger">*</span> </label>
                                 <select name="place_id" id="place_id" class="form-control input-lg">
                                     <option value="">Select Place</option>
                                 </select>
                                 <?=form_error('place_id','<div class="text-danger">','</div>');?>
                             </div>
-
+                            <div class="form-group" id="res">
+                            </div>          
                         </div>
 
                         <div class="card-footer">
@@ -137,7 +124,7 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 'type': 'POST',
-                'url': base_url + 'admin/BlockList',
+                'url': base_url + 'admin/DistrictPlacesList',
                 'data': {
                     'district_id': district_id,
                     'flag': ""
@@ -145,27 +132,12 @@ $(document).ready(function() {
                 'dataType': 'text',
                 'cache': false,
                 'success': function(data) {
-                    $('select[name="block_id"]').empty();
-                    $('select[name="block_id"]').append(data);
-                    $('select[name="block_id"]').removeAttr("disabled");
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
                 }
             });
-            $.ajax({
-                'type': 'POST',
-                'url': base_url + 'admin/TalukList',
-                'data': {
-                    'district_id': district_id,
-                    'flag': ""
-                },
-                'dataType': 'text',
-                'cache': false,
-                'success': function(data) {
-                    $('select[name="taluk_id"]').empty();
-                    $('select[name="taluk_id"]').append(data);
-                    $('select[name="taluk_id"]').removeAttr("disabled");
-                }
-            });
-
+            
         }
     });
     $("#block_id").change(function() {
@@ -217,6 +189,33 @@ $(document).ready(function() {
                     $('select[name="place_id"]').empty();
                     $('select[name="place_id"]').append(data);
                     $('select[name="place_id"]').removeAttr("disabled");
+                }
+            });
+
+        }
+    });
+
+    $("#res").hide();
+    $("#place_id").change(function() {
+        event.preventDefault();
+
+
+        var place_id = $("#place_id").val();
+
+        if (place_id == ' ') {
+            alert("Please Select Blocks");
+        } else {
+            $.ajax({
+                'type': 'POST',
+                'url': base_url + 'admin/getBlockTaluk',
+                'data': {
+                    'place_id': place_id
+                },
+                'dataType': 'text',
+                'cache': false,
+                'success': function(data) {
+                    $("#res").show();
+                    $("#res").html(data);
                 }
             });
 

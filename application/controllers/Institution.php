@@ -64,7 +64,7 @@ class Institution extends CI_Controller
 			$data['places'] = $this->admin_model->get_table_details('places');
 			$this->institution_template->show('institution/dashboard', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -80,7 +80,7 @@ class Institution extends CI_Controller
 			$data['institution_courses'] = $this->admin_model->get_institution_courses($data['institution']['institution_id'])->result();
 			$this->institution_template->show('institution/viewinstitution', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -120,7 +120,7 @@ class Institution extends CI_Controller
 				redirect('institution/managecourses/'.$institution_id);
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -135,7 +135,7 @@ class Institution extends CI_Controller
 			$this->db->delete('institutional_courses');
 			redirect('institution/managecourses/'.$institution_id);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -149,7 +149,7 @@ class Institution extends CI_Controller
 			$data['states'] = $this->admin_model->get_table_details('states');
 			$this->institution_template->show('institution/states', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -179,7 +179,7 @@ class Institution extends CI_Controller
 				redirect('institution/states');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -213,7 +213,7 @@ class Institution extends CI_Controller
 				redirect('institution/states');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -228,7 +228,7 @@ class Institution extends CI_Controller
 			$this->db->delete('states');
 			redirect('institution/states');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -246,7 +246,7 @@ class Institution extends CI_Controller
 			$data['districts'] = $this->admin_model->get_table_details('districts');
 			$this->institution_template->show('institution/districts', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -283,7 +283,7 @@ class Institution extends CI_Controller
 				redirect('institution/districts');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -324,7 +324,7 @@ class Institution extends CI_Controller
 				redirect('institution/districts');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -340,7 +340,7 @@ class Institution extends CI_Controller
 			$this->db->delete('districts');
 			redirect('institution/districts');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -354,7 +354,7 @@ class Institution extends CI_Controller
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
 			$this->institution_template->show('institution/taluks', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addtaluks()
@@ -386,7 +386,7 @@ class Institution extends CI_Controller
 				redirect('institution/taluks');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function edittaluks($taluk_id)
@@ -422,7 +422,7 @@ class Institution extends CI_Controller
 				redirect('institution/taluks');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
     public function deletetaluks($taluk_id)
@@ -436,7 +436,7 @@ class Institution extends CI_Controller
 			$this->db->delete('taluks');
 			redirect('institution/taluks');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -450,7 +450,7 @@ class Institution extends CI_Controller
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
 			$this->institution_template->show('institution/blocks', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addblocks()
@@ -481,7 +481,7 @@ class Institution extends CI_Controller
 				redirect('institution/blocks');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editblocks($block_id)
@@ -516,7 +516,7 @@ class Institution extends CI_Controller
 				redirect('institution/blocks');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteblocks($block_id)
@@ -530,7 +530,7 @@ class Institution extends CI_Controller
 			$this->db->delete('blocks');
 			redirect('institution/blocks');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -544,7 +544,7 @@ class Institution extends CI_Controller
 			$data['places'] = $this->admin_model->get_table_details('places');
 			$this->institution_template->show('institution/places', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addplaces()
@@ -580,7 +580,7 @@ class Institution extends CI_Controller
 				redirect('institution/places');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editplaces($place_id)
@@ -620,7 +620,7 @@ class Institution extends CI_Controller
 				redirect('institution/places');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteplaces($place_id)
@@ -634,7 +634,7 @@ class Institution extends CI_Controller
 			$this->db->delete('places');
 			redirect('institution/places');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -648,7 +648,7 @@ class Institution extends CI_Controller
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
 			$this->institution_template->show('institution/institution_types', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addinstitutiontypes()
@@ -675,7 +675,7 @@ class Institution extends CI_Controller
 				redirect('institution/institution_types');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editinstitutiontypes($institution_type_id)
@@ -705,7 +705,7 @@ class Institution extends CI_Controller
 				redirect('institution/institution_types');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteinstitutiontypes($institution_type_id)
@@ -719,7 +719,7 @@ class Institution extends CI_Controller
 			$this->db->delete('institution_types');
 			redirect('institution/institution_types');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -733,7 +733,7 @@ class Institution extends CI_Controller
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
 			$this->institution_template->show('institution/institutions', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	 
@@ -744,25 +744,47 @@ class Institution extends CI_Controller
 			$data['username'] = $session_data['username'];
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
+			
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
+			$data['place_id'] = $data['institution']['place_id'];
+			
+			if($data['place_id']){
+				$places = $this->admin_model->getDetailsbyfield($data['place_id'],'place_id',"places")->row(); 
+				$data['block_id'] = $places->block_id;
+				$data['taluk_id'] = $places->taluk_id;
 
+				$blocks = $this->admin_model->getDetailsbyfield($data['block_id'],'block_id',"blocks")->row(); 
+				$data['district_id'] = $blocks->district_id;
+
+				$data['blocksArray'] = array(""=>"Select Block")+$this->blocksDropdown($data['district_id']);
+				$data['taluksArray'] = array(""=>"Select Taluk")+$this->taluksDropdown($data['district_id']);
+				$data['placesArray'] = array(""=>"Select Place")+$this->placesDropdown($data['block_id']);
+				
+			}else{
+				$data['district_id'] = '';
+				$data['block_id'] = '';
+				$data['taluk_id'] = '';
+				$data['blocksArray'] = array(""=>"Select Block");
+				$data['taluksArray'] = array(""=>"Select Taluk");
+				$data['placesArray'] = array(""=>"Select Place");
+			}                                        
+
+			$data['districts'] = array(""=>"Select District")+$this->districtsDropdown();
+			
 			// $this->form_validation->set_rules('institution_code', 'Institution Code', 'required|is_unique[institutions.institution_code]');
 			// $this->form_validation->set_rules('institution_name', 'Institution Name', 'required|trim');
 			$this->form_validation->set_rules('principal_name', 'Principal Name', 'required|trim');
 			$this->form_validation->set_rules('principal_mobile', 'Principal Mobile', 'required|numeric|exact_length[10]');
 			$this->form_validation->set_rules('principal_whatsapp_mobile', 'Principal Watsapp Mobile', 'required|numeric|exact_length[10]');
-			$this->form_validation->set_rules('principal_email', 'Principal Email', 'required|valid_email');
+			$this->form_validation->set_rules('principal_email', 'Principal Email', 'valid_email');
 			$this->form_validation->set_rules('district_id', 'District', 'required|trim');
-			$this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
-			$this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
+			// $this->form_validation->set_rules('block_id', 'Block Name', 'required|trim');
+			// $this->form_validation->set_rules('taluk_id', 'Taluk Name', 'required|trim');
 			$this->form_validation->set_rules('place_id', 'Place ID', 'required|trim');
 			// $this->form_validation->set_rules('status', 'Status', 'required|in_list[ACTIVE,INACTIVE,DELETED]');
 
 			// $data['institution_types'] = $this->admin_model->get_table_details('institution_types');
-			$data['districts'] = $this->admin_model->get_table_details('districts');
-			$data['blocks'] = $this->admin_model->get_table_details('blocks');
-			$data['taluks'] = $this->admin_model->get_table_details('taluks');
-			$data['places'] = $this->admin_model->get_table_details('places');
+			
 			
 			if ($this->form_validation->run() === FALSE) {
 				$this->institution_template->show('institution/editinstitution', $data);
@@ -775,7 +797,9 @@ class Institution extends CI_Controller
 					'principal_mobile' => $this->input->post('principal_mobile'),
 					'principal_whatsapp_mobile' => $this->input->post('principal_whatsapp_mobile'),
 					'principal_email' => $this->input->post('principal_email'),
-					'place_id' => $this->input->post('place_id')
+					'place_id' => $this->input->post('place_id'),
+					'updated_at'=>date('Y-m-d H:i:s'),
+					'updated_by'=>$data['username']
 				);
 				$this->db->where('institution_id', $institution_id);
 				$this->db->update('institutions', $data);
@@ -784,7 +808,7 @@ class Institution extends CI_Controller
 				redirect('institution/viewinstitution/'.$institution_id);
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteinstitution($institution_id)
@@ -803,7 +827,120 @@ class Institution extends CI_Controller
 			$this->db->delete('institutions');
 			redirect('institution/institutions');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
+		}
+	}
+
+	public function DistrictPlacesList()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "institutions";
+			$data['activeMenu'] = "institutions";
+
+			$district_id=$this->input->post('district_id');
+			$flag=$this->input->post('flag');
+			$list = $this->admin_model->getDistrictPlacesList($district_id)->result();
+			if (count($list)) {
+				$places = array();
+				if($flag=="A"){
+					$places[] = '<option value="all">All Places</option>';
+				}else{
+					$places[] = '<option value=" ">Select Place</option>';
+				}
+				foreach ($list as $res1) {
+					$places[] = '<option value="' . $res1->place_id . '">' . $res1->place_name .  '</option>';
+				}
+				print_r($places);
+			}
+
+		} else {
+			redirect('institution', 'refresh');
+		}
+	}
+
+	function districtsDropdown()
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Districts";
+			$data['activeMenu'] = "Districts";
+
+			$districts = $this->admin_model->get_table_details('districts');
+
+			$result = array();
+			foreach($districts as $row) {
+				$result[$row["district_id"]] = $row["district_name"];
+			}
+			return $result;
+
+		} else {
+			redirect('institution', 'refresh');
+		}
+	}
+
+	function blocksDropdown($district_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Districts";
+			$data['activeMenu'] = "Districts";
+
+			$blocks = $this->admin_model->getDetailsbyfield($district_id,'district_id',"blocks")->result(); 
+			
+			$result = array();
+			foreach($blocks as $row) {
+				$result[$row->block_id] = $row->block_name;
+			}
+			return $result;
+
+		} else {
+			redirect('institution', 'refresh');
+		}
+	}
+
+	function taluksDropdown($district_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Taluks";
+			$data['activeMenu'] = "Taluks";
+
+			$taluks = $this->admin_model->getDetailsbyfield($district_id,'district_id',"taluks")->result(); 
+			
+			$result = array();
+			foreach($taluks as $row) {
+				$result[$row->taluk_id] = $row->taluk_name;
+			}
+			return $result;
+
+		} else {
+			redirect('institution', 'refresh');
+		}
+	}
+
+	function placesDropdown($block_id)
+	{
+		if ($this->session->userdata('logged_in')) {
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['pageTitle'] = "Places";
+			$data['activeMenu'] = "Places";
+
+			$places = $this->admin_model->getDetailsbyfield($block_id,'block_id',"places")->result(); 
+			
+			$result = array();
+			foreach($places as $row) {
+				$result[$row->place_id] = $row->place_name;
+			}
+			return $result;
+
+		} else {
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -817,7 +954,7 @@ class Institution extends CI_Controller
 			$data['institutionprincipals'] = $this->admin_model->get_table_details('institutionprincipals');
 			$this->institution_template->show('institution/institutionprincipals', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addinstitutionprincipals()
@@ -851,7 +988,7 @@ class Institution extends CI_Controller
 				redirect('institution/institutionprincipals');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editinstitutionprincipals($institution_principal_id)
@@ -890,7 +1027,7 @@ class Institution extends CI_Controller
 				redirect('institution/institutionprincipals');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteinstitutionprincipals($institution_principal_id)
@@ -904,7 +1041,7 @@ class Institution extends CI_Controller
 			$this->db->delete('institutionprincipals');
 			redirect('institution/institutionprincipals');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -918,7 +1055,7 @@ class Institution extends CI_Controller
 			$data['streams'] = $this->admin_model->get_table_details('streams');
 			$this->institution_template->show('institution/streams', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addstreams()
@@ -947,7 +1084,7 @@ class Institution extends CI_Controller
 				redirect('institution/streams');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editstreams($stream_id)
@@ -982,7 +1119,7 @@ class Institution extends CI_Controller
 				redirect('institution/streams');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deletestreams($stream_id)
@@ -996,7 +1133,7 @@ class Institution extends CI_Controller
 			$this->db->delete('streams');
 			redirect('institution/streams');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1010,7 +1147,7 @@ class Institution extends CI_Controller
 			$data['institutioncourses'] = $this->admin_model->get_table_details('institutionalcourses');
 			$this->institution_template->show('institution/institutioncourses', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addinstitutioncourses()
@@ -1046,7 +1183,7 @@ class Institution extends CI_Controller
 				redirect('institution/institutioncourses');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editinstitutioncourses($institution_course_id)
@@ -1086,7 +1223,7 @@ class Institution extends CI_Controller
 				redirect('institution/institutioncourses');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteinstitutioncourses($institution_course_id)
@@ -1100,7 +1237,7 @@ class Institution extends CI_Controller
 			$this->db->delete('institutionalcourses');
 			redirect('institution/institutioncourses');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1114,7 +1251,7 @@ class Institution extends CI_Controller
 			$data['themes_problems'] = $this->admin_model->get_table_details('themes_problems');
 			$this->institution_template->show('institution/themesproblems', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1144,7 +1281,7 @@ class Institution extends CI_Controller
 				redirect('institution/themesproblems');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1178,7 +1315,7 @@ class Institution extends CI_Controller
 				redirect('institution/themesproblems');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1193,7 +1330,7 @@ class Institution extends CI_Controller
 			$this->db->delete('themes_problems');
 			redirect('institution/themesproblems');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1207,7 +1344,7 @@ class Institution extends CI_Controller
 			$data['programs'] = $this->admin_model->get_table_details('programs');
 			$this->institution_template->show('institution/programs', $data);
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function addprograms()
@@ -1239,7 +1376,7 @@ class Institution extends CI_Controller
 				redirect('institution/programs');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function editprograms($program_id)
@@ -1275,7 +1412,7 @@ class Institution extends CI_Controller
 				redirect('institution/programs');
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	public function deleteprograms($program_id)
@@ -1289,7 +1426,7 @@ class Institution extends CI_Controller
 			$this->db->delete('programs');
 			redirect('institution/programs');
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 
@@ -1320,7 +1457,7 @@ class Institution extends CI_Controller
 				print_r($blocks);
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	function TalukList()
@@ -1341,7 +1478,7 @@ class Institution extends CI_Controller
 				print_r($taluks);
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 	function PlaceList()
@@ -1362,7 +1499,7 @@ class Institution extends CI_Controller
 				print_r($places);
 			}
 		} else {
-			redirect('admin', 'refresh');
+			redirect('institution', 'refresh');
 		}
 	}
 }

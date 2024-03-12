@@ -2,19 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Edit Institution</h1>
-                </div>
-                <div class="col-sm-6">
-                    <!-- <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">DataTables</li>
-                        </ol> -->
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
+       
     </section>
 
     <!-- Main content -->
@@ -39,7 +27,7 @@
                                 <?=form_error('institution_code','<div class="text-danger">','</div>');?>
                             </div> -->
                             <div class="form-group">
-                                <label for="institution_name">Institution Name:</label>
+                                <label for="institution_name">Institution Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="institution_name" id="institution_name"
                                     value="<?php echo set_value('institution_name', $institution['institution_name']); ?>">
                                 <?=form_error('institution_name','<div class="text-danger">','</div>');?>
@@ -77,28 +65,19 @@
                                 <?=form_error('principal_email','<div class="text-danger">','</div>');?>
                             </div>
                             <div class="form-group">
-                                <label for="status">District Name:</label>
+                                <label for="status">District Name <span class="text-danger">*</span></label>
                                 <?php echo form_dropdown('district_id', $districts, (set_value('district_id'))?set_value('district_id'):$district_id, 'class="form-control input-xs" id="district_id"'); ?>
                                 <?=form_error('district_id','<div class="text-danger">','</div>');?>
                             </div>
-                            <div class="form-group">
-                                <label for="status">Block Name:</label>
-                                <?php echo form_dropdown('block_id', $blocksArray, (set_value('block_id'))?set_value('block_id'):$block_id, 'class="form-control input-xs" id="block_id"'); ?>
-                                <?=form_error('block_id','<div class="text-danger">','</div>');?>
-                            </div>
 
                             <div class="form-group">
-                                <label for="status">Taluk Name</label>
-                                <?php echo form_dropdown('taluk_id', $taluksArray, (set_value('taluk_id'))?set_value('taluk_id'):$taluk_id, 'class="form-control input-xs" id="taluk_id"'); ?>
-                                <?=form_error('taluk_id','<div class="text-danger">','</div>');?>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status">Place Name</label>
-                                <?php echo form_dropdown('place_id', $placesArray, (set_value('place_id'))?set_value('place_id'):$place_id, 'class="form-control input-xs" id="place_id"'); ?>
+                                <label for="status">Place Name <span class="text-danger">*</span></label>
+                                <?php echo form_dropdown('place_id', $placesArray, (set_value('place_id'))?set_value('place_id'):$place_id, 'class="form-control input-xs select2" id="place_id"'); ?>
                                 <?=form_error('place_id','<div class="text-danger">','</div>');?>
                             </div>
 
+                            <div class="form-group" id="res">
+                            </div>
 
                         </div>
 
@@ -110,16 +89,7 @@
                         <?php echo form_close(); ?>
                     </div>
 
-
                 </div>
-
-
-
-
-
-
-
-
 
             </div>
             <!-- /.col -->
@@ -133,7 +103,7 @@
 <script>
 $(document).ready(function() {
     var base_url = '<?php echo base_url(); ?>';
-
+    
 
     $("#district_id").change(function() {
         event.preventDefault();
@@ -146,7 +116,7 @@ $(document).ready(function() {
         } else {
             $.ajax({
                 'type': 'POST',
-                'url': base_url + 'admin/BlockList',
+                'url': base_url + 'admin/DistrictPlacesList',
                 'data': {
                     'district_id': district_id,
                     'flag': ""
@@ -154,30 +124,42 @@ $(document).ready(function() {
                 'dataType': 'text',
                 'cache': false,
                 'success': function(data) {
-                    $('select[name="block_id"]').empty();
-                    $('select[name="block_id"]').append(data);
-                    $('select[name="block_id"]').removeAttr("disabled");
+                    $('select[name="place_id"]').empty();
+                    $('select[name="place_id"]').append(data);
+                    $('select[name="place_id"]').removeAttr("disabled");
                 }
             });
+        }
+    });
+
+    $("#res").hide();
+    $("#place_id").change(function() {
+        event.preventDefault();
+
+
+        var place_id = $("#place_id").val();
+
+        if (place_id == ' ') {
+            alert("Please Select Blocks");
+        } else {
             $.ajax({
                 'type': 'POST',
-                'url': base_url + 'admin/TalukList',
+                'url': base_url + 'admin/getBlockTaluk',
                 'data': {
-                    'district_id': district_id,
-                    'flag': ""
+                    'place_id': place_id
                 },
                 'dataType': 'text',
                 'cache': false,
                 'success': function(data) {
-                    $('select[name="taluk_id"]').empty();
-                    $('select[name="taluk_id"]').append(data);
-                    $('select[name="taluk_id"]').removeAttr("disabled");
+                    $("#res").show();
+                    $("#res").html(data);
                 }
             });
 
         }
     });
-    $("#block_id").change(function() {
+
+    $("#block_id1").change(function() {
         event.preventDefault();
 
 
