@@ -254,6 +254,11 @@ class CI_Input {
 	 */
 	public function post($index = NULL, $xss_clean = NULL)
 	{
+		$temp = $_POST;
+		array_walk_recursive($temp, function(&$leaf){
+			if(is_string($leaf))
+				$leaf = htmlentities($leaf);
+		});
 		return $this->_fetch_from_array($_POST, $index, $xss_clean);
 	}
 

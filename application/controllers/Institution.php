@@ -42,9 +42,9 @@ class Institution extends CI_Controller
 			foreach ($result as $row) {
 				$sess_array = array(
 					'id' => $row->id,
-					'username' => $row->username
+					'inst_username' => $row->username
 				);
-				$this->session->set_userdata('logged_in', $sess_array);
+				$this->session->set_userdata('logged_inst', $sess_array);
 			}
 			return TRUE;
 		} else {
@@ -55,9 +55,9 @@ class Institution extends CI_Controller
 
 	function dashboard()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Dashboard";
 			$data['activeMenu'] = "dashboard";
 			$data['	tion_types'] = $this->admin_model->get_table_details('institution_types');
@@ -70,9 +70,9 @@ class Institution extends CI_Controller
 
 	function viewinstitution($institution_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Viewinstitution";
 			$data['activeMenu'] = "institutions";
 			$data['institution'] = $this->admin_model->get_details_by_id($institution_id,'institution_id','institutions');
@@ -86,9 +86,9 @@ class Institution extends CI_Controller
 
 	public function managecourses($institution_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
 			$data['institution_id'] = $institution_id;
@@ -126,9 +126,9 @@ class Institution extends CI_Controller
 
 	public function deletecourses($institution_course_id, $institution_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$this->db->where('institution_course_id', $institution_course_id);
@@ -141,9 +141,9 @@ class Institution extends CI_Controller
 
 	function states()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$data['states'] = $this->admin_model->get_table_details('states');
@@ -158,9 +158,9 @@ class Institution extends CI_Controller
 	public function addstates()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$this->form_validation->set_rules('state_name', 'State Name', 'required|trim|is_unique[states.state_name]');
@@ -185,9 +185,9 @@ class Institution extends CI_Controller
 
 	public function editstates($state_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$data['state'] = $this->admin_model->get_details_by_id($state_id,'state_id','states');
@@ -219,9 +219,9 @@ class Institution extends CI_Controller
 
 	public function deletestates($state_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "States";
 			$data['activeMenu'] = "states";
 			$this->db->where('state_id', $state_id);
@@ -238,9 +238,9 @@ class Institution extends CI_Controller
 
 	function districts()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
 			$data['districts'] = $this->admin_model->get_table_details('districts');
@@ -253,9 +253,9 @@ class Institution extends CI_Controller
 	public function adddistricts()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
 			$this->form_validation->set_rules('lgd_code', 'lgd Code', 'required|trim');
@@ -289,9 +289,9 @@ class Institution extends CI_Controller
 
 	public function editdistrict($district_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "districts";
 			$data['district'] = $this->admin_model->get_details_by_id($district_id,'district_id','districts');
@@ -331,9 +331,9 @@ class Institution extends CI_Controller
 
 	public function deletedistrict($district_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "districts";
 			$data['activeMenu'] = "districts";
 			$this->db->where('district_id', $district_id);
@@ -346,9 +346,9 @@ class Institution extends CI_Controller
 
 	function taluks()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$data['taluks'] = $this->admin_model->get_table_details('taluks');
@@ -360,9 +360,9 @@ class Institution extends CI_Controller
 	public function addtaluks()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$this->form_validation->set_rules('block_id', 'Block ID', 'required|trim');
@@ -391,9 +391,9 @@ class Institution extends CI_Controller
 	}
 	public function edittaluks($taluk_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$data['taluk'] = $this->admin_model->get_details_by_id($taluk_id,'taluk_id','taluks');
@@ -427,9 +427,9 @@ class Institution extends CI_Controller
 	}
     public function deletetaluks($taluk_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "taluks";
 			$data['activeMenu'] = "taluks";
 			$this->db->where('taluk_id', $taluk_id);
@@ -442,9 +442,9 @@ class Institution extends CI_Controller
 
     function blocks()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$data['blocks'] = $this->admin_model->get_table_details('blocks');
@@ -456,9 +456,9 @@ class Institution extends CI_Controller
 	public function addblocks()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$this->form_validation->set_rules('district_id', 'District ID', 'required|trim');
@@ -486,9 +486,9 @@ class Institution extends CI_Controller
 	}
 	public function editblocks($block_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$data['block'] = $this->admin_model->get_details_by_id($block_id,'block_id','blocks');
@@ -521,9 +521,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteblocks($block_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "blocks";
 			$data['activeMenu'] = "blocks";
 			$this->db->where('block_id', $block_id);
@@ -536,9 +536,9 @@ class Institution extends CI_Controller
 
 	public function places()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$data['places'] = $this->admin_model->get_table_details('places');
@@ -550,9 +550,9 @@ class Institution extends CI_Controller
 	public function addplaces()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$this->form_validation->set_rules('taluk_id', 'Taluk ID', 'required|trim');
@@ -585,9 +585,9 @@ class Institution extends CI_Controller
 	}
 	public function editplaces($place_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$data['place'] = $this->admin_model->get_details_by_id($place_id,'place_id','places');
@@ -625,9 +625,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteplaces($place_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "places";
 			$data['activeMenu'] = "places";
 			$this->db->where('place_id', $place_id);
@@ -640,9 +640,9 @@ class Institution extends CI_Controller
 
 	function institution_types()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$data['institutiontypes'] = $this->admin_model->get_table_details('institution_types');
@@ -654,9 +654,9 @@ class Institution extends CI_Controller
 	public function addinstitutiontypes()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$this->form_validation->set_rules('institution_type', 'Institution Type', 'required|trim');
@@ -680,9 +680,9 @@ class Institution extends CI_Controller
 	}
 	public function editinstitutiontypes($institution_type_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$data['institutiontype'] = $this->admin_model->get_details_by_id($institution_type_id,'institution_type_id','institution_types');
@@ -710,9 +710,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteinstitutiontypes($institution_type_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutiontypes";
 			$data['activeMenu'] = "institutiontypes";
 			$this->db->where('institution_type_id', $institution_type_id);
@@ -725,9 +725,9 @@ class Institution extends CI_Controller
 
 	function institutions()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
 			$data['institutions'] = $this->admin_model->get_table_details('institutions');
@@ -739,9 +739,9 @@ class Institution extends CI_Controller
 	 
 	public function editinstitution($institution_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutions";
 			$data['activeMenu'] = "institutions";
 			
@@ -813,9 +813,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteinstitution($institution_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutions";
 			$data['activeMenu'] = "institutions";
 
@@ -833,9 +833,9 @@ class Institution extends CI_Controller
 
 	public function DistrictPlacesList()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutions";
 			$data['activeMenu'] = "institutions";
 
@@ -862,9 +862,9 @@ class Institution extends CI_Controller
 
 	function districtsDropdown()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "Districts";
 
@@ -883,9 +883,9 @@ class Institution extends CI_Controller
 
 	function blocksDropdown($district_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Districts";
 			$data['activeMenu'] = "Districts";
 
@@ -904,9 +904,9 @@ class Institution extends CI_Controller
 
 	function taluksDropdown($district_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "Taluks";
 
@@ -925,9 +925,9 @@ class Institution extends CI_Controller
 
 	function placesDropdown($block_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "Places";
 
@@ -946,9 +946,9 @@ class Institution extends CI_Controller
 
 	function institutionprincipals()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutionprincipals";
 			$data['activeMenu'] = "institutionPrincipals";
 			$data['institutionprincipals'] = $this->admin_model->get_table_details('institutionprincipals');
@@ -960,9 +960,9 @@ class Institution extends CI_Controller
 	public function addinstitutionprincipals()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutionprincipals";
 			$data['activeMenu'] = "institutionprincipals";
 			$this->form_validation->set_rules('institution_id', 'Institution ID', 'required|trim');
@@ -993,9 +993,9 @@ class Institution extends CI_Controller
 	}
 	public function editinstitutionprincipals($institution_principal_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutionprincipals";
 			$data['activeMenu'] = "institutionprincipals";
 			$data['institutionprincipal'] = $this->admin_model->get_details_by_id($institution_principal_id,'institution_principal_id','institutionprincipals');
@@ -1032,9 +1032,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteinstitutionprincipals($institution_principal_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutionprincipals";
 			$data['activeMenu'] = "institutionprincipals";
 			$this->db->where('institution_principal_id', $institution_principal_id);
@@ -1047,9 +1047,9 @@ class Institution extends CI_Controller
 
 	function streams()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$data['streams'] = $this->admin_model->get_table_details('streams');
@@ -1061,9 +1061,9 @@ class Institution extends CI_Controller
 	public function addstreams()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$this->form_validation->set_rules('stream_name', 'Stream Name', 'required|trim');
@@ -1089,9 +1089,9 @@ class Institution extends CI_Controller
 	}
 	public function editstreams($stream_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Streams";
 			$data['activeMenu'] = "streams";
 			$data['stream'] = $this->admin_model->get_details_by_id($stream_id,'stream_id','streams');
@@ -1124,9 +1124,9 @@ class Institution extends CI_Controller
 	}
 	public function deletestreams($stream_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "streams";
 			$data['activeMenu'] = "streams";
 			$this->db->where('stream_id', $stream_id);
@@ -1139,9 +1139,9 @@ class Institution extends CI_Controller
 
 	function institutioncourses()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutioncourses";
 			$data['activeMenu'] = "institutioncourses";
 			$data['institutioncourses'] = $this->admin_model->get_table_details('institutionalcourses');
@@ -1153,9 +1153,9 @@ class Institution extends CI_Controller
 	public function addinstitutioncourses()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutioncourses";
 			$data['activeMenu'] = "institutioncourses";
 			$this->form_validation->set_rules('institution_id', 'Institution ID', 'required|trim');
@@ -1188,9 +1188,9 @@ class Institution extends CI_Controller
 	}
 	public function editinstitutioncourses($institution_course_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Institutioncourses";
 			$data['activeMenu'] = "institutioncourses";
 			$data['institutioncourse'] = $this->admin_model->get_details_by_id($institution_course_id,'institution_course_id','institutionalcourses');
@@ -1228,9 +1228,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteinstitutioncourses($institution_course_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "institutioncourses";
 			$data['activeMenu'] = "institutioncourses";
 			$this->db->where('institution_course_id', $institution_course_id);
@@ -1243,9 +1243,9 @@ class Institution extends CI_Controller
 
 	function themesproblems()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Themeproblems";
 			$data['activeMenu'] = "themesproblems";
 			$data['themes_problems'] = $this->admin_model->get_table_details('themes_problems');
@@ -1258,9 +1258,9 @@ class Institution extends CI_Controller
 	public function addthemesproblems()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Themeproblems";
 			$data['activeMenu'] = "themeproblems";
 			$this->form_validation->set_rules('theme_name', 'Theme Name', 'required|trim');
@@ -1287,9 +1287,9 @@ class Institution extends CI_Controller
 
 	public function editthemesproblems($theme_problem_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Themeproblems";
 			$data['activeMenu'] = "themeproblemsates";
 			$data['themesproblem'] = $this->admin_model->get_details_by_id($theme_problem_id,'theme_problem_id','themes_problems');
@@ -1321,9 +1321,9 @@ class Institution extends CI_Controller
 
 	public function deletethemesproblems($theme_problem_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "themeproblems";
 			$data['activeMenu'] = "themeproblems";
 			$this->db->where('theme_problem_id', $theme_problem_id);
@@ -1336,9 +1336,9 @@ class Institution extends CI_Controller
 
 	function programs()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Programs";
 			$data['activeMenu'] = "programs";
 			$data['programs'] = $this->admin_model->get_table_details('programs');
@@ -1350,9 +1350,9 @@ class Institution extends CI_Controller
 	public function addprograms()
 	{
 
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Programs";
 			$data['activeMenu'] = "programs";
 			$this->form_validation->set_rules('program_name', 'Program Name', 'required|trim');
@@ -1381,9 +1381,9 @@ class Institution extends CI_Controller
 	}
 	public function editprograms($program_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Programs";
 			$data['activeMenu'] = "programs";
 			$data['program'] = $this->admin_model->get_details_by_id($program_id,'program_id','programs');
@@ -1417,9 +1417,9 @@ class Institution extends CI_Controller
 	}
 	public function deleteprograms($program_id)
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "programs";
 			$data['activeMenu'] = "programs";
 			$this->db->where('program_id', $program_id);
@@ -1432,7 +1432,7 @@ class Institution extends CI_Controller
 
 	function logout()
 	{
-		$this->session->unset_userdata('logged_in');
+		$this->session->unset_userdata('logged_inst');
 		session_destroy();
 		redirect('institution', 'refresh');
 	}
@@ -1441,9 +1441,9 @@ class Institution extends CI_Controller
 
 	function BlockList()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Blocks";
 			$data['activeMenu'] = "blocks";
 			$district_id=$this->input->post('district_id');
@@ -1462,9 +1462,9 @@ class Institution extends CI_Controller
 	}
 	function TalukList()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Taluks";
 			$data['activeMenu'] = "taluks";
 			$block_id=$this->input->post('block_id');
@@ -1483,9 +1483,9 @@ class Institution extends CI_Controller
 	}
 	function PlaceList()
 	{
-		if ($this->session->userdata('logged_in')) {
-			$session_data = $this->session->userdata('logged_in');
-			$data['username'] = $session_data['username'];
+		if ($this->session->userdata('logged_inst')) {
+			$session_data = $this->session->userdata('logged_inst');
+			$data['inst_username'] = $session_data['inst_username'];
 			$data['pageTitle'] = "Places";
 			$data['activeMenu'] = "places";
 			$taluk_id=$this->input->post('taluk_id');

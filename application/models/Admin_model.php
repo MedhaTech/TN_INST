@@ -329,6 +329,12 @@ Class Admin_model extends CI_Model
       return $this->db->get('institutions');
     }
 
+
+    funcTion getThemesProblems(){
+      $query = "SELECT * FROM themes_problems WHERE theme_problem_id IN (SELECT MIN(theme_problem_id) FROM themes_problems GROUP BY problem_statement)";
+      $this->db->query($query);
+    }
+
      
 }
 ?>

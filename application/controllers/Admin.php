@@ -377,7 +377,7 @@ class Admin extends CI_Controller
 			$data['district'] = $this->admin_model->get_details_by_id($district_id,'district_id','districts');
 
 		    $this->form_validation->set_rules('lgd_code', 'lgd Code', 'required|trim');
-			$this->form_validation->set_rules('district_name', 'District Name', 'required|trim');
+			$this->form_validation->set_rules('district_name', 'District Name', 'required|trim|strip_tags');
 			$this->form_validation->set_rules('district_name_vernacular', 'Vernacular District Name', 'required|trim');
 			$this->form_validation->set_rules('district_short_form', 'District Short Form', 'required|trim');
 			// $this->form_validation->set_rules('district_headquarters', 'District Headquarters', 'required|trim');
