@@ -259,7 +259,7 @@ class CI_Input {
 			if(is_string($leaf))
 				$leaf = htmlentities($leaf);
 		});
-		return $this->_fetch_from_array($_POST, $index, $xss_clean);
+		return $this->_fetch_from_array($temp, $index, $xss_clean);
 	}
 
 	// --------------------------------------------------------------------
