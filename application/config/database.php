@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'nt-dev-db.cloai0swq01u.ap-south-1.rds.amazonaws.com',
-	'username' => 'admin',
-	'password' => 'axYgYYlzNdRzmB337qsK',
-	'database' => 'unisolve_db',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'edii',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
